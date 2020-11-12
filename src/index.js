@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import '@/styles/base.less';
+import store from '@/store';
+import Login from '@/views/Login';
+import Home from '@/views/Home';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const Root = ({ store }) => (
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path='/login' component={Login}></Route>
+        <Route path='/' component={Home}></Route>
+      </Switch>
+    </Router>
+  </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(<Root store={store} />, document.getElementById('root'));

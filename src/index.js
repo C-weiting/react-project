@@ -9,6 +9,7 @@ import Login from '@/views/Login';
 import Home from '@/views/Home';
 
 import Community from '@/views/Community'
+import Service from '@/views/Service'
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -16,6 +17,7 @@ const Root = ({ store }) => (
       <Switch>
         <Route path='/login' component={Login}></Route>
         <Route path='/community' component={Community}></Route>
+        <Route path='/service' component={Service}></Route>
         <Route path='/' component={Home}></Route>
       </Switch>
     </Router>

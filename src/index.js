@@ -8,11 +8,14 @@ import store from '@/store';
 import Login from '@/views/Login';
 import Home from '@/views/Home';
 
+import Community from '@/views/Community'
+
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
         <Route path='/login' component={Login}></Route>
+        <Route path='/community' component={Community}></Route>
         <Route path='/' component={Home}></Route>
       </Switch>
     </Router>

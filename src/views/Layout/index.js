@@ -4,6 +4,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Home from '@/views/Home';
 import Login from '@/views/Login';
+
+import Community from '@/views/Community'
+import Service from '@/views/Service'
 import './layout.less';
 
 function Layout (props) {
@@ -16,6 +19,8 @@ function Layout (props) {
                 <Switch>
                     <Route exact path={path} component={Home}></Route>
                     <Route path={`${path}login`} component={Login}></Route>
+                    <Route path={`${path}community`} component={Community}></Route>
+                    <Route path={`${path}service`} component={Service}></Route>
                 </Switch>
             </div>
             <Footer />

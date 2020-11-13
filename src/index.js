@@ -5,15 +5,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '@/styles/base.less';
 import '@/utils/flexible.js';
 import store from '@/store';
-import Login from '@/views/Login';
-import Home from '@/views/Home';
+import Layout from '@/views/Layout';
+import Message from '@/views/Message';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path='/login' component={Login}></Route>
-        <Route path='/' component={Home}></Route>
+        <Route path='/message' component={Message}></Route>
+        <Route path='/' component={Layout}></Route>
       </Switch>
     </Router>
   </Provider>

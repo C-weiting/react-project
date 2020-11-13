@@ -65,7 +65,7 @@ function Service() {
   let chooseSecondIndex = (index) => {
     let firstIndex = currentIndex[0];
     setCurrentIndex([firstIndex, index]);
-    history.push(`${path}/message`);
+    history.replace(`${path}/message`);
   };
   // 第一行目录
   let firstListElement = indexTree.map((item, index) => (

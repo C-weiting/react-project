@@ -25,6 +25,6 @@ module.exports = override(
         "components": path.resolve(__dirname, "src/components")
     }),
     addPostcssPlugins([
-        require('postcss-pxtorem')({ rootValue: 100, propList: ['*'], minPixelValue: 2, selectorBlackList: ['am-'] })
+        require('postcss-pxtorem')({ rootValue: 128, propList: ['*'], minPixelValue: 2, selectorBlackList: ['am-'] })
     ]),
 );

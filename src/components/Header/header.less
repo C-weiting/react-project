@@ -1,5 +1,3 @@
-@import url('~@/styles/mixin.less');
-
 .header-content {
     width: 100%;
     height: 98px;
@@ -15,8 +13,38 @@
     .icon-logo {
         width: 367px;
         height: 48px;
-        .bg-image('~@/assets/images/logo');
-        background-size: 100% 100%;
+    }
+
+    .right-content {
+        display: flex;
+        align-items: center;
+
+        .login-btn {
+            width: 88px;
+            height: 30px;
+            display: inline-flex;
+            border: 2px solid #2B2B2C;
+            border-radius: 15px;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            color: #ffffff;
+        }
+
+        .message {
+            position: relative;
+            margin: 0 49px 0 54px;
+
+            .message-badge {
+                position: absolute;
+                top: 3px;
+                right: -4px;
+            }
+        }
+        
+        .icon {
+            font-size: 42px;
+        }
     }
 }
 

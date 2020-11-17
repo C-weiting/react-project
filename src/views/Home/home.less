@@ -5,32 +5,256 @@
     justify-content: space-between;
     padding-bottom: 20px;
     box-sizing: border-box;
+
     .left-content {
         width: 366px;
         display: flex;
         flex-direction: column;
+
         .left-top-content {
             width: 100%;
             flex: 1;
             border-radius: 6px;
             background: #2C2C2D;
+            color: #ffffff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .time {
+                font-size: 60px;
+                line-height: 84px;
+                margin: 47px 0 0 30px;
+            }
+
+            .day {
+                font-size: 16px;
+                line-height: 22px;
+                margin-left: 30px;
+            }
+
+            .weather-info {
+                display: flex;
+                margin: 0 0 15px 35px;
+
+                .temperature {
+                    font-size: 80px;
+                    line-height: 112px;
+                }
+
+                .weather {
+                    height: 112px;
+                    font-size: 26px;
+                    line-height: 37px;
+
+                    .cricle {
+                        width: 14px;
+                        height: 14px;
+                        border-radius: 50%;
+                        border: 2.4px solid #ffffff;
+                        display: block;
+                        box-sizing: border-box;
+                        margin: 32px 0 8px;
+                    }
+                }
+            }
+
+            .weather-pic-content {
+                position: absolute;
+                width: 175px;
+                right: 0;
+                bottom: 0;
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    background-image: linear-gradient(to bottom, rgba(44, 44, 45, 1), rgba(44, 44, 45, 0));
+                }
+
+                .weather-pic {
+                    width: 100%;
+                }
+            }
         }
+
         .left-bottom-content {
             width: 100%;
             height: 144px;
             background-color: #2B2B2D;
             margin-top: 28px;
             border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 33px 0 35px;
+            align-items: center;
+            box-sizing: border-box;
+
+            .music-left {
+                font-size: 26px;
+                line-height: 37px;
+                color: #ffffff;
+                display: flex;
+                flex-direction: column;
+
+                img {
+                    width: 62px;
+                }
+            }
+
+            .music-pic {
+                width: 119px;
+
+                img {
+                    width: 100%;
+                }
+            }
         }
     }
+
     .center-content {
         width: 400px;
         border-radius: 6px;
-        background: linear-gradient(to top,#0A0A0A,#1E1E1E 80%, #2C2B2B);
+        background: #2D2D2D;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .time-content {
+            position: relative;
+
+            .title {
+                position: absolute;
+                top: 50px;
+                left: 39px;
+                font-size: 58px;
+                line-height: 81px;
+                color: #ffffff;
+            }
+
+            .pic {
+                width: 100%;
+            }
+        }
+
+        .tag-list {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 30px 30px;
+
+            .tag-item {
+                width: 106px;
+                height: 106px;
+                background-color: #4E4E4E;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                color: #ffffff;
+                font-size: 14px;
+                line-height: 20px;
+                border-radius: 8px;
+
+                .icon {
+                    font-size: 32px;
+                    margin-bottom: 13px;
+                }
+            }
+        }
     }
+
     .right-content {
         width: 366px;
         border-radius: 6px;
         background-color: #2C2C2D;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 30px;
+
+        .message-header {
+            width: 100%;
+            position: relative;
+
+            .pic {
+                width: 100%;
+            }
+
+            .text {
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: #ffffff;
+
+                .title {
+                    font-size: 31px;
+                    line-height: 44px;
+                    margin-bottom: 8px;
+                    text-align: center;
+                }
+                .subtitle {
+                    font-size: 16px;
+                    line-height: 22px;
+                    text-align: center;
+                }
+            }
+        }
+
+        .message-list {
+            padding-right: 26px;
+            height: 267px;
+
+            .message-item {
+                height: 79px;
+                padding-left: 26px;
+
+                .message-item-info {
+                    height: 100%;
+                    background-color: #555556;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    color: #D6D6D6;
+                    padding: 0 18px 0 25px;
+
+                    .icon {
+                        font-size: 24px;
+                        margin-right: 10px;
+                    }
+
+                    .message-item-info-content {
+                        flex: 1;
+                        font-size: 13px;
+                        line-height: 18px;
+
+                        .title {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 3px;
+
+                            .message-type {
+                                font-size: 16px;
+                                line-height: 22px;
+                            }
+
+                            .message-time {
+                                color: rgba(255, 255, 255, 0.5);
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            .am-swipe-content {
+                background-color: transparent;
+            }
+        }
     }
 }

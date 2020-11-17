@@ -1,0 +1,41 @@
+[{
+        "label": "物业服务",
+        "id": "01",
+        "children": [{
+                "label": "报事报修",
+                "id": "0101",
+                "path": "repair"
+            },
+            {
+                "label": "投诉咨询",
+                "id": "0102",
+                "path": "complaints"
+            },
+            {
+                "label": "物业缴费",
+                "id": "0103",
+                "path": "pay"
+            }
+        ]
+    },
+    {
+        "label": "生活服务",
+        "id": "02",
+        "children": []
+    },
+    {
+        "label": "家政服务",
+        "id": "03",
+        "children": []
+    },
+    {
+        "label": "邻里社区",
+        "id": "04",
+        "children": []
+    },
+    {
+        "label": "家庭医生",
+        "id": "05",
+        "children": []
+    }
+]

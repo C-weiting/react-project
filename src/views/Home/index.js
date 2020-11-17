@@ -1,18 +1,20 @@
 import React from 'react';
 import './home.less';
+import Left from './Left';
+import Center from './Center';
+import Right from './Right';
 
 function Home () {
     return (
         <div className="home-content">
             <div className="left-content">
-                <div className="left-top-content"></div>
-                <div className="left-bottom-content"></div>
+                <Left />
             </div>
             <div className="center-content">
-
+                <Center />
             </div>
             <div className="right-content">
-
+                <Right />
             </div>
         </div>
     )

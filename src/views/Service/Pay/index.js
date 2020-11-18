@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ListView } from 'antd-mobile';
 import CheckboxItem from '@/components/CheckboxItem'
+import showPayModel from '@/views/Pay';
 import '../inner-route.less';
 
 function Pay () {
@@ -78,6 +79,10 @@ function Pay () {
         )
     }
 
+    function handlePay() {
+        showPayModel();
+    }
+
     return (
         <div className="pay-content">
             <div className="pay-list">
@@ -92,7 +97,7 @@ function Pay () {
                     <span>共选中{selectedData.length}个账单</span>
                     <span>应缴总计：<span className="money">￥{totolMoney}</span></span>
                 </div>
-                <div className="bttom-btn">提交申请</div>
+                <div className="bttom-btn" onClick={handlePay}>确认缴费</div>
             </div>
         </div>
     )

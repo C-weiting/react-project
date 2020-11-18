@@ -15,7 +15,7 @@ function Header () {
             <div className="right-content">
                 <span className="login-btn" onClick={login}>登录</span>
                 <div className="message">
-                    <Badge className="message-badge" text={77} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} />
+                    {/* <Badge className="message-badge" text={77} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} /> */}
                     <svg className="icon" aria-hidden="true">
                         <use xlinkHref="#iconxiaoxi"></use>
                     </svg>

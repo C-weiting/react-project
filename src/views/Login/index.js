@@ -34,11 +34,11 @@ function Login (props) {
                 <div className="qrcode-bg">
                     <div className="qrcode">
                         <QRCode
-                            size={192}
+                            size={96}
                             value={text}
                             logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
-                            logoWidth={50}
-                            logoHeight={50}
+                            logoWidth={25}
+                            logoHeight={25}
                         />
                     </div>
                 </div>

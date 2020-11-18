@@ -8,11 +8,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     .qrcode-bg {
         width: 237px;
         height: 374px;
         .bg-image('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/qrcode-bg');
         background-size: 100% 100%;
+        position: relative;
+
+        .qrcode {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 16px;
+        }
     }
 }

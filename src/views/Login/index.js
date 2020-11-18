@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import QRCode from 'qrcode-react';
+import MD5 from 'md5';
 import { Modal } from 'antd-mobile';
 import './login.less';
 
@@ -16,6 +17,10 @@ function Login (props) {
         divList = [];
     }
 
+    const text = MD5(Math.random());
+
+    console.log(text);
+
     return (
         <Modal
             visible={modal}
@@ -27,13 +32,15 @@ function Login (props) {
         >
             <div className="login-content">
                 <div className="qrcode-bg">
-                    <QRCode
-                        size={150}
-                        value={`https://www.baidu.com`}
-                        logo={`https://www.baidu.com/img/baidu_jgylogo3.gif`}
-                        logoWidth={50}
-                        logoHeight={50}
-                    />
+                    <div className="qrcode">
+                        <QRCode
+                            size={192}
+                            value={text}
+                            logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
+                            logoWidth={50}
+                            logoHeight={50}
+                        />
+                    </div>
                 </div>
             </div>
         </Modal>

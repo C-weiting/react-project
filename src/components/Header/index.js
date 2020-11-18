@@ -18,6 +18,10 @@ function Header () {
         history.push('/message');
     }
 
+    function handleSetting() {
+        history.push('/settings');
+    }
+
     return (
         <div className="header-content">
             <img className="icon-logo" src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png" alt=""></img>
@@ -29,7 +33,7 @@ function Header () {
                         <use xlinkHref="#iconxiaoxi"></use>
                     </svg>
                 </div>
-                <svg className="icon" aria-hidden="true">
+                <svg className="icon" aria-hidden="true" onClick={handleSetting}>
                     <use xlinkHref="#iconshezhi"></use>
                 </svg>
             </div>

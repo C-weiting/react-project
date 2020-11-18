@@ -18,7 +18,7 @@ export default function HomeRight () {
                         {
                             text: '移出',
                             onPress: () => console.log('delete'),
-                            style: { backgroundColor: '#F2543F', color: '#ffffff', fontSize: '15px', width: '0.78125rem', borderRadius: '0.0625rem', marginLeft: '0.078125rem' },
+                            style: { backgroundColor: '#F2543F', color: '#ffffff', fontSize: '0.09375rem', width: '0.78125rem', borderRadius: '0.0625rem', marginLeft: '0.078125rem' },
                         },
                     ]}
                     onOpen={() => console.log('global open')}

@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ListView } from 'antd-mobile';
 import CheckboxItem from '@/components/CheckboxItem'
+import Empty from '@/components/Empty'
 import showPayModel from '@/views/Pay';
 import '../inner-route.less';
 
 function Pay () {
-    const [dataSource, setDataSource] = useState(new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2
-    }));
+    const [dataSource, setDataSource] = useState([]);
     const [selectedData, setSelectedData] = useState([])
 
     useEffect(() => {
-        setDataSource(dataSource.cloneWithRows([
+        setDataSource([
             {
                 id: 1,
                 img: 'https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png',
@@ -47,8 +45,24 @@ function Pay () {
                 des: '不是所有的兼职汪都需要风吹日晒',
                 money: 100
             },
-        ]))
+            {
+                id: 5,
+                img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
+                title: 'Eat the week',
+                des: '不是所有的兼职汪都需要风吹日晒',
+                money: 100
+            },
+            {
+                id: 5,
+                img: 'https://zos.alipayobjects.com/rmsportal/hfVtzEhPzTUewPm.png',
+                title: 'Eat the week',
+                des: '不是所有的兼职汪都需要风吹日晒',
+                money: 100
+            },
+        ])
     }, []);
+
+    console.log(dataSource)
 
     const totolMoney = useMemo(() => (
         selectedData.length ? selectedData.reduce((a, b) => {
@@ -67,30 +81,30 @@ function Pay () {
         }
     }
 
-    const row = (rowData, sectionID, rowID) => {
-        return (
-            <div key={rowID} className="pay-list-item">
-                <CheckboxItem onChange={(status) => onChange(rowData, status)} />
-                <span className="pay-type">物业管理费</span>
-                <span className="payment-days">账期：2020/01-2020/12</span>
-                <span>应缴：<span className="money">￥20000</span></span>
-                <span className="arrow-btn"></span>
-            </div>
-        )
-    }
-
-    function handlePay() {
+    function handlePay () {
         showPayModel();
     }
 
     return (
         <div className="pay-content">
-            <div className="pay-list">
-                <ListView
-                    dataSource={dataSource}
-                    renderRow={row}
-                    style={{ height: '100%', overflow: 'auto' }}
-                />
+            <div className="pay-list-content">
+                {
+                    dataSource.length ? (
+                        <ul className="pay-list">
+                            {
+                                dataSource.map((item, index) => (
+                                    <div key={index} className="pay-list-item">
+                                        <CheckboxItem onChange={(status) => onChange(item, status)} />
+                                        <span className="pay-type">物业管理费</span>
+                                        <span className="payment-days">账期：2020/01-2020/12</span>
+                                        <span>应缴：<span className="money">￥20000</span></span>
+                                        <span className="arrow-btn"></span>
+                                    </div>
+                                ))
+                            }
+                        </ul>
+                    ): <Empty pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/pay-empty%402x.png" text="当前没有缴费账单" />
+                }
             </div>
             <div className="content-bottom">
                 <div className="btn-title">

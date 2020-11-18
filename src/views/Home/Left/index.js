@@ -6,12 +6,12 @@ export default function HomeLeft () {
 
     const [weatherInfo, setWeatherInfo] = useState({});
 
-    useEffect(() => {
-        getWeather().then(res => {
-            console.log(res)
-            setWeatherInfo(res.showapi_res_body.f1)
-        })
-    }, []);
+    // useEffect(() => {
+    //     getWeather().then(res => {
+    //         console.log(res)
+    //         setWeatherInfo(res.showapi_res_body.f1)
+    //     })
+    // }, []);
 
     return (
         <>

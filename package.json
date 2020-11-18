@@ -8,6 +8,9 @@
     "@testing-library/user-event": "^12.1.10",
     "antd-mobile": "^2.3.4",
     "axios": "^0.21.0",
+    "crypto-js": "^4.0.0",
+    "http-proxy-middleware": "^1.0.6",
+    "js-base64": "^3.6.0",
     "md5": "^2.3.0",
     "prop-types": "^15.7.2",
     "qrcode-react": "^0.1.16",
@@ -51,6 +54,5 @@
     "less-loader": "^7.1.0",
     "postcss-pxtorem": "^5.1.1",
     "react-app-rewired": "^2.1.6"
-  },
-  "proxy": "https://www.baidu.com"
+  }
 }

@@ -9,6 +9,7 @@ import {
 import Complaints from '@/views/Service/Complaints';
 import Pay from '@/views/Service/Pay';
 import Repair from '@/views/Service/Repair';
+import Navigation from '@/components/Navigation';
 import indexTree from './menu.json';
 
 import './service.less';
@@ -68,14 +69,11 @@ function Service () {
 
   return (
     <div className="service">
-      <div className="header">
-        <span className="back-icon"></span>
-        物业服务
-      </div>
+      <Navigation title="物业服务" />
       <div className="service-content">
         <section className="addressLine flex-row-center">
           <div className="addressIcon"></div>
-          <div className="address">当前房屋:常州帝景002单位001栋101室</div>
+          <div className="address">当前房屋：常州帝景002单位001栋101室</div>
         </section>
         <section className="contentBox flex-row">
           <div className="firstList">{firstListElement}</div>

@@ -1,0 +1,12 @@
+@import url('~@/styles/mixin.less');
+
+.checkbox-item {
+    width: 24px;
+    height: 24px;
+    .bg-image('~@/assets/images/checkbox');
+    background-size: 100% 100%;
+
+    &.selected {
+        .bg-image('~@/assets/images/checkedbox');
+    }
+}

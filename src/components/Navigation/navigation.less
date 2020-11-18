@@ -1,0 +1,21 @@
+@import url('~@/styles/mixin.less');
+
+.header {
+    height: 94px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: #ffffff;
+    font-size: 28px;
+
+    .back-icon {
+        width: 25px;
+        height: 28px;
+        position: absolute;
+        display: block;
+        left: 32px;
+        .bg-image('~@/assets/images/back_icon');
+        background-size: 100% 100%;
+    }
+}

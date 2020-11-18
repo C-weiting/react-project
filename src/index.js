@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '@/styles/base.less';
+import '@/styles/reset-antd.less';
 import '@/styles/font.less';
 import '@/utils/flexible.js';
 import store from '@/store';

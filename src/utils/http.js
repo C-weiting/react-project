@@ -3,11 +3,11 @@
  */
 import axios from 'axios';
 import { Base64 } from 'js-base64';
-import { decrypt, encrypt } from './secret';
+import { DESEncrypt, DESDecrypt } from './secret';
 import Qs from 'qs';
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = '/';
+axios.defaults.baseURL = '/api';
 // axios.defaults.baseURL = 'http://61.132.109.16:8088/';
 // axios.defaults.baseURL = 'http://61.132.109.16:8099/';
 // axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
@@ -17,21 +17,12 @@ axios.defaults.baseURL = '/';
  */
 axios.interceptors.request.use(
   (config) => {
-    // config.data = JSON.stringify(config.data);
-    // config.headers = {
-    //   'Content-Type': 'application/json',
-    // };
-    // return config;
-
     config.headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
     };
-    let obj = { errorCode: '', model: null, msg: '', success: true };
-    console.log(JSON.stringify(obj), 11111);
-    console.log(Base64.encode(encrypt(JSON.stringify(obj))), 22222);
     config.data = Qs.stringify({
-      secretMsg: encodeURI(Base64.encode(encrypt(JSON.stringify(config.data)))),
-      secretMsgs: Base64.encode(encrypt(JSON.stringify(config.data))),
+      secretMsg: DESEncrypt(JSON.stringify(config.data)),
+      fromH5: true,
     });
     return config;
   },
@@ -48,9 +39,8 @@ axios.interceptors.response.use(
     if (response.data.errCode === 2) {
       console.log('过期');
     }
-    console.log(response);
+    response.data = JSON.parse(DESDecrypt(response.data));
     return response;
-    // return decrypt(Base64.decode(response));
   },
   (error) => {
     console.log('请求出错：', error);

@@ -1,37 +1,29 @@
-import { Base64 } from 'js-base64';
+import CryptoJS from 'crypto-js';
 
-const CryptoJS = require('crypto-js'); 
-
-const key = CryptoJS.enc.Utf8.parse(
-  //   Base64.decode('t96IBJWTOMIMWOzdjQ36pw==')
-  CryptoJS.enc.Base64.parse('t96IBJWTOMIMWOzdjQ36pw==')
-).toString();
-
-//加密方法
-export function encrypt(word) {
-  console.log(key, 'key');
-  let srcs = CryptoJS.enc.Utf8.parse(word);
-  let encrypted = CryptoJS.AES.encrypt(srcs, key, {
-    // iv: iv,
+// 加密
+export function DESEncrypt(data) {
+  var key = '958TkI*&';
+  var keyHex = CryptoJS.enc.Utf8.parse(key);
+  var ivHex = CryptoJS.enc.Utf8.parse(key);
+  var encrypted = CryptoJS.DES.encrypt(CryptoJS.enc.Utf8.parse(data), keyHex, {
+    iv: ivHex,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
   });
-  return encrypted.toString();
+
+  return encodeURIComponent(encrypted.toString());
 }
-//解密方法
-export function decrypt(word) {
-  let encryptedHexStr = CryptoJS.enc.Hex.parse(word);
-  let srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-  let decrypt = CryptoJS.AES.decrypt(srcs, key, {
-    // iv: iv,
+// 解密
+export function DESDecrypt(data) {
+  var key = '958TkI*&';
+  var keyHex = CryptoJS.enc.Utf8.parse(key);
+  var ivHex = CryptoJS.enc.Utf8.parse(key);
+  var decrypted = CryptoJS.DES.decrypt(data, keyHex, {
+    iv: ivHex,
     mode: CryptoJS.mode.CBC,
     padding: CryptoJS.pad.Pkcs7,
   });
-  let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
-  return decryptedStr.toString();
-}
+  var dataBase64 = decrypted.toString(CryptoJS.enc.Utf8);
 
-// export default {
-//   decrypt,
-//   encrypt,
-// };
+  return dataBase64;
+}

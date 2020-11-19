@@ -27,7 +27,9 @@ function Login(props) {
       qrCodeId: 'a67f4dc277eb26813198e7c3bed39849',
       source: 'Y-PAD',
     }).then((res) => {
-      console.log(res);
+      if (res.success) {
+        console.log(res.model);
+      }
     });
   };
   userLogin();
@@ -61,7 +63,9 @@ function Login(props) {
             />
           </div>
         </div>
-        <div className="infoTag">下载新橙社APP，进入APP首页点击右上角扫码登录</div>
+        <div className="infoTag">
+          下载新橙社APP，进入APP首页点击右上角扫码登录
+        </div>
       </div>
     </Modal>
   );

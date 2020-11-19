@@ -5,7 +5,7 @@ import http from '../utils/http';
  */
 function getUserMsg(params){
   return new Promise((resolve, reject) => {
-    http("post",'/api/customer/customer/queryQrCodeAuth.json',params).then(res => {
+    http("post",'/customer/customer/queryQrCodeAuth.json',params).then(res => {
       resolve (res);
     },error => {
       console.log("网络异常~",error);

@@ -5,6 +5,7 @@ import Center from './Center';
 import Right from './Right';
 
 function Home () {
+
     return (
         <div className="home-content">
             <div className="left-content">

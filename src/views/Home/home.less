@@ -1,3 +1,5 @@
+@import url('~@/styles/mixin.less');
+
 .home-content {
     width: 100%;
     height: 100%;
@@ -153,14 +155,33 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                color: #ffffff;
+                color: rgba(255, 255, 255, 0.8);
                 font-size: 14px;
                 line-height: 20px;
                 border-radius: 8px;
 
-                .icon {
-                    font-size: 32px;
+                .icon-wrapper {
+                    width: 33px;
+                    height: 33px;
                     margin-bottom: 13px;
+                    margin-right: 23px;
+                    position: relative;
+                    background-size: cover;
+
+                    &.property {
+                        .bg-image('~@/assets/images/property');
+                    }
+
+                    &.camera {
+                        width: 29px;
+                        height: 35px;
+                        margin-bottom: 11px;
+                        .bg-image('~@/assets/images/camera');
+                    }
+
+                    &.elevator {
+                        .bg-image('~@/assets/images/elevator');
+                    }
                 }
             }
         }
@@ -197,6 +218,7 @@
                     margin-bottom: 8px;
                     text-align: center;
                 }
+
                 .subtitle {
                     font-size: 16px;
                     line-height: 22px;
@@ -222,8 +244,9 @@
                     color: #D6D6D6;
                     padding: 0 18px 0 25px;
 
-                    .icon {
+                    .iconfont {
                         font-size: 24px;
+                        color: #EBEBEB;
                         margin-right: 10px;
                     }
 

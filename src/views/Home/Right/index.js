@@ -26,9 +26,7 @@ export default function HomeRight () {
                 >
                     <li className="message-item">
                         <div className="message-item-info">
-                            <svg className="icon" aria-hidden="true">
-                                <use xlinkHref="#iconshineihuti"></use>
-                            </svg>
+                            <i className="iconfont iconshineihuti"></i>
                             <div className="message-item-info-content">
                                 <div className="title">
                                     <span className="message-type">水浸告警</span>

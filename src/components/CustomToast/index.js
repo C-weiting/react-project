@@ -5,9 +5,7 @@ import './custom-toast.less';
 function Success (props) {
     return (
         <div className="custom-toast">
-            <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#iconchenggong"></use>
-            </svg>
+            <i className="iconfont iconchenggong"></i>
             <h1 className="text">{props.text}</h1>
         </div>
     )
@@ -16,9 +14,7 @@ function Success (props) {
 function Fail (props) {
     return (
         <div className="custom-toast">
-            <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#iconcuowu"></use>
-            </svg>
+            <i className="iconfont iconcuowu"></i>
             <h1 className="text">{props.text}</h1>
         </div>
     )
@@ -27,22 +23,20 @@ function Fail (props) {
 function Info (props) {
     return (
         <div className="custom-toast">
-            <svg className="icon" aria-hidden="true">
-                <use xlinkHref="#iconjinggao"></use>
-            </svg>
+            <i className="iconfont iconjinggao"></i>
             <h1 className="text">{props.text}</h1>
         </div>
     )
 }
 
 export function CustomSuccess (text) {
-    return Toast.info(<Success text={text} />, 300)
+    return Toast.info(<Success text={text} />, 2)
 }
 
 export function CustomFail (text) {
-    return Toast.info(<Fail text={text} />, 200)
+    return Toast.info(<Fail text={text} />, 2)
 }
 
 export function CustomInfo (text) {
-    return Toast.info(<Info text={text} />, 100)
+    return Toast.info(<Info text={text} />, 2)
 }

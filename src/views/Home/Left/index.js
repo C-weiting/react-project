@@ -1,24 +1,56 @@
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { getWeather } from '@/api/thirdParty';
 import '../home.less';
 
+const weekDayMap = {
+    1: '周一',
+    2: '周二',
+    3: '周三',
+    4: '周四',
+    5: '周五',
+    6: '周六',
+    7: '周日',
+}
+
 export default function HomeLeft () {
-
     const [weatherInfo, setWeatherInfo] = useState({});
+    const [timeData, setTimeData] = useState({
+        time: moment().format('HH:mm'),
+        day: moment().format('MM月DD日'),
+        weekday: weekDayMap[moment().get('weekday')]
+    });
 
-    // useEffect(() => {
-    //     getWeather().then(res => {
-    //         console.log(res)
-    //         setWeatherInfo(res.showapi_res_body.f1)
-    //     })
-    // }, []);
+    useEffect(() => {
+        getWeather().then(res => {
+            console.log(res)
+            setWeatherInfo(res.showapi_res_body.f1)
+        })
+    }, []);
+
+    useEffect(() => {
+        const timer= setInterval(getTime, 60 * 1000)
+
+        return () => {
+            clearInterval(timer);
+        }
+    }, []);
+
+    function getTime() {
+        const newTimeData = {
+            time: moment().format('HH:mm'),
+            day: moment().format('MM月DD日'),
+            weekday: weekDayMap[moment().get('weekday')]
+        }
+        setTimeData(newTimeData);
+    }
 
     return (
         <>
             <div className="left-top-content">
                 <div>
-                    <div className="time">20:00</div>
-                    <div className="day">10月10日周六</div>
+                    <div className="time">{timeData.time}</div>
+                    <div className="day">{timeData.day}{timeData.weekday}</div>
                 </div>
                 <div className="weather-info">
                     <span className="temperature">{weatherInfo.day_air_temperature}</span>

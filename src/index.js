@@ -9,7 +9,9 @@ import '@/utils/flexible.js';
 import store from '@/store';
 import Layout from '@/views/Layout';
 import Message from '@/views/Message';
-import Service from '@/views/Service'
+import Service from '@/views/Service';
+import Settings from '@/views/Settings';
+import About from '@/views/About';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -17,6 +19,8 @@ const Root = ({ store }) => (
       <Switch>
         <Route path='/message' component={Message}></Route>
         <Route path='/service' component={Service}></Route>
+        <Route path='/settings' component={Settings}></Route>
+        <Route path='/about' component={About}></Route>
         <Route path='/' component={Layout}></Route>
       </Switch>
     </Router>

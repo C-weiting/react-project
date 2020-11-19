@@ -6,7 +6,26 @@ html:not([data-scale]) .am-modal-button-group-v .am-modal-button::before {
     background-color: rgba(255, 255, 255, 0.07) !important;
 }
 
-.am-modal-button-group-v .am-modal-button {
+html:not([data-scale]) .am-modal-button-group-v .am-modal-button.am-modal-button-active, 
+html:not([data-scale]) .am-modal-button-group-h .am-modal-button.am-modal-button-active {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.am-modal-button-group-v .am-modal-button, .am-modal-button-group-h .am-modal-button {
     color: rgba(255, 255, 255, 0.5) !important;
-    font-size: 16px !important;
+    font-size: 10px !important;
+    height: 35px !important;
+    line-height: 35px !important;
+}
+
+html:not([data-scale]) .am-modal-button-group-h::before {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+html:not([data-scale]) .am-modal-button-group-h .am-modal-button:last-child::before {
+    background-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+.am-modal-button-group-h .am-modal-button:last-child {
+    color: #FF8C00 !important;
 }

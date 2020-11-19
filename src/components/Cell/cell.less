@@ -1,0 +1,39 @@
+@import url('~@/styles/mixin.less');
+
+.cell {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: space-between;
+    color: #ffffff;
+    padding: 0 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    
+    .cell-title {
+        font-size: 24px;
+    }
+
+    .cell-btn {
+        display: flex;
+        align-items: center;
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #FF3B3B;
+            display: inline-block;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+    
+        .allow-btn {
+            width: 19.11px;
+            height: 21.41px;
+            display: inline-block;
+            .bg-image('~@/assets/images/back_icon');
+            background-size: 100% 100%;
+            transform: rotate(180deg);
+        }
+    }
+}

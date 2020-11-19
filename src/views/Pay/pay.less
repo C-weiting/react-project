@@ -1,0 +1,64 @@
+@import url('~@/styles/mixin.less');
+
+.model-pay.am-modal-transparent {
+    width: 306px;
+}
+
+.pay-model-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .address {
+        height: 37px;
+        font-size: 26px;
+        color: #ffffff;
+        margin-top: 30px;
+        line-height: 37px;
+        position: relative;
+
+        .addressIcon {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            margin-right: 16px;
+            .bg-image('~@/assets/images/location');
+            background-size: 100% 100%;
+            position: relative;
+            top: 5px;
+        }
+    }
+
+    .qrcode {
+        padding: 25px;
+        margin: 51px 0 39px;
+    }
+
+    .pay-type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 33px;
+
+        .wechat,
+        .alipay {
+            width: 44px;
+            height: 44px;
+            background-size: 100% 100%;
+        }
+
+        .wechat {
+            .bg-image('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/wechat');
+        }
+
+        .alipay {
+            .bg-image('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/alipay');
+            margin: 0 18px 0 14px;
+        }
+
+        .text {
+            font-size: 28px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+}

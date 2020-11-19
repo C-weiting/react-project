@@ -1,20 +1,29 @@
 /**
  * 网络请求配置
  */
-import axios from "axios";
+import axios from 'axios';
+import { Base64 } from 'js-base64';
+import { DESEncrypt, DESDecrypt } from './secret';
+import Qs from 'qs';
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = "/";
+axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = 'http://61.132.109.16:8088/';
+// axios.defaults.baseURL = 'http://61.132.109.16:8099/';
+// axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
 
 /**
  * http request 拦截器
  */
 axios.interceptors.request.use(
   (config) => {
-    config.data = JSON.stringify(config.data);
     config.headers = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/x-www-form-urlencoded',
     };
+    config.data = Qs.stringify({
+      secretMsg: DESEncrypt(JSON.stringify(config.data)),
+      fromH5: true,
+    });
     return config;
   },
   (error) => {
@@ -28,12 +37,13 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   (response) => {
     if (response.data.errCode === 2) {
-      console.log("过期");
+      console.log('过期');
     }
+    response.data = JSON.parse(DESDecrypt(response.data));
     return response;
   },
   (error) => {
-    console.log("请求出错：", error);
+    console.log('请求出错：', error);
   }
 );
 
@@ -45,9 +55,11 @@ axios.interceptors.response.use(
  */
 export function get(url, params = {}) {
   return new Promise((resolve, reject) => {
-    axios.get(url, {
+    axios
+      .get(url, {
         params: params,
-      }).then((response) => {
+      })
+      .then((response) => {
         landing(url, params, response.data);
         resolve(response.data);
       })
@@ -123,24 +135,24 @@ export function put(url, data = {}) {
 export default function http(fecth, url, param) {
   return new Promise((resolve, reject) => {
     switch (fecth) {
-      case "get":
-        console.log("begin a get request,and url:", url);
+      case 'get':
+        console.log('begin a get request,and url:', url);
         get(url, param)
           .then(function (response) {
             resolve(response);
           })
           .catch(function (error) {
-            console.log("get request GET failed.", error);
+            console.log('get request GET failed.', error);
             reject(error);
           });
         break;
-      case "post":
+      case 'post':
         post(url, param)
           .then(function (response) {
             resolve(response);
           })
           .catch(function (error) {
-            console.log("get request POST failed.", error);
+            console.log('get request POST failed.', error);
             reject(error);
           });
         break;
@@ -158,43 +170,43 @@ function msag(err) {
         alert(err.response.data.error.details);
         break;
       case 401:
-        alert("未授权，请登录");
+        alert('未授权，请登录');
         break;
 
       case 403:
-        alert("拒绝访问");
+        alert('拒绝访问');
         break;
 
       case 404:
-        alert("请求地址出错");
+        alert('请求地址出错');
         break;
 
       case 408:
-        alert("请求超时");
+        alert('请求超时');
         break;
 
       case 500:
-        alert("服务器内部错误");
+        alert('服务器内部错误');
         break;
 
       case 501:
-        alert("服务未实现");
+        alert('服务未实现');
         break;
 
       case 502:
-        alert("网关错误");
+        alert('网关错误');
         break;
 
       case 503:
-        alert("服务不可用");
+        alert('服务不可用');
         break;
 
       case 504:
-        alert("网关超时");
+        alert('网关超时');
         break;
 
       case 505:
-        alert("HTTP版本不受支持");
+        alert('HTTP版本不受支持');
         break;
       default:
     }

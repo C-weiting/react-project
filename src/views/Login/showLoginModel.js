@@ -5,7 +5,9 @@ import MD5 from 'md5';
 import { Modal } from 'antd-mobile';
 import './login.less';
 import { getUserMsg } from '../../api/user';
-
+import { createStore } from 'redux';
+import action from '../../store/action/userInfo';
+import rootReducer from '../../store/reducer/index';
 
 let divList = [];
 
@@ -26,11 +28,12 @@ function Login(props) {
   let userLogin = () => {
     getUserMsg({
       qrCodeId: 'a67f4dc277eb26813198e7c3bed39849',
-
       source: 'Y-PAD',
     }).then((res) => {
       if (res.success) {
-        console.log(res.model);
+        let { subscribe, dispatch, getState } = createStore(rootReducer);
+        dispatch(action.addUserInfo({ ...res.model }));
+        console.log(getState());
       }
     });
   };

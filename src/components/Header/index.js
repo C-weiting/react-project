@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
-// import {showLoginModel} from '@/views/Login';
-import { showLoginInfoModel } from '@/views/Login';
+import {showLoginModel} from '@/views/Login';
+// import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 
 function Header () {
@@ -10,8 +10,8 @@ function Header () {
     const history = useHistory();
 
     function handleLogin () {
-        // showLoginModel();
-        showLoginInfoModel()
+        showLoginModel();
+        // showLoginInfoModel()
     }
 
     function handleMessage () {

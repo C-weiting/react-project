@@ -1,11 +1,11 @@
 @import url('~@/styles/mixin.less');
 
 .model-login.am-modal-transparent {
-    width: 307px;
+  width: 307px;
 }
 
 .model-login-info.am-modal-transparent {
-    width: 300px;
+  width: 300px;
 }
 
 .login-content {
@@ -26,24 +26,34 @@
       transform: translateX(-50%);
       bottom: 16px;
     }
+  }
+  .infoTag {
+    height: 30px;
+    font-size: 22px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 30px;
+    margin-top: 20px;
+    margin-bottom: 43px;
+    opacity: 0.8;
+  }
 }
 
 .login-info-content {
+  .title {
+    font-size: 28px;
+    line-height: 40px;
+    margin-top: 25px;
+  }
 
-    .title {
-        font-size: 28px;
-        line-height: 40px;
-        margin-top: 25px;
+  .info-list {
+    margin: 49px 39px 0;
+
+    li {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 24px;
+      line-height: 48px;
+      text-align: left;
     }
-
-    .info-list {
-        margin: 49px 39px 0;
-
-        li {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 24px;
-            line-height: 48px;
-            text-align: left;
-        }
-    }
+  }
 }

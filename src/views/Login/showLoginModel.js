@@ -8,6 +8,8 @@ import { getUserMsg } from '../../api/user';
 import { createStore } from 'redux';
 import action from '../../store/action/userInfo';
 import rootReducer from '../../store/reducer/index';
+import { useStore } from 'react-redux';
+import store from '@/store';
 
 let divList = [];
 
@@ -31,9 +33,10 @@ function Login(props) {
       source: 'Y-PAD',
     }).then((res) => {
       if (res.success) {
-        let { subscribe, dispatch, getState } = createStore(rootReducer);
-        dispatch(action.addUserInfo({ ...res.model }));
-        console.log(getState());
+        // let { subscribe, dispatch, getState } = createStore(rootReducer);
+        // dispatch(action.addUserInfo({ ...res.model }));
+        store.dispatch(action.addUserInfo({ ...res.model }));
+        console.log(store.getState());
       }
     });
   };

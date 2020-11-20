@@ -1,7 +1,7 @@
 import http from '../utils/http';
 
 /**
- * 获取首页列表
+ * 获取登陆用户信息
  */
 function getUserMsg(params){
   return new Promise((resolve, reject) => {

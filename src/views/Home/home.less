@@ -227,56 +227,66 @@
             }
         }
 
-        .message-list {
-            padding-right: 26px;
-            height: 267px;
+        .message-list-wrapper {
+            flex: 1;
+            overflow: hidden;
 
-            .message-item {
-                height: 79px;
-                padding-left: 26px;
-
-                .message-item-info {
-                    height: 100%;
-                    background-color: #555556;
-                    border-radius: 8px;
-                    display: flex;
-                    align-items: center;
-                    color: #D6D6D6;
-                    padding: 0 18px 0 25px;
-
-                    .iconfont {
-                        font-size: 24px;
-                        color: #EBEBEB;
-                        margin-right: 10px;
-                    }
-
-                    .message-item-info-content {
-                        flex: 1;
-                        font-size: 13px;
-                        line-height: 18px;
-
-                        .title {
-                            display: flex;
-                            justify-content: space-between;
-                            align-items: center;
-                            margin-bottom: 3px;
-
-                            .message-type {
-                                font-size: 16px;
-                                line-height: 22px;
-                            }
-
-                            .message-time {
-                                color: rgba(255, 255, 255, 0.5);
-                            }
-                        }
-                    }
-
-                }
+            &.short {
+                margin-bottom: 50px;
             }
 
-            .am-swipe-content {
-                background-color: transparent;
+            .message-list {
+                padding-right: 26px;
+                height: 267px;
+                overflow-y: auto;
+
+                .message-item {
+                    height: 79px;
+                    padding-left: 26px;
+
+                    .message-item-info {
+                        height: 100%;
+                        background-color: #555556;
+                        border-radius: 8px;
+                        display: flex;
+                        align-items: center;
+                        color: #D6D6D6;
+                        padding: 0 18px 0 25px;
+
+                        .iconfont {
+                            font-size: 24px;
+                            color: #EBEBEB;
+                            margin-right: 10px;
+                        }
+
+                        .message-item-info-content {
+                            flex: 1;
+                            font-size: 13px;
+                            line-height: 18px;
+
+                            .title {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 3px;
+
+                                .message-type {
+                                    font-size: 16px;
+                                    line-height: 22px;
+                                }
+
+                                .message-time {
+                                    color: rgba(255, 255, 255, 0.5);
+                                }
+                            }
+                        }
+
+                    }
+                }
+
+                .am-swipe-content {
+                    background-color: transparent;
+                }
             }
         }
     }

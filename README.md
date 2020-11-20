@@ -83,6 +83,24 @@ H5->native
 }
 
 
+### 消息测试
+H5->native
+{
+    "method":"PUSH_TEST",
+    "object":{
+            "type":"xxx"
+    }
+}
+
+type:目前支持 10090 10091 10092
+
+native->H5
+{"method":"GET_PUSH_MSG","object":[{"content":"{\"id2\":\"021-12345678\",\"id1\":6491,\"type\":\"10090\",\"title\":\"新橙社\",\"content\":\"馥华里有新公告，立即查看\"}","isRead":false,"messageId":"c1097c58779a49f3b66c12e1aa0a6d74","read":false}]}
+
+{"method":"GET_PUSH_MSG","object":[{"content":"{\"id2\":\"021-12345678\",\"id1\":6491,\"type\":\"10092\",\"title\":\"已缴费通知\",\"content\":\"馥华里有新公告，立即查看\"}","isRead":false,"messageId":"c1097c58779a49f3b66c12e1aa0a6d74","read":false}]}
+
+{"method":"GET_PUSH_MSG","object":[{"content":"{\"id2\":\"021-12345678\",\"id1\":6491,\"type\":\"10091\",\"title\":\"欠费通知\",\"content\":\"馥华里有新公告，立即查看-冯伟推送1501\"}","isRead":false,"messageId":"c2d25dc1ebbe4c5da345cb9426eb6a5b","read":false}]}
+
 
 
 

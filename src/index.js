@@ -6,6 +6,7 @@ import '@/styles/base.less';
 import '@/styles/reset-antd.less';
 import '@/styles/font.less';
 import '@/utils/flexible.js';
+import '@/event'
 import store from '@/store';
 import Layout from '@/views/Layout';
 import Message from '@/views/Message';

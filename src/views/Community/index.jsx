@@ -10,33 +10,28 @@ function Community() {
 
   const [slideList, setSlideList] = useState([
     {
-      imgUrl: 'https://reactjs.org/logo-og.png',
+      imgUrl: 'https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-1%402x.png',
       title: '物业服务',
-      description: '报事报修｜投诉｜缴费',
       id: 'property',
     },
     {
-      imgUrl: 'https://reactjs.org/logo-og.png',
+      imgUrl: 'https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-2%402x.png',
       title: '生活缴费',
-      description: '报事报修｜投诉｜缴费',
       id: 'life',
     },
     {
-      imgUrl: 'https://reactjs.org/logo-og.png',
+      imgUrl: 'https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-3%402x.png',
       title: '家政服务',
-      description: '报事报修｜投诉｜缴费',
       id: 'housekeeping',
     },
     {
-      imgUrl: 'https://reactjs.org/logo-og.png',
+      imgUrl: 'https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-4%402x.png',
       title: '邻里社区',
-      description: '报事报修｜投诉｜缴费',
       id: 'block',
     },
     {
-      imgUrl: 'https://reactjs.org/logo-og.png',
+      imgUrl: 'https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-5%402x.png',
       title: '更多服务',
-      description: '报事报修｜投诉｜缴费',
       id: 'more',
     },
   ]);
@@ -45,10 +40,7 @@ function Community() {
     let actions = {
       property: () => {
         history.push({
-          pathname: '/service',
-          query: {
-            currentIndex:[0,0]
-          },
+          pathname: '/service'
         });
       },
     };
@@ -68,19 +60,18 @@ function Community() {
         <div className="title">社区生活</div>
         <div className="tag">橙主社区</div>
       </section>
-      <section className="slideLine flex-row-center">
-        <div className="shadow"></div>
+      <section className="slideLine">
         {SlideListElement}
       </section>
-      <section className="bottomLine flex-row-center">
+      <section className="bottomLine">
         <img
           className="bottomImg"
-          src="https://reactjs.org/logo-og.png"
+          src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-6%402x.png"
           alt=""
         />
         <img
           className="bottomImg"
-          src="https://reactjs.org/logo-og.png"
+          src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-7%402x.png"
           alt=""
         />
       </section>

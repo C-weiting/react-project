@@ -1,0 +1,53 @@
+@import url('~@/styles/mixin.less');
+
+.about {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    .about-content {
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .icon-logo {
+            width: 504px;
+        }
+
+        .version {
+            font-size: 20px;
+            line-height: 28px;
+            color: #ffffff;
+            margin: 45px 0 140px;
+        }
+
+        .last-version {
+            font-size: 20px;
+            line-height: 28px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+
+            .reflash-icon {
+                width: 28px;
+                height: 28px;
+                display: inline-block;
+                .bg-image('~@/assets/images/reflash');
+                background-size: 100% 100%;
+                margin-right: 3px;
+            }
+        }
+    }
+
+    .about-footer {
+        font-size: 15px;
+        line-height: 21px;
+        color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 31px;
+        text-align: center;
+    }
+}

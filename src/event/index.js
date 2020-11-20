@@ -1,18 +1,4 @@
-/* 创建一个事件对象，名字为newEvent，类型为build */
-var newEvent = new CustomEvent('build', {
-    detail: {
-        dog: "wo", cat: "mio"
-    }
-});
-
-/* 将自定义事件绑定在document对象上 */
-document.addEventListener("build", function (event) {
-
-}, false)
-
-/* 触发自定义事件 */
-document.dispatchEvent(newEvent);
-
+import EventBus from './EventBus';
 
 function sendHelloToAndroid () {
     if (window.android != null && typeof (window.android) != "undefined") {

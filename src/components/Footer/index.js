@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './footer.less';
 
 function Footer () {
-
+    const history = useHistory();
     const [state, setstate] = useState(1)
 
     function handleClick (type) {
         setstate(type)
+
+        if (type === 1) {
+            history.push('/');
+        } else if (type === 2) {
+
+        } else if (type === 3) {
+            history.push('/community');
+        }
     }
 
     return (

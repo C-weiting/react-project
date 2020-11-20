@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
-import {showLoginModel} from '@/views/Login';
+import { showLoginModel } from '@/views/Login';
 // import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 
@@ -18,7 +18,7 @@ function Header () {
         history.push('/message');
     }
 
-    function handleSetting() {
+    function handleSetting () {
         history.push('/settings');
     }
 
@@ -29,13 +29,11 @@ function Header () {
                 <span className="login-btn" onClick={handleLogin}>登录</span>
                 <div className="message" onClick={handleMessage}>
                     <Badge className="message-badge" text={77} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} />
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#iconxiaoxi"></use>
-                    </svg>
+                    <i className="iconfont iconxiaoxi"></i>
                 </div>
-                <svg className="icon" aria-hidden="true" onClick={handleSetting}>
-                    <use xlinkHref="#iconshezhi"></use>
-                </svg>
+                <div className="settings new">
+                    <i className="iconfont iconshezhi"></i>
+                </div>
             </div>
         </div>
     )

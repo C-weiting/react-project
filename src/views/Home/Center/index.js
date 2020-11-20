@@ -20,7 +20,7 @@ export default function HomeCenter () {
         }
     }, [])
 
-    function go(path){
+    function go (path) {
         history.push(path);
     }
 
@@ -32,21 +32,15 @@ export default function HomeCenter () {
             </div>
             <ul className="tag-list">
                 <li className="tag-item" onClick={() => go('/service')}>
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#iconwuyefuwu"></use>
-                    </svg>
+                    <div className="icon-wrapper property"></div>
                     物业服务
                 </li>
                 <li className="tag-item">
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#iconshexiangjiankong"></use>
-                    </svg>
+                    <div className="icon-wrapper camera"></div>
                     摄像监控
                 </li>
                 <li className="tag-item">
-                    <svg className="icon" aria-hidden="true">
-                        <use xlinkHref="#iconshineihuti"></use>
-                    </svg>
+                    <div className="icon-wrapper elevator"></div>
                     室内呼梯
                 </li>
             </ul>

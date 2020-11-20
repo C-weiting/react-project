@@ -1,31 +1,14 @@
 .slideItemBox {
   width: 240px;
   height: 360px;
-  background: #ffffff;
   border-radius: 8px;
-  margin-right: 24px;
+  overflow: hidden;
+
+  &:last-of-type {
+    width: 169px;
+  }
+
   .headImg {
-    width: 240px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 8px 8px 0 0;
-  }
-  .itemTitle {
-    height: 33px;
-    font-size: 24px;
-    font-weight: 500;
-    color: #333333;
-    line-height: 33px;
-    margin-top: 8px;
-    margin-left: 23px;
-  }
-  .itemDescription {
-    height: 22px;
-    font-size: 16px;
-    font-weight: 500;
-    color: #999999;
-    line-height: 22px;
-    margin-top: 12px;
-    margin-left: 23px;
+    width: 100%;
   }
 }

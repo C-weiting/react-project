@@ -1,12 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import './footer.less';
 
-function Footer() {
+function Footer () {
+    const history = useHistory();
+    const [state, setstate] = useState(1)
+
+    function handleClick (type) {
+        setstate(type)
+
+        if (type === 1) {
+            history.push('/');
+        } else if (type === 2) {
+
+        } else if (type === 3) {
+            history.push('/community');
+        }
+    }
+
     return (
-        <div>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
+        <div className="footer">
+            <ul className="menu-list">
+                <li className={`menu-item ${state === 1 && 'selected'}`}>
+                    <i className="iconfont iconshouye" onClick={() => { handleClick(1) }}></i>
+                </li>
+                <li className={`menu-item ${state === 2 && 'selected'}`}>
+                    <i className="iconfont iconkeshiduijiang" onClick={() => { handleClick(2) }}></i>
+                </li>
+                <li className={`menu-item ${state === 3 && 'selected'}`}>
+                    <i className="iconfont iconshequ" onClick={() => { handleClick(3) }}></i>
+                </li>
             </ul>
         </div>
     )

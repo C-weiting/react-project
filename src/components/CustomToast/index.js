@@ -29,14 +29,14 @@ function Info (props) {
     )
 }
 
-export function CustomSuccess (text) {
-    return Toast.info(<Success text={text} />, 2)
+export function CustomSuccess (text, delay) {
+    return Toast.info(<Success text={text} />, delay || 2)
 }
 
-export function CustomFail (text) {
-    return Toast.info(<Fail text={text} />, 2)
+export function CustomFail (text, delay) {
+    return Toast.info(<Fail text={text} />, delay || 2)
 }
 
-export function CustomInfo (text) {
-    return Toast.info(<Info text={text} />, 2)
+export function CustomInfo (text, delay) {
+    return Toast.info(<Info text={text} />, delay || 2)
 }

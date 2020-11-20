@@ -10,7 +10,7 @@ class EventBus {
         }
     }
     emit(type, params) {
-        this.subs[type].forEach(fn => {
+        this.subs[type] && this.subs[type].forEach(fn => {
             fn(params)
         });
     }

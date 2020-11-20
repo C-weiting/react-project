@@ -73,6 +73,14 @@ native->H5
     "object":"1.2.3"
 }
 
+### 提供原生账号手机号(目的是绑定推送)
+H5->native
+{
+    "method":"SET_PUSH_PHONE",
+    "object":{
+            "phone":"xxx"
+    }
+}
 
 
 

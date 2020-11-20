@@ -4,17 +4,20 @@ import {
   useRouteMatch,
   Route,
   Switch,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 import Complaints from '@/views/Service/Complaints';
 import Pay from '@/views/Service/Pay';
 import Repair from '@/views/Service/Repair';
 import Navigation from '@/components/Navigation';
 import indexTree from './menu.json';
+import rootReducer from '../../store/reducer/index';
 
 import './service.less';
+import { createStore } from 'redux';
+import { useStore } from 'react-redux';
 
-function Service () {
+function Service() {
   const history = useHistory();
   const { path } = useRouteMatch();
 
@@ -67,13 +70,15 @@ function Service () {
     )
   );
 
+  const store = useStore();
+  let houseName = store.getState().userInfo.houseAddress;
   return (
     <div className="service">
       <Navigation title="物业服务" />
       <div className="service-content">
         <section className="addressLine flex-row-center">
           <div className="addressIcon"></div>
-          <div className="address">当前房屋：常州帝景002单位001栋101室</div>
+          <div className="address">当前房屋：{houseName}</div>
         </section>
         <section className="contentBox flex-row">
           <div className="firstList">{firstListElement}</div>

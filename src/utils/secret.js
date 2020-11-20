@@ -27,3 +27,12 @@ export function DESDecrypt(data) {
 
   return dataBase64;
 }
+export const md5 = 'V8LA3r279vEDR58tQ4GURozhpK8EkQfG';
+export const md5Timestamp = new Date().getTime();
+
+export function md5Sign(data) {
+  // 加入字符编码
+  // let md5 = CryptoJS.createHash('md5').update(data, 'utf-8').digest('hex');
+  let md5 = CryptoJS.MD5(data).toString().toLowerCase();
+  return md5;
+}

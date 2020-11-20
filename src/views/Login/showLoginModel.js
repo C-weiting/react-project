@@ -23,25 +23,34 @@ function Login(props) {
     divList = [];
   }
 
-  const text = MD5(Math.random());
+  const text = MD5('a67f4dc277eb26813198e7c3bed39840');
+  //   const text = MD5(Math.random());
 
   console.log(text);
 
   let userLogin = () => {
     getUserMsg({
-      qrCodeId: 'a67f4dc277eb26813198e7c3bed39849',
+      //   qrCodeId: text,
+      qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
       source: 'Y-PAD',
     }).then((res) => {
       if (res.success) {
-        // let { subscribe, dispatch, getState } = createStore(rootReducer);
-        // dispatch(action.addUserInfo({ ...res.model }));
+        console.log(res.model);
         store.dispatch(action.addUserInfo({ ...res.model }));
-        console.log(store.getState());
       }
     });
   };
-
-  userLogin();
+  useEffect(() => {
+    let timer = setInterval(() => {
+      userLogin();
+      if (store.getState().userInfo) {
+        clearInterval(timer);
+      }
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
 
   return (
     <Modal

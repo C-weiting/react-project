@@ -19,8 +19,6 @@ function LoginInfo(props) {
   }
 
   const userInfo = store.getState().userInfo;
-  // const address = store.getState().userInfo.houseAddress;
-  // console.log(userInfo);
 
   function onCommit() {
     addWorkOrder({
@@ -32,8 +30,7 @@ function LoginInfo(props) {
       address: userInfo.houseAddress,
       thirdHouseId: userInfo.thirdHouseid,
       community: userInfo.blockId,
-      orderType: 1,
-      subOrderType: 1,
+      orderType: 3,
     }).then((res) => {
       if (res.success) {
         CustomSuccess('操作成功');
@@ -67,7 +64,7 @@ function LoginInfo(props) {
       ]}
     >
       <div className="login-info-content">
-        <div className="title">报事保修确认</div>
+        <div className="title">投诉举报确认</div>
         <ul className="info-list">
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>

@@ -11,19 +11,17 @@ function Pay() {
   const [selectedData, setSelectedData] = useState([]);
   const store = useStore();
   const userInfo = store.getState().userInfo;
-  console.log({
-    thirdHouseId: userInfo.thirdHouseid,
-    custId: userInfo.custId,
-  });
-    let initData = () => {
-      getOrderList({
-        thirdHouseId: userInfo.thirdHouseid,
-        custId: userInfo.custId,
-      }).then((res) => {
-        console.log(res);
-      });
-    };
-    initData();
+  console.log(userInfo);
+  let initData = () => {
+    getOrderList({
+      thirdHouseId: userInfo.thirdHouseid,
+      // custId: userInfo.custId,
+      data: `thirdHouseId=${userInfo.thirdHouseid}`,
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+  initData();
 
   useEffect(() => {
     setDataSource([

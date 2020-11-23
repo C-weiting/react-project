@@ -86,6 +86,7 @@ function Login(props) {
               logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
               logoWidth={25}
               logoHeight={25}
+              level="H"
             />
           </div>
         </div>

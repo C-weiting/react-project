@@ -66,10 +66,12 @@ function Login (props) {
       userLogin();
       if (store.getState().userInfo) {
         clearInterval(timer);
+        timer = null;
       }
     }, 1000);
     return () => {
       clearInterval(timer);
+      timer = null;
     };
   }, []);
 

@@ -42,7 +42,7 @@ export default function HomeRight () {
                         <ul className="message-list">
                             {
 
-                                messageList.map((item, index) => {
+                                messageList.filter(item => !item.isRead).map((item, index) => {
                                     let message = {
                                         ...JSON.parse(item.content),
                                         messageId: item.messageId,

@@ -29,10 +29,11 @@ export default function HomeLeft () {
     }, []);
 
     useEffect(() => {
-        const timer= setInterval(getTime, 60 * 1000)
+        let timer= setInterval(getTime, 60 * 1000)
 
         return () => {
             clearInterval(timer);
+            timer = null
         }
     }, []);
 

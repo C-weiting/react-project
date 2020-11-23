@@ -9,7 +9,7 @@ function useMessageList () {
     const { cacheMessageList, pushMessageList } = useSelector(state => state.message);
     const messageList = useMemo(
         () =>
-            [...cacheMessageList, ...pushMessageList],
+            [...cacheMessageList, ...pushMessageList].filter(item => !item.isRead),
         [cacheMessageList, pushMessageList]
     );
 

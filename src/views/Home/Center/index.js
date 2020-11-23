@@ -8,15 +8,28 @@ export default function HomeCenter () {
     const history = useHistory();
 
     useEffect(() => {
-        if (time_range('5:00', '12:00')) {// 早
-            setTitle('早上好')
-            setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/morning%402x.png')
-        } else if (time_range('12:00', '18:00')) { //下午
-            setTitle('下午好')
-            setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/noon%402x.png')
-        } else {// 晚
-            setTitle('晚上好')
-            setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/night%402x.png')
+        function initData () {
+            if (time_range('5:00', '12:00')) {// 早
+                setTitle('早上好')
+                setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/morning%402x.png')
+            } else if (time_range('12:00', '18:00')) { //下午
+                setTitle('下午好')
+                setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/noon%402x.png')
+            } else {// 晚
+                setTitle('晚上好')
+                setPic('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/night%402x.png')
+            }
+        }
+
+        initData();
+
+        let timer = setInterval(() => {
+            initData();
+        }, 60 * 10 * 1000)
+
+        return () => {
+            clearInterval(timer);
+            timer = null;
         }
     }, [])
 

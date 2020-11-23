@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import QRCode from 'qrcode-react';
+import QRCode from 'qrcode.react';
+// import QRCode from 'qrcode-react';
 import MD5 from 'md5';
 import { Modal } from 'antd-mobile';
 import './login.less';
@@ -14,10 +15,10 @@ import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
-function Login (props) {
+function Login(props) {
   const [modal, setModal] = useState(true);
 
-  function onClose () {
+  function onClose() {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -31,13 +32,6 @@ function Login (props) {
     expireTimeMills: '90000', // 二维码过期时间的毫秒值
     source: 'Y-PAD', //二维码来源 Y-PAD
   });
-
-  //   {
-  //     type: 2, //Y-PAD登录二维码
-  //     qrCodeId: '', // 二维码标识
-  //     expireTimeMills: '', // 二维码过期时间的毫秒值
-  //     source: '' //二维码来源 Y-PAD
-  //   }
   let userLogin = () => {
     getUserMsg({
       //   qrCodeId: text,
@@ -48,20 +42,20 @@ function Login (props) {
         console.log(res.model);
         store.dispatch(action.addUserInfo({ ...res.model }));
 
-        if (window.android != null && typeof (window.android) != "undefined") {
+        if (window.android != null && typeof window.android != 'undefined') {
           const data = {
             method: eventActionTypes.SET_PUSH_PHONE,
             object: {
-              phone: res.model.custPhone
-            }
-          }
+              phone: res.model.custPhone,
+            },
+          };
           window.android.callAndroid(JSON.stringify(data));
         }
 
-        if (window.android != null && typeof (window.android) != "undefined") {
+        if (window.android != null && typeof window.android != 'undefined') {
           const data = {
             method: eventActionTypes.GET_MSG_LIST,
-          }
+          };
           window.android.callAndroid(JSON.stringify(data));
         }
       }
@@ -100,7 +94,9 @@ function Login (props) {
       <div className="login-content">
         <div className="qrcode-bg">
           <div className="qrcode">
-            <QRCode
+            <QRCode size={96} value={qrText} level="L" />
+          </div>
+          {/* <QRCode
               size={96}
               value={qrText}
               logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
@@ -108,7 +104,7 @@ function Login (props) {
               logoHeight={25}
               level="H"
             />
-          </div>
+          </div> */}
         </div>
         <div className="infoTag">
           下载新橙社APP，进入APP首页点击右上角扫码登录
@@ -118,7 +114,7 @@ function Login (props) {
   );
 }
 
-function showLoginModel (...args) {
+function showLoginModel(...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

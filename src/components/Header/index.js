@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
+import eventBus from '@/event/EventBus';
 // import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 
@@ -103,6 +104,27 @@ function Header () {
         }
     }
 
+    const [messageList, setMessageList] = useState([]);
+
+    useEffect(() => {
+        const fn = (data) => {
+            // CustomInfo(JSON.stringify(data) + 111111111111111111, 20)
+            let newMessageList = [...messageList];
+            newMessageList.unshift(data)
+            setMessageList(newMessageList);
+        }
+
+        eventBus.on('10090', fn);
+        eventBus.on('10091', fn);
+        eventBus.on('10092', fn);
+
+        return () => {
+            eventBus.off('10090', fn);
+            eventBus.off('10091', fn);
+            eventBus.off('10092', fn);
+        }
+    }, [messageList])
+
     return (
         <div className="header-content">
             <img className="icon-logo" src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png" alt=""></img>
@@ -110,14 +132,14 @@ function Header () {
                 <span className="login-btn" onClick={() => handleTestMessage(10090)}>10090</span>
                 <span className="login-btn" onClick={() => handleTestMessage(10091)}>10091</span>
                 <span className="login-btn" onClick={() => handleTestMessage(10092)}>10092</span>
-                <span className="login-btn" onClick={handleGETMSGLIST}>GET_MSG_LIST</span>
+                {/* <span className="login-btn" onClick={handleGETMSGLIST}>GET_MSG_LIST</span>
                 <span className="login-btn" onClick={() => handleSETMEGREAD(1)}>SET_MEG_READ</span>
                 <span className="login-btn" onClick={handleSTARTUPGRADE}>START_UPGRADE</span>
                 <span className="login-btn" onClick={handleAPPVERSION}>APP_VERSION</span>
-                <span className="login-btn" onClick={() => handleSETPUSHPHONE(18966480861)}>SET_PUSH_PHONE</span>
+                <span className="login-btn" onClick={() => handleSETPUSHPHONE(18966480861)}>SET_PUSH_PHONE</span> */}
                 <span className="login-btn" onClick={handleLogin}>登录</span>
                 <div className="message" onClick={handleMessage}>
-                    <Badge className="message-badge" text={77} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} />
+                    {messageList.length && <Badge className="message-badge" text={messageList.length} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} />}
                     <i className="iconfont iconxiaoxi"></i>
                 </div>
                 <div className="settings new" onClick={handleSetting}>

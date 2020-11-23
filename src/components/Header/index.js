@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
-import eventBus from '@/event/EventBus';
+import useMessageList from '@/hooks/useMessageList';
+import useMessageSub from '@/hooks/useMessageSub';
 // import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 
@@ -104,26 +105,8 @@ function Header () {
         }
     }
 
-    const [messageList, setMessageList] = useState([]);
-
-    useEffect(() => {
-        const fn = (data) => {
-            // CustomInfo(JSON.stringify(data) + 111111111111111111, 20)
-            let newMessageList = [...messageList];
-            newMessageList.unshift(data)
-            setMessageList(newMessageList);
-        }
-
-        eventBus.on('10090', fn);
-        eventBus.on('10091', fn);
-        eventBus.on('10092', fn);
-
-        return () => {
-            eventBus.off('10090', fn);
-            eventBus.off('10091', fn);
-            eventBus.off('10092', fn);
-        }
-    }, [messageList])
+    const messageList = useMessageList();
+    useMessageSub();
 
     return (
         <div className="header-content">

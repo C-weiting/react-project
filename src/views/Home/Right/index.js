@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { SwipeAction } from 'antd-mobile';
-// import { CustomInfo } from '@/components/CustomToast';
-import eventBus from '@/event/EventBus';
+import { useDispatch } from 'react-redux';
 import Empty from '@/components/Empty';
+import useMessageList from '@/hooks/useMessageList';
+import { showTime } from '@/utils';
+import * as actionTypes from '@/store/action-types';
+import * as eventActionTypes from '@/event/action-types';
 
 export default function HomeRight () {
-    const [messageList, setMessageList] = useState([]);
+    const messageList = useMessageList();
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        const fn = (data) => {
-            // CustomInfo(JSON.stringify(data) + 111111111111111111, 20)
-            let newMessageList = [...messageList];
-            newMessageList.unshift(data)
-            setMessageList(newMessageList);
+    function handleReadMessage (message) {
+        dispatch({ type: actionTypes.READ_MESSAGE, payload: message.messageId });
+        if (window.android != null && typeof (window.android) != "undefined") {
+            const data = {
+                method: eventActionTypes.SET_MEG_READ,
+                object: {
+                    messageId: message.messageId
+                }
+            }
+            window.android.callAndroid(JSON.stringify(data));
         }
-
-        eventBus.on('10090', fn);
-        eventBus.on('10091', fn);
-        eventBus.on('10092', fn);
-
-        return () => {
-            eventBus.off('10090', fn);
-            eventBus.off('10091', fn);
-            eventBus.off('10092', fn);
-        }
-    }, [messageList])
+    }
 
     return (
         <>
@@ -41,37 +39,43 @@ export default function HomeRight () {
                         <ul className="message-list">
                             {
 
-                                messageList.map((item, index) => (
-                                    <SwipeAction
-                                        autoClose
-                                        right={[
-                                            {
-                                                text: '移出',
-                                                onPress: () => console.log('delete'),
-                                                style: { backgroundColor: '#F2543F', color: '#ffffff', fontSize: '0.09375rem', width: '0.78125rem', borderRadius: '0.0625rem', marginLeft: '0.078125rem' },
-                                            },
-                                        ]}
-                                        onOpen={() => console.log('global open')}
-                                        onClose={() => console.log('global close')}
-                                        style={{ marginBottom: '0.09375rem' }}
-                                        key={index}
-                                    >
-                                        <li className="message-item">
-                                            <div className="message-item-info">
-                                                <i className="iconfont iconshineihuti"></i>
-                                                <div className="message-item-info-content">
-                                                    <div className="title">
-                                                        <span className="message-type">{item.title}</span>
-                                                        <span className="message-time">1分钟前</span>
-                                                    </div>
-                                                    <div className="info">
-                                                        {item.content}
+                                messageList.filter(item => !item.isRead).map((item, index) => {
+                                    let message = {
+                                        ...item,
+                                        ...JSON.parse(item.content)
+                                    }
+                                    return (
+                                        <SwipeAction
+                                            autoClose
+                                            right={[
+                                                {
+                                                    text: '移出',
+                                                    onPress: () => handleReadMessage(message),
+                                                    style: { backgroundColor: '#F2543F', color: '#ffffff', fontSize: '0.09375rem', width: '0.78125rem', borderRadius: '0.0625rem', marginLeft: '0.078125rem' },
+                                                },
+                                            ]}
+                                            onOpen={() => console.log('global open')}
+                                            onClose={() => console.log('global close')}
+                                            style={{ marginBottom: '0.09375rem' }}
+                                            key={message.messageId}
+                                        >
+                                            <li className="message-item">
+                                                <div className="message-item-info">
+                                                    <i className="iconfont iconshineihuti"></i>
+                                                    <div className="message-item-info-content">
+                                                        <div className="title">
+                                                            <span className="message-type">{message.title}</span>
+                                                            <span className="message-time">{showTime(message.createTime)}</span>
+                                                        </div>
+                                                        <div className="info">
+                                                            {message.content}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </li>
-                                    </SwipeAction>
-                                ))
+                                            </li>
+                                        </SwipeAction>
+                                    )
+                                })
                             }
                         </ul> :
                         <Empty pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/empty-message%402x.png" text="暂无消息" />

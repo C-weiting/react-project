@@ -10,13 +10,14 @@ import action from '../../store/action/userInfo';
 import rootReducer from '../../store/reducer/index';
 import { useStore } from 'react-redux';
 import store from '@/store';
+import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
-function Login(props) {
+function Login (props) {
   const [modal, setModal] = useState(true);
 
-  function onClose() {
+  function onClose () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -46,6 +47,23 @@ function Login(props) {
       if (res.success) {
         console.log(res.model);
         store.dispatch(action.addUserInfo({ ...res.model }));
+
+        if (window.android != null && typeof (window.android) != "undefined") {
+          const data = {
+            method: eventActionTypes.SET_PUSH_PHONE,
+            object: {
+              phone: res.model.custPhone
+            }
+          }
+          window.android.callAndroid(JSON.stringify(data));
+        }
+
+        if (window.android != null && typeof (window.android) != "undefined") {
+          const data = {
+            method: eventActionTypes.GET_MSG_LIST,
+          }
+          window.android.callAndroid(JSON.stringify(data));
+        }
       }
     });
   };
@@ -54,10 +72,12 @@ function Login(props) {
       userLogin();
       if (store.getState().userInfo) {
         clearInterval(timer);
+        timer = null;
       }
     }, 1000);
     return () => {
       clearInterval(timer);
+      timer = null;
     };
   }, []);
 
@@ -98,7 +118,7 @@ function Login(props) {
   );
 }
 
-function showLoginModel(...args) {
+function showLoginModel (...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

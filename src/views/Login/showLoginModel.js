@@ -13,10 +13,10 @@ import store from '@/store';
 
 let divList = [];
 
-function Login(props) {
+function Login (props) {
   const [modal, setModal] = useState(true);
 
-  function onClose() {
+  function onClose () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -37,6 +37,18 @@ function Login(props) {
       if (res.success) {
         console.log(res.model);
         store.dispatch(action.addUserInfo({ ...res.model }));
+
+        if (window.android != null && typeof (window.android) != "undefined") {
+          const data = {
+            method: "SET_PUSH_PHONE",
+            object: {
+              "phone": res.model.custPhone
+            }
+          }
+          window.android.callAndroid(JSON.stringify(data));
+        } else {
+          alert(typeof (window.android));
+        }
       }
     });
   };
@@ -88,7 +100,7 @@ function Login(props) {
   );
 }
 
-function showLoginModel(...args) {
+function showLoginModel (...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

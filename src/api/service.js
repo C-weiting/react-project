@@ -32,5 +32,21 @@ function getOrderList(params) {
     );
   });
 }
+/**
+ * 生成账单
+ */
+function createPayOrder(params) {
+  return new Promise((resolve, reject) => {
+    http('post', '/obms-pos/order/generatingOrder', params).then(
+      (res) => {
+        resolve(res);
+      },
+      (error) => {
+        console.log('网络异常~', error);
+        reject(error);
+      }
+    );
+  });
+}
 
-export { addWorkOrder, getOrderList };
+export { addWorkOrder, getOrderList ,createPayOrder};

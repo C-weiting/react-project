@@ -24,10 +24,19 @@ function Login(props) {
   }
 
   const text = MD5('a67f4dc277eb26813198e7c3bed39840');
-  //   const text = MD5(Math.random());
+  const qrText = JSON.stringify({
+    type: 2, //Y-PAD登录二维码
+    qrCodeId: text, // 二维码标识
+    expireTimeMills: '90000', // 二维码过期时间的毫秒值
+    source: 'Y-PAD', //二维码来源 Y-PAD
+  });
 
-  console.log(text);
-
+  //   {
+  //     type: 2, //Y-PAD登录二维码
+  //     qrCodeId: '', // 二维码标识
+  //     expireTimeMills: '', // 二维码过期时间的毫秒值
+  //     source: '' //二维码来源 Y-PAD
+  //   }
   let userLogin = () => {
     getUserMsg({
       //   qrCodeId: text,
@@ -73,7 +82,7 @@ function Login(props) {
           <div className="qrcode">
             <QRCode
               size={96}
-              value={text}
+              value={qrText}
               logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
               logoWidth={25}
               logoHeight={25}

@@ -4,7 +4,7 @@ import { Modal } from 'antd-mobile';
 import './model.less';
 import store from '@/store';
 import { addWorkOrder } from '../../../api/service';
-import { CustomSuccess } from '../../../components/CustomToast';
+import { CustomSuccess, CustomFail } from '../../../components/CustomToast';
 
 let divList = [];
 
@@ -32,11 +32,11 @@ function LoginInfo(props) {
       community: userInfo.blockId,
       orderType: 3,
     }).then((res) => {
-      if (res.success) {
+      if (res.success === true) {
         CustomSuccess('操作成功');
         onClose();
       } else {
-        CustomSuccess('操作失败');
+        CustomFail('操作失败');
         onClose();
       }
     });

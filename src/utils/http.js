@@ -20,6 +20,7 @@ axios.interceptors.request.use(
     if (config.url.indexOf('/obms-pos') !== -1) {
       let timestamp = md5Timestamp;
       let baseString = `${config.data.data}${timestamp}${md5}`;
+      console.log(baseString);
       let sign = md5Sign(baseString);
       config.params = config.data;
       delete config.params.data;
@@ -51,6 +52,9 @@ axios.interceptors.response.use(
   (response) => {
     if (response.data) {
       if (response.data.showapi_res_body) {
+        return response;
+      }
+      if (response.config.url.indexOf('/obms-pos') !== -1) {
         return response;
       }
       if (response.data.errCode === 2) {

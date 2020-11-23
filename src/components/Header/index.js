@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
 import useMessageList from '@/hooks/useMessageList';
+import useMessageSub from '@/hooks/useMessageSub';
 // import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 
@@ -105,6 +106,7 @@ function Header () {
     }
 
     const messageList = useMessageList();
+    useMessageSub();
 
     return (
         <div className="header-content">

@@ -10,6 +10,7 @@ import action from '../../store/action/userInfo';
 import rootReducer from '../../store/reducer/index';
 import { useStore } from 'react-redux';
 import store from '@/store';
+import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
@@ -49,14 +50,19 @@ function Login (props) {
 
         if (window.android != null && typeof (window.android) != "undefined") {
           const data = {
-            method: "SET_PUSH_PHONE",
+            method: eventActionTypes.SET_PUSH_PHONE,
             object: {
-              "phone": res.model.custPhone
+              phone: res.model.custPhone
             }
           }
           window.android.callAndroid(JSON.stringify(data));
-        } else {
-          alert(typeof (window.android));
+        }
+
+        if (window.android != null && typeof (window.android) != "undefined") {
+          const data = {
+            method: eventActionTypes.GET_MSG_LIST,
+          }
+          window.android.callAndroid(JSON.stringify(data));
         }
       }
     });

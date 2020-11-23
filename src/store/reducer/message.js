@@ -6,6 +6,8 @@ function reducer (state = { cacheMessageList: [], pushMessageList: [] }, action)
             return { ...state, cacheMessageList: action.payload };
         case actionTypes.PUSH_MESSAGE:
             return { ...state, pushMessageList: [...state.pushMessageList, action.payload] };
+        case actionTypes.CLEAR_MESSAGELIST:
+            return { cacheMessageList: [], pushMessageList: [] };
         case actionTypes.READ_MESSAGE:
             let cacheMessageIndex = state.cacheMessageList.findIndex((item)=>{
                 return item.messageId === action.payload

@@ -2,53 +2,14 @@ import React from 'react';
 import Navigation from '@/components/Navigation';
 import Empty from '@/components/Empty';
 import showMessageModel from '@/components/MessageModel';
+import useMessageList from '@/hooks/useMessageList';
+import { showTime } from '@/utils';
 import './message.less';
 
 function Message () {
-    const messageList = [
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-        {
-            type: '社区通知',
-            time: '2019-2-31 19:36',
-            content: '主卧床边左插座 长时间超出最大负载，已主动断电！'
-        },
-    ];
+    const messageList = useMessageList();
 
-    function handleClick(item) {
+    function handleClick (item) {
         showMessageModel(item);
     }
 
@@ -59,12 +20,18 @@ function Message () {
                 {
                     messageList.length ? (<ul className="message-list">
                         {
-                            messageList.map((item, index) => (
-                                <li className="message-item" key={index} onClick={() => handleClick(item)}>
-                                    <div className="message-time">{item.time}</div>
-                                    <div className="message-text">{item.content}</div>
-                                </li>
-                            ))
+                            messageList.filter(item => !item.isRead).map((item, index) => {
+                                let message = {
+                                    ...item,
+                                    ...JSON.parse(item.content)
+                                }
+                                return (
+                                    <li className="message-item" key={index} onClick={() => handleClick(message)}>
+                                        <div className="message-time">{showTime(message.createTime)}</div>
+                                        <div className="message-text">{message.content}</div>
+                                    </li>
+                                )
+                            })
                         }
                     </ul>) : <Empty pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/empty-message%402x.png" text="暂无消息" />
                 }

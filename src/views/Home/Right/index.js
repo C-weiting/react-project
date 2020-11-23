@@ -1,17 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { SwipeAction } from 'antd-mobile';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Empty from '@/components/Empty';
+import useMessageList from '@/hooks/useMessageList';
+import { showTime } from '@/utils';
 import * as actionTypes from '@/store/action-types';
 import * as eventActionTypes from '@/event/action-types';
 
 export default function HomeRight () {
-    const { cacheMessageList, pushMessageList } = useSelector(state => state.message);
-    const messageList = useMemo(
-        () =>
-            [...cacheMessageList, ...pushMessageList],
-        [cacheMessageList, pushMessageList]
-    );
+    const messageList = useMessageList();
     const dispatch = useDispatch();
 
     function handleReadMessage (message) {
@@ -44,9 +41,8 @@ export default function HomeRight () {
 
                                 messageList.filter(item => !item.isRead).map((item, index) => {
                                     let message = {
-                                        ...JSON.parse(item.content),
-                                        messageId: item.messageId,
-                                        isRead: item.isRead
+                                        ...item,
+                                        ...JSON.parse(item.content)
                                     }
                                     return (
                                         <SwipeAction
@@ -69,7 +65,7 @@ export default function HomeRight () {
                                                     <div className="message-item-info-content">
                                                         <div className="title">
                                                             <span className="message-type">{message.title}</span>
-                                                            <span className="message-time">1分钟前</span>
+                                                            <span className="message-time">{showTime(message.createTime)}</span>
                                                         </div>
                                                         <div className="info">
                                                             {message.content}

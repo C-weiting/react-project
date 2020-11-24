@@ -80,7 +80,7 @@ function Pay() {
       data: json2String(paramsObj),
     };
     createPayOrder(params).then((res) => {
-      showPayModel();
+      showPayModel(res.model);
     });
   }
   function json2String(params) {

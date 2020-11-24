@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { Toast } from 'antd-mobile';
 import { getWeather } from '@/api/thirdParty';
 import '../home.less';
 
@@ -29,7 +30,7 @@ export default function HomeLeft () {
     }, []);
 
     useEffect(() => {
-        let timer= setInterval(getTime, 60 * 1000)
+        let timer = setInterval(getTime, 60 * 1000)
 
         return () => {
             clearInterval(timer);
@@ -37,13 +38,17 @@ export default function HomeLeft () {
         }
     }, []);
 
-    function getTime() {
+    function getTime () {
         const newTimeData = {
             time: moment().format('HH:mm'),
             day: moment().format('MM月DD日'),
             weekday: weekDayMap[moment().get('weekday')]
         }
         setTimeData(newTimeData);
+    }
+
+    function handleToast () {
+        Toast.info('敬请期待...', 1);
     }
 
     return (
@@ -64,13 +69,13 @@ export default function HomeLeft () {
                     <img className="weather-pic" src={weatherInfo.day_weather_pic} alt="" />
                 </div>
             </div>
-            <div className="left-bottom-content">
+            <div className="left-bottom-content" onClick={handleToast}>
                 <div className="music-left">
                     <span className="music-title">音乐视听</span>
-                    <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/music%402x.png" alt=""/>
+                    <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/music%402x.png" alt="" />
                 </div>
                 <div className="music-pic">
-                    <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/machine%402x.png" alt=""/>
+                    <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/machine%402x.png" alt="" />
                 </div>
             </div>
         </>

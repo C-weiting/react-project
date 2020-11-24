@@ -1,11 +1,12 @@
-import React, { createContext, useRef, useState } from 'react';
+import React, { createContext, useState } from 'react';
+import { Toast } from 'antd-mobile';
 import './index.less';
 
 import SlideItem from './Components/SlideTag/SlideTag';
 import { useHistory } from 'react-router-dom';
 export const SlideItemContext = createContext({});
 
-function Community() {
+function Community () {
   let history = useHistory();
 
   const [slideList, setSlideList] = useState([
@@ -35,6 +36,10 @@ function Community() {
       id: 'more',
     },
   ]);
+
+  function handleToast () {
+    Toast.info('敬请期待...', 1);
+  }
   // 点击跳转事件
   let clickItem = (id) => {
     let actions = {
@@ -46,6 +51,8 @@ function Community() {
     };
     if (actions.hasOwnProperty(id)) {
       actions[id]();
+    } else {
+      handleToast();
     }
   };
   let SlideListElement = slideList.map((item, index) => (
@@ -67,11 +74,13 @@ function Community() {
         <img
           className="bottomImg"
           src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-6%402x.png"
+          onClick={handleToast}
           alt=""
         />
         <img
           className="bottomImg"
           src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/fake-figure-7%402x.png"
+          onClick={handleToast}
           alt=""
         />
       </section>

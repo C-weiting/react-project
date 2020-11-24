@@ -25,46 +25,45 @@ function Login(props) {
     divList = [];
   }
 
-  const text = MD5('a67f4dc277eb26813198e7c3bed39840');
+  const text = MD5(Math.random());
   const qrText = JSON.stringify({
     type: 2, //Y-PAD登录二维码
     qrCodeId: text, // 二维码标识
     expireTimeMills: '90000', // 二维码过期时间的毫秒值
     source: 'Y-PAD', //二维码来源 Y-PAD
   });
-  let userLogin = () => {
-    getUserMsg({
-      qrCodeId: text,
-      // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
-      source: 'Y-PAD',
-    }).then((res) => {
-      if (res.success) {
-        console.log(res.model);
-        store.dispatch(action.addUserInfo({ ...res.model }));
-
-        if (window.android != null && typeof window.android != 'undefined') {
-          const data = {
-            method: eventActionTypes.SET_PUSH_PHONE,
-            object: {
-              phone: res.model.custPhone,
-            },
-          };
-          window.android.callAndroid(JSON.stringify(data));
-        }
-
-        if (window.android != null && typeof window.android != 'undefined') {
-          const data = {
-            method: eventActionTypes.GET_MSG_LIST,
-          };
-          window.android.callAndroid(JSON.stringify(data));
-        }
-      }
-    });
-  };
+  let userLogin = () => {};
   useEffect(() => {
     let timer = setInterval(() => {
-      userLogin();
-      if (store.getState().userInfo) {
+      // userLogin();
+      getUserMsg({
+        qrCodeId: text,
+        // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
+        source: 'Y-PAD',
+      }).then((res) => {
+        if (res.model) {
+          console.log(res);
+          store.dispatch(action.addUserInfo({ ...res.model }));
+
+          if (window.android != null && typeof window.android != 'undefined') {
+            const data = {
+              method: eventActionTypes.SET_PUSH_PHONE,
+              object: {
+                phone: res.model.custPhone,
+              },
+            };
+            window.android.callAndroid(JSON.stringify(data));
+          }
+
+          if (window.android != null && typeof window.android != 'undefined') {
+            const data = {
+              method: eventActionTypes.GET_MSG_LIST,
+            };
+            window.android.callAndroid(JSON.stringify(data));
+          }
+        }
+      });
+      if (Object.keys(store.getState().userInfo).length > 0) {
         clearInterval(timer);
         timer = null;
       }

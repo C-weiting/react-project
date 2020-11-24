@@ -1,136 +1,175 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
 import useMessageList from '@/hooks/useMessageList';
 import useMessageSub from '@/hooks/useMessageSub';
-// import { showLoginInfoModel } from '@/views/Login';
+import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
+import { useSelector } from 'react-redux';
 
-function Header () {
-
-    const history = useHistory();
-
-    function handleLogin () {
-        showLoginModel();
-        // showLoginInfoModel()
+function Header() {
+  const history = useHistory();
+  const userInfo = useSelector((state) => {
+    return state.userInfo;
+  });
+  function loginBtn() {
+    if (Object.keys(userInfo).length !== 0) {
+      return (
+        <span className="xc-btn" onClick={handleUserInfo}>
+          新橙社
+        </span>
+      );
+    } else {
+      return (
+        <span className="login-btn" onClick={handleLogin}>
+          登录
+        </span>
+      );
     }
+  }
+  let login = loginBtn();
 
-    function handleMessage () {
-        history.push('/message');
+  function handleLogin() {
+    showLoginModel();
+    // showLoginInfoModel()
+  }
+
+  function handleUserInfo() {
+    showLoginInfoModel();
+  }
+  function handleMessage() {
+    history.push('/message');
+  }
+
+  function handleSetting() {
+    history.push('/settings');
+  }
+
+  function handleTestMessage(type) {
+    const data = {
+      method: 'PUSH_TEST',
+      object: {
+        type: type,
+      },
+    };
+
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleSetting () {
-        history.push('/settings');
+  function handleGETMSGLIST() {
+    const data = {
+      method: 'GET_MSG_LIST',
+    };
+
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleTestMessage (type) {
-        const data = {
-            "method": "PUSH_TEST",
-            "object": {
-                "type": type
-            }
-        }
+  function handleSETMEGREAD(messageId) {
+    const data = {
+      method: 'SET_MEG_READ',
+      object: {
+        messageId: messageId,
+      },
+    };
 
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleGETMSGLIST () {
-        const data = {
-            "method": "GET_MSG_LIST"
-        }
+  function handleSTARTUPGRADE() {
+    const data = {
+      method: 'START_UPGRADE',
+    };
 
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleSETMEGREAD (messageId) {
-        const data = {
-            "method": "SET_MEG_READ",
-            "object": {
-                "messageId": messageId
-            }
-        }
+  function handleAPPVERSION() {
+    const data = {
+      method: 'APP_VERSION',
+    };
 
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleSTARTUPGRADE () {
-        const data = {
-            "method": "START_UPGRADE"
-        }
+  function handleSETPUSHPHONE(phone) {
+    const data = {
+      method: 'SET_PUSH_PHONE',
+      object: {
+        phone: phone,
+      },
+    };
 
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
+    if (window.android != null && typeof window.android != 'undefined') {
+      window.android.callAndroid(JSON.stringify(data));
+    } else {
+      alert(typeof window.android);
     }
+  }
 
-    function handleAPPVERSION () {
-        const data = {
-            "method": "APP_VERSION"
-        }
+  const messageList = useMessageList();
+  useMessageSub();
 
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
-    }
-
-    function handleSETPUSHPHONE (phone) {
-        const data = {
-            "method": "SET_PUSH_PHONE",
-            "object": {
-                "phone": phone
-            }
-        }
-
-        if (window.android != null && typeof (window.android) != "undefined") {
-            window.android.callAndroid(JSON.stringify(data));
-        } else {
-            alert(typeof (window.android));
-        }
-    }
-
-    const messageList = useMessageList();
-    useMessageSub();
-
-    return (
-        <div className="header-content">
-            <img className="icon-logo" src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png" alt=""></img>
-            <div className="right-content">
-                <span className="login-btn" onClick={() => handleTestMessage(10090)}>10090</span>
-                <span className="login-btn" onClick={() => handleTestMessage(10091)}>10091</span>
-                <span className="login-btn" onClick={() => handleTestMessage(10092)}>10092</span>
-                {/* <span className="login-btn" onClick={handleGETMSGLIST}>GET_MSG_LIST</span>
+  return (
+    <div className="header-content">
+      <img
+        className="icon-logo"
+        src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png"
+        alt=""
+      ></img>
+      <div className="right-content">
+        <span className="login-btn" onClick={() => handleTestMessage(10090)}>
+          10090
+        </span>
+        <span className="login-btn" onClick={() => handleTestMessage(10091)}>
+          10091
+        </span>
+        <span className="login-btn" onClick={() => handleTestMessage(10092)}>
+          10092
+        </span>
+        {/* <span className="login-btn" onClick={handleGETMSGLIST}>GET_MSG_LIST</span>
                 <span className="login-btn" onClick={() => handleSETMEGREAD(1)}>SET_MEG_READ</span>
                 <span className="login-btn" onClick={handleSTARTUPGRADE}>START_UPGRADE</span>
                 <span className="login-btn" onClick={handleAPPVERSION}>APP_VERSION</span>
                 <span className="login-btn" onClick={() => handleSETPUSHPHONE(18966480861)}>SET_PUSH_PHONE</span> */}
-                <span className="login-btn" onClick={handleLogin}>登录</span>
-                <div className="message" onClick={handleMessage}>
-                    {messageList.length && <Badge className="message-badge" text={messageList.length} overflowCount={99} style={{ backgroundColor: '#FF3B3B' }} />}
-                    <i className="iconfont iconxiaoxi"></i>
-                </div>
-                <div className="settings new" onClick={handleSetting}>
-                    <i className="iconfont iconshezhi"></i>
-                </div>
-            </div>
+        {login}
+        <div className="message" onClick={handleMessage}>
+          {messageList.length && (
+            <Badge
+              className="message-badge"
+              text={messageList.length}
+              overflowCount={99}
+              style={{ backgroundColor: '#FF3B3B' }}
+            />
+          )}
+          <i className="iconfont iconxiaoxi"></i>
         </div>
-    )
+        <div className="settings new" onClick={handleSetting}>
+          <i className="iconfont iconshezhi"></i>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Header;

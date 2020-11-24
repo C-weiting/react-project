@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'antd-mobile';
 import './login.less';
+import store from '@/store';
+import action from '../../store/action/userInfo';
+import showLoginModel from './showLoginModel';
 
 let divList = [];
 
 function LoginInfo(props) {
   const [modal, setModal] = useState(true);
+  const userInfo = store.getState().userInfo;
 
   function onClose() {
     setModal(false);
@@ -14,7 +18,6 @@ function LoginInfo(props) {
     divList.forEach((div) => document.body.removeChild(div));
     divList = [];
   }
-
 
   return (
     <Modal
@@ -27,12 +30,15 @@ function LoginInfo(props) {
         {
           text: '切换地址',
           onPress: () => {
+            store.dispatch(action.clearUserInfo());
             onClose();
+            showLoginModel();
           },
         },
         {
           text: '退出登录',
           onPress: () => {
+            store.dispatch(action.clearUserInfo());
             onClose();
           },
         },
@@ -41,9 +47,9 @@ function LoginInfo(props) {
       <div className="login-info-content">
         <div className="title">账户信息</div>
         <ul className="info-list">
-          <li>账号名：社员001</li>
-          <li>定位地址：常州 新城公馆001单元001栋201室</li>
-          <li>手机号： 136*****121</li>
+          <li>账号名：{userInfo.custNickName}</li>
+          <li>定位地址：{userInfo.houseAddress}</li>
+          <li>手机号： {userInfo.custPhone}</li>
         </ul>
       </div>
     </Modal>

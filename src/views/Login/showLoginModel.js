@@ -34,8 +34,8 @@ function Login(props) {
   });
   let userLogin = () => {
     getUserMsg({
-      //   qrCodeId: text,
-      qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
+      qrCodeId: text,
+      // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
       source: 'Y-PAD',
     }).then((res) => {
       if (res.success) {

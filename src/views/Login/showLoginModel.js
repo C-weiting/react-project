@@ -15,10 +15,10 @@ import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
-function Login(props) {
+function Login (props) {
   const [modal, setModal] = useState(true);
 
-  function onClose() {
+  function onClose () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -93,18 +93,10 @@ function Login(props) {
     >
       <div className="login-content">
         <div className="qrcode-bg">
+          <div className="qrcode-header"></div>
           <div className="qrcode">
             <QRCode size={96} value={qrText} level="L" />
           </div>
-          {/* <QRCode
-              size={96}
-              value={qrText}
-              logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
-              logoWidth={25}
-              logoHeight={25}
-              level="H"
-            />
-          </div> */}
         </div>
         <div className="infoTag">
           下载新橙社APP，进入APP首页点击右上角扫码登录
@@ -114,7 +106,7 @@ function Login(props) {
   );
 }
 
-function showLoginModel(...args) {
+function showLoginModel (...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

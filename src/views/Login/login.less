@@ -15,18 +15,27 @@
 
   .qrcode-bg {
     width: 237px;
-    height: 374px;
-    .bg-image('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/qrcode-bg');
-    background-size: 100% 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    .qrcode-header {
+      width: 126px;
+      height: 139px;
+      .bg-image('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/qrcode-header');
+      background-size: 100% 100%;
+      margin-top: 35px;
+    }
 
     .qrcode {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: 16px;
+      padding: 5px;
+      border: 16px solid #2B2B2D;
+      background-color: #ffffff;
     }
   }
+
   .infoTag {
     height: 30px;
     font-size: 22px;

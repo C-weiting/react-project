@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import { Toast } from 'antd-mobile';
 import { time_range } from '@/utils';
 
 export default function HomeCenter () {
@@ -37,6 +38,10 @@ export default function HomeCenter () {
         history.push(path);
     }
 
+    function handleToast () {
+        Toast.info('敬请期待...', 1);
+    }
+
     return (
         <>
             <div className="time-content">
@@ -48,11 +53,11 @@ export default function HomeCenter () {
                     <div className="icon-wrapper property"></div>
                     物业服务
                 </li>
-                <li className="tag-item">
+                <li className="tag-item" onClick={handleToast}>
                     <div className="icon-wrapper camera"></div>
                     摄像监控
                 </li>
-                <li className="tag-item">
+                <li className="tag-item" onClick={handleToast}>
                     <div className="icon-wrapper elevator"></div>
                     室内呼梯
                 </li>

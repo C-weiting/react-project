@@ -12,6 +12,8 @@ import rootReducer from '../../store/reducer/index';
 import { useStore } from 'react-redux';
 import store from '@/store';
 import * as eventActionTypes from '@/event/action-types';
+import { CustomSuccess, CustomFail } from '../../components/CustomToast';
+
 
 let divList = [];
 
@@ -61,6 +63,8 @@ function Login(props) {
             };
             window.android.callAndroid(JSON.stringify(data));
           }
+          CustomSuccess('操作成功');
+          onClose();
         }
       });
       if (Object.keys(store.getState().userInfo).length > 0) {
@@ -85,6 +89,7 @@ function Login(props) {
         {
           text: '取消',
           onPress: () => {
+            CustomFail('取消登陆')
             onClose();
           },
         },

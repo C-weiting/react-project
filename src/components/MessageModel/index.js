@@ -5,7 +5,7 @@ import './message-model.less';
 
 let divList = [];
 
-function MessageModel () {
+function MessageModel (props) {
     const [modal, setModal] = useState(true);
 
     function onClose () {
@@ -32,21 +32,19 @@ function MessageModel () {
             ]}
         >
             <div className="message-model-content">
-                <div className="title">社区通知</div>
-                <div className="time">2020/11/09 18:05:20</div>
-                <div className="message-text">
-                    11月9日18:00，上海举行新闻发会，上海市卫生健康委主任邬惊雷、浦东新区副区长李国华、上海市疫情防控公共卫生专家组成员复11月9日18:00，上海举行新闻发会，上海市卫生健康委主任邬惊雷、浦东新区副区长李国华、上海市疫情防控公共卫生专家组成员复11月9日18:00，上海举行新闻发会，上海市卫生健康委主任邬惊雷、浦东新区副区长李国华、上海市疫情防控公共卫生专家组成员复
-                </div>
+                <div className="title">{props.title}</div>
+                <div className="time">{props.createTime}</div>
+                <div className="message-text">{props.content}</div>
             </div>
         </Modal>
     )
 }
 
-function showMessageModel (...args) {
+function showMessageModel (params) {
     const div = document.createElement('div');
     document.body.appendChild(div);
     divList.push(div);
-    ReactDOM.render(<MessageModel {...args} />, div);
+    ReactDOM.render(<MessageModel {...params} />, div);
 
     return () => {
         document.body.removeChild(div);

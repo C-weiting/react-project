@@ -4,13 +4,30 @@ import Empty from '@/components/Empty';
 import showMessageModel from '@/components/MessageModel';
 import useMessageList from '@/hooks/useMessageList';
 import { showTime } from '@/utils';
+import { getPropertyBlockInformationPicDetail } from '@/api/message';
 import './message.less';
 
 function Message () {
     const messageList = useMessageList();
 
     function handleClick (item) {
-        showMessageModel(item);
+        let params = {
+            informationId: item.id1,
+            sourceType: 1
+        }
+        getPropertyBlockInformationPicDetail(params).then(res => {
+            if (res.success && res.model) {
+                const { title, createTime, detailList } = res.model;
+                if (detailList && detailList.length) {
+                    let messageDetail = {
+                        title: title,
+                        createTime: createTime,
+                        content: detailList[0].note
+                    }
+                    showMessageModel(messageDetail);
+                }
+            }
+        });
     }
 
     return (

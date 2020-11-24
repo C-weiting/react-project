@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import QRCode from 'qrcode-react';
+// import QRCode from 'qrcode-react';
 import { Modal } from 'antd-mobile';
 import './pay.less';
 import store from '@/store';
+import QRCode from 'qrcode.react';
 
 let divList = [];
 
 function Pay(props) {
   const [modal, setModal] = useState(true);
   const [text, setText] = useState(props.qrCodePayUrl);
+
+  console.log(props);
 
   function onClose() {
     setModal(false);
@@ -40,13 +43,14 @@ function Pay(props) {
           缴费房屋：{store.getState().userInfo.houseAddress}
         </div>
         <div className="qrcode">
-          <QRCode
+          {/* <QRCode
             size={96}
             value={text}
             logo={`https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/small-logo%402x.png`}
             logoWidth={25}
             logoHeight={25}
-          />
+          /> */}
+          <QRCode size={96} value={props[0]} level="L" />
         </div>
         <div className="pay-type">
           <span className="wechat"></span>

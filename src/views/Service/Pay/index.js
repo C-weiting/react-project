@@ -55,7 +55,6 @@ function Pay() {
   };
 
   function handlePay() {
-    console.log(userInfo);
     const paramsObj = {
       cityId: userInfo.cityId,
       cityName: userInfo.cityName,
@@ -80,7 +79,7 @@ function Pay() {
       data: json2String(paramsObj),
     };
     createPayOrder(params).then((res) => {
-      showPayModel(res.model);
+      showPayModel(res.model.qrCodePayUrl);
     });
   }
   function json2String(params) {

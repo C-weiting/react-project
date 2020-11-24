@@ -52,7 +52,8 @@ function Login(props) {
               method: eventActionTypes.SET_PUSH_PHONE,
               object: {
                 phone: res.model.custPhone,
-              },
+                custId: res.model.custId
+              }
             };
             window.android.callAndroid(JSON.stringify(data));
           }

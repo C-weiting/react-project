@@ -13,6 +13,7 @@ import { useStore } from 'react-redux';
 import store from '@/store';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess, CustomFail } from '../../components/CustomToast';
+import { string } from 'prop-types';
 
 let divList = [];
 
@@ -31,10 +32,9 @@ function Login(props) {
   const qrText = JSON.stringify({
     type: 2, //Y-PAD登录二维码
     qrCodeId: text, // 二维码标识
-    expireTimeMills: '90000', // 二维码过期时间的毫秒值
+    expireTimeMills: parseInt(new Date().getTime()) + 90000 + '', // 二维码过期时间的毫秒值
     source: 'Y-PAD', //二维码来源 Y-PAD
   });
-  let userLogin = () => {};
   useEffect(() => {
     let timer = setInterval(() => {
       // userLogin();

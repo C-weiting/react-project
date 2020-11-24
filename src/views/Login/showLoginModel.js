@@ -14,13 +14,13 @@ import store from '@/store';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess, CustomFail } from '../../components/CustomToast';
 
-
 let divList = [];
 
-function Login (props) {
+function Login(props) {
   const [modal, setModal] = useState(true);
+  let timer;
 
-  function onClose () {
+  function onClose() {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -67,7 +67,10 @@ function Login (props) {
           onClose();
         }
       });
-      if (Object.keys(store.getState().userInfo).length > 0) {
+      if (
+        Object.keys(store.getState().userInfo).length > 0 ||
+        divList.length === 0
+      ) {
         clearInterval(timer);
         timer = null;
       }
@@ -89,7 +92,7 @@ function Login (props) {
         {
           text: '取消',
           onPress: () => {
-            CustomFail('取消登陆')
+            CustomFail('取消登陆');
             onClose();
           },
         },
@@ -110,7 +113,7 @@ function Login (props) {
   );
 }
 
-function showLoginModel (...args) {
+function showLoginModel(...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

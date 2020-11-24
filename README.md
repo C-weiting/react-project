@@ -82,6 +82,12 @@ H5->native
     }
 }
 
+### 退出登录
+H5->native
+{
+    "method":"APP_LOGOUT"
+}
+
 
 ### 消息测试
 H5->native

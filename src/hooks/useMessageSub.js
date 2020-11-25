@@ -9,11 +9,11 @@ function useMessageSub () {
 
     useEffect(() => {
         const push_msg_fn = (payload) => {
-            dispatch({ type: actionTypes.PUSH_MESSAGE, payload: { ...payload, createTime: new Date().getTime() } });
+            dispatch({ type: actionTypes.PUSH_MESSAGE, payload });
         }
 
         const msg_list_fn = (payload) => {
-            dispatch({ type: actionTypes.GET_CACHE_MESSAGELIST, payload: payload.map(item => ({ ...item, createTime: new Date().getTime() })) });
+            dispatch({ type: actionTypes.GET_CACHE_MESSAGELIST, payload });
         }
 
         eventBus.on(eventActionTypes.GET_PUSH_MSG, push_msg_fn);

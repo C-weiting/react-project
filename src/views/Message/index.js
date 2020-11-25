@@ -4,30 +4,52 @@ import Empty from '@/components/Empty';
 import showMessageModel from '@/components/MessageModel';
 import useMessageList from '@/hooks/useMessageList';
 import { showTime } from '@/utils';
-import { getPropertyBlockInformationPicDetail } from '@/api/message';
+import { getPropertyBlockInformationPicDetail, queryPropertyOrderDetail } from '@/api/message';
 import './message.less';
 
 function Message () {
     const messageList = useMessageList();
+    let params = {
+        // orderId: item.id1,
+        orderId: 12011181533601682,
+    }
+    queryPropertyOrderDetail(params).then(res => {
+        if (res.success && res.model) {
+            
+        }
+    });
 
     function handleClick (item) {
-        let params = {
-            informationId: item.id1,
-            sourceType: 1
-        }
-        getPropertyBlockInformationPicDetail(params).then(res => {
-            if (res.success && res.model) {
-                const { title, createTime, detailList } = res.model;
-                if (detailList && detailList.length) {
-                    let messageDetail = {
-                        title: title,
-                        createTime: createTime,
-                        content: detailList[0].note
-                    }
-                    showMessageModel(messageDetail);
-                }
+        if (parseInt(item.type) === 10092) { // 已缴费通知
+            let params = {
+                // orderId: item.id1,
+                orderId: 12011181533601682,
             }
-        });
+            queryPropertyOrderDetail(params).then(res => {
+                alert(res);
+                if (res.success && res.model) {
+                    
+                }
+            });
+        } else {
+            let params = {
+                informationId: item.id1,
+                sourceType: 1
+            }
+            getPropertyBlockInformationPicDetail(params).then(res => {
+                if (res.success && res.model) {
+                    const { title, createTime, detailList } = res.model;
+                    if (detailList && detailList.length) {
+                        let messageDetail = {
+                            title: title,
+                            createTime: createTime,
+                            content: detailList[0].note
+                        }
+                        showMessageModel(messageDetail);
+                    }
+                }
+            });
+        }
     }
 
     return (

@@ -8,6 +8,7 @@ import Qs from 'qs';
 
 axios.defaults.timeout = 100000;
 axios.defaults.baseURL = '/api';
+const argraceBaseUrl ='/'
 // axios.defaults.baseURL = 'http://61.132.109.16:8088/';
 // axios.defaults.baseURL = 'http://61.132.109.16:8099/';
 // axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
@@ -20,7 +21,6 @@ axios.interceptors.request.use(
     if (config.url.indexOf('/obms-pos') !== -1) {
       let timestamp = md5Timestamp;
       let baseString = `${config.data.data}${timestamp}${md5}`;
-      console.log(baseString);
       let sign = md5Sign(baseString);
       config.params = config.data;
       delete config.params.data;
@@ -30,6 +30,11 @@ axios.interceptors.request.use(
         requestSource: '',
       };
       return config;
+    }
+    if (config.url.indexOf('/argrace') !== -1) {
+      console.log(config);
+      config.baseURL=argraceBaseUrl
+      return config
     }
     config.headers = {
       'Content-Type': 'application/x-www-form-urlencoded',

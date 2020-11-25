@@ -3,7 +3,8 @@ const {
     fixBabelImports,
     addLessLoader,
     addWebpackAlias,
-    addPostcssPlugins
+    addPostcssPlugins,
+    setWebpackPublicPath
 } = require('customize-cra');
 const path = require('path');
 
@@ -27,4 +28,6 @@ module.exports = override(
     addPostcssPlugins([
         require('postcss-pxtorem')({ rootValue: 128, propList: ['*'], minPixelValue: 2, selectorBlackList: ['am-'] })
     ]),
+    // setWebpackPublicPath('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/web/')
+
 );

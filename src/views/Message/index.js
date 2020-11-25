@@ -12,6 +12,7 @@ function Message () {
     let params = {
         // orderId: item.id1,
         orderId: 12011181533601682,
+        data:'orderId=12011181533601682'
     }
     queryPropertyOrderDetail(params).then(res => {
         if (res.success && res.model) {

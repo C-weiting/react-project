@@ -3,33 +3,39 @@ import Navigation from '@/components/Navigation';
 import Empty from '@/components/Empty';
 import showMessageModel from '@/components/MessageModel';
 import useMessageList from '@/hooks/useMessageList';
+import useMessageSub from '@/hooks/useMessageSub';
 import { showTime } from '@/utils';
+import { CustomFail } from '@/components/CustomToast';
 import { getPropertyBlockInformationPicDetail, queryPropertyOrderDetail } from '@/api/message';
 import './message.less';
 
 function Message () {
     const messageList = useMessageList();
-    let params = {
-        // orderId: item.id1,
-        orderId: 12011181533601682,
-        data:'orderId=12011181533601682'
-    }
-    queryPropertyOrderDetail(params).then(res => {
-        if (res.success && res.model) {
-            
-        }
-    });
+    useMessageSub();
+    // handleClick({type: 10092, id1: 6491})
 
     function handleClick (item) {
         if (parseInt(item.type) === 10092) { // 已缴费通知
+            const orderId = item.id1; // 12011181533601682
             let params = {
-                // orderId: item.id1,
-                orderId: 12011181533601682,
+                orderId: orderId,
+                data: `orderId=${orderId}`
             }
             queryPropertyOrderDetail(params).then(res => {
-                alert(res);
                 if (res.success && res.model) {
-                    
+                    let { propertyBillList, orderId, paymentTime, paymentTypeName, paymentChannelName } = res.model
+                    if (propertyBillList && propertyBillList.length) {
+                        const { subBillMonth, subFeeName } = propertyBillList[0];
+
+                        let messageDetail = {
+                            title: '物业通知',
+                            createTime: paymentTime,
+                            content: `您已缴纳${subFeeName}，缴纳账期${subBillMonth}，订单编号{${orderId}}，支付时间{${paymentTime}}，支付方式{${paymentTypeName}}，缴纳渠道{${paymentChannelName}}`
+                        }
+                        showMessageModel(messageDetail);
+                    }
+                } else {
+                    CustomFail('请求详情失败');
                 }
             });
         } else {

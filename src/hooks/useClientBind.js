@@ -20,7 +20,7 @@ function useClientBind () {
                 bindType: 'Y-PAD'
             }
             bindingUserClientid(params).then(res => {
-                CustomInfo(JSON.stringify(res), 20);
+                
             })
         }
 

@@ -27,7 +27,7 @@ function LoginInfo (props) {
       clientId: clientId,
       bindType: 'Y-PAD'
     }
-    CustomInfo(JSON.stringify(params), 20);
+ 
     unBindingUserClientid(params).then(res => {
       // CustomInfo(JSON.stringify(res), 10);
     });

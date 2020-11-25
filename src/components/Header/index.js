@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
 import useMessageList from '@/hooks/useMessageList';
 import useMessageSub from '@/hooks/useMessageSub';
+import useClientBind from '@/hooks/useClientBind';
 import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 import { useSelector } from 'react-redux';
@@ -32,7 +33,6 @@ function Header() {
 
   function handleLogin() {
     showLoginModel();
-    // showLoginInfoModel()
   }
 
   function handleUserInfo() {
@@ -61,73 +61,9 @@ function Header() {
     }
   }
 
-  function handleGETMSGLIST() {
-    const data = {
-      method: 'GET_MSG_LIST',
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      alert(typeof window.android);
-    }
-  }
-
-  function handleSETMEGREAD(messageId) {
-    const data = {
-      method: 'SET_MEG_READ',
-      object: {
-        messageId: messageId,
-      },
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      alert(typeof window.android);
-    }
-  }
-
-  function handleSTARTUPGRADE() {
-    const data = {
-      method: 'START_UPGRADE',
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      alert(typeof window.android);
-    }
-  }
-
-  function handleAPPVERSION() {
-    const data = {
-      method: 'APP_VERSION',
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      alert(typeof window.android);
-    }
-  }
-
-  function handleSETPUSHPHONE(phone) {
-    const data = {
-      method: 'SET_PUSH_PHONE',
-      object: {
-        phone: phone,
-      },
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      alert(typeof window.android);
-    }
-  }
 
   const messageList = useMessageList();
+  useClientBind();
   useMessageSub();
 
   return (
@@ -147,11 +83,6 @@ function Header() {
         <span className="login-btn" onClick={() => handleTestMessage(10092)}>
           10092
         </span>
-        {/* <span className="login-btn" onClick={handleGETMSGLIST}>GET_MSG_LIST</span>
-                <span className="login-btn" onClick={() => handleSETMEGREAD(1)}>SET_MEG_READ</span>
-                <span className="login-btn" onClick={handleSTARTUPGRADE}>START_UPGRADE</span>
-                <span className="login-btn" onClick={handleAPPVERSION}>APP_VERSION</span>
-                <span className="login-btn" onClick={() => handleSETPUSHPHONE(18966480861)}>SET_PUSH_PHONE</span> */}
         {login}
         <div className="message" onClick={handleMessage}>
           {messageList.length && (

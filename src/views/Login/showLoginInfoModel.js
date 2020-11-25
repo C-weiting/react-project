@@ -5,18 +5,35 @@ import './login.less';
 import store from '@/store';
 import action from '../../store/action/userInfo';
 import showLoginModel from './showLoginModel';
+import { unBindingUserClientid } from '@/api/bindingUserClientid';
+import { CustomInfo } from '@/components/CustomToast';
+import * as actionTypes from '@/store/action-types';
 
 let divList = [];
 
-function LoginInfo(props) {
+function LoginInfo (props) {
   const [modal, setModal] = useState(true);
   const userInfo = store.getState().userInfo;
+  const { clientId } = store.getState().clientId;
 
-  function onClose() {
+  function onClose () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
     divList = [];
+
+    let params = {
+      custId: userInfo.custId,
+      clientId: clientId,
+      bindType: 'Y-PAD'
+    }
+    CustomInfo(JSON.stringify(params), 20);
+    unBindingUserClientid(params).then(res => {
+      // CustomInfo(JSON.stringify(res), 10);
+    });
+
+    store.dispatch({ type: actionTypes.CLEAR_MESSAGELIST }); //退出登录后清除前端页面消息缓存
+
   }
 
   return (
@@ -56,7 +73,7 @@ function LoginInfo(props) {
   );
 }
 
-function showLoginInfoModel(...args) {
+function showLoginInfoModel (...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

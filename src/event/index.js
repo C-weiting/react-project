@@ -26,6 +26,9 @@ function callByAndroidParam (msg) { // 接收来自Android的一个参数的方�
         case actionTypes.APP_VERSION: // 获取APP版本信息
             eventBus.emit(actionTypes.APP_VERSION, msg.object);
             break;
+        case actionTypes.SET_PUSH_CLIENTID: // 获取个推clientId
+            eventBus.emit(actionTypes.SET_PUSH_CLIENTID, msg.object);
+            break;
         default:
             break;
     }

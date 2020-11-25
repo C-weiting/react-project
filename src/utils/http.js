@@ -31,9 +31,10 @@ axios.interceptors.request.use(
       };
       return config;
     }
-    if (config.url.indexOf('/argrace') !== -1) {
-      console.log(config);
+    if (config.url.indexOf('/argraceApi') !== -1) {
+      config.url=config.url.slice(11,config.url.length)
       config.baseURL=argraceBaseUrl
+      console.log(config);
       return config
     }
     config.headers = {

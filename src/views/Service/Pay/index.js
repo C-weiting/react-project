@@ -55,6 +55,9 @@ function Pay() {
   };
 
   function handlePay() {
+    if (selectedData.length===0) {
+      return
+    }
     const paramsObj = {
       cityId: userInfo.cityId,
       cityName: userInfo.cityName,

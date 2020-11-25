@@ -16,9 +16,22 @@ function addWorkOrder(params) {
     );
   });
 }
-/**
- * 获取账单列表
- */
+// /**
+//  * 获取账单列表
+//  */
+// function getOrderList(params) {
+//   return new Promise((resolve, reject) => {
+//     http('post', '/argraceApi/user/getNotPaymentOrderListByThirdHouseId', params).then(
+//       (res) => {
+//         resolve(res);
+//       },
+//       (error) => {
+//         console.log('网络异常~', error);
+//         reject(error);
+//       }
+//     );
+//   });
+// }
 function getOrderList(params) {
   return new Promise((resolve, reject) => {
     http('post', '/obms-pos/user/getNotPaymentOrderListByThirdHouseId', params).then(

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import eventBus from '@/event/EventBus';
-import { CustomInfo } from '@/components/CustomToast';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindingUserClientid } from '@/api/bindingUserClientid';
 import * as eventActionTypes from '@/event/action-types';

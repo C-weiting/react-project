@@ -1,17 +1,20 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import CheckboxItem from '@/components/CheckboxItem';
 import Empty from '@/components/Empty';
 import showPayModel from '@/views/Pay';
 import '../inner-route.less';
 import { getOrderList, createPayOrder } from '../../../api/service';
 import { useStore } from 'react-redux';
+import eventBus from '@/event/EventBus';
+import * as eventActionTypes from '@/event/action-types';
+import { CustomSuccess } from '@/components/CustomToast';
 
-function Pay() {
+function Pay () {
   const [dataSource, setDataSource] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [payInfo, setPayInfo] = useState({});
   const store = useStore();
   const userInfo = store.getState().userInfo;
+  let payModelCallback;
   let initData = () => {
     getOrderList({
       thirdHouseId: userInfo.thirdHouseid,
@@ -26,17 +29,32 @@ function Pay() {
     initData();
   }, []);
 
+  useEffect(() => {
+    const fn = (data) => {
+      if (parseInt(data.type) === 10092) {//已缴费通知
+        CustomSuccess('缴费成功');
+        payModelCallback();//关闭二维码弹框
+        initData();
+      }
+    }
+    eventBus.on(eventActionTypes.GET_PUSH_MSG, fn);
+
+    return () => {
+      eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
+    }
+  }, [])
+
   const totolMoney = useMemo(
     () =>
       selectedData.length
         ? selectedData.reduce((a, b) => {
-            return parseInt(a) + parseInt(b.totalMoney);
-          }, 0)
+          return parseInt(a) + parseInt(b.totalMoney);
+        }, 0)
         : 0,
     [selectedData]
   );
 
-  function onChange(data, status) {
+  function onChange (data, status) {
     const index = selectedData.findIndex((item) => item.id === data.id);
 
     if (index > -1) {
@@ -54,8 +72,8 @@ function Pay() {
     return arr;
   };
 
-  function handlePay() {
-    if (selectedData.length===0) {
+  function handlePay () {
+    if (selectedData.length === 0) {
       return
     }
     const paramsObj = {
@@ -82,10 +100,10 @@ function Pay() {
       data: json2String(paramsObj),
     };
     createPayOrder(params).then((res) => {
-      showPayModel(res.model.qrCodePayUrl);
+      payModelCallback = showPayModel(res.model.qrCodePayUrl);
     });
   }
-  function json2String(params) {
+  function json2String (params) {
     let result = '';
     for (let key in params) {
       if (params.hasOwnProperty(key)) {
@@ -120,11 +138,11 @@ function Pay() {
             ))}
           </ul>
         ) : (
-          <Empty
-            pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/pay-empty%402x.png"
-            text="当前没有缴费账单"
-          />
-        )}
+            <Empty
+              pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/pay-empty%402x.png"
+              text="当前没有缴费账单"
+            />
+          )}
       </div>
       <div className="content-bottom">
         <div className="btn-title">

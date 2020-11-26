@@ -14,7 +14,7 @@ function Pay () {
   const store = useStore();
   const userInfo = store.getState().userInfo;
   let payModelCallback;
-  
+
   useEffect(() => {
     let initData = () => {
       getOrderList({
@@ -22,8 +22,10 @@ function Pay () {
         reqSource: 1,
         data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
       }).then((res) => {
-        setDataSource(res.model);
-        setSelectedData(res.model);
+        if (res && res.success && res.model) {
+          setDataSource(res.model);
+          setSelectedData(res.model);
+        }
       });
     };
     initData();

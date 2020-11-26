@@ -6,16 +6,14 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { useStore } from 'react-redux';
+import { Toast } from 'antd-mobile';
 import Complaints from '@/views/Service/Complaints';
 import Pay from '@/views/Service/Pay';
 import Repair from '@/views/Service/Repair';
 import Navigation from '@/components/Navigation';
 import indexTree from './menu.json';
-import rootReducer from '../../store/reducer/index';
-
 import './service.less';
-import { createStore } from 'redux';
-import { useStore } from 'react-redux';
 
 function Service() {
   const history = useHistory();
@@ -25,7 +23,11 @@ function Service() {
 
   // 选择一级菜单
   let chooseFirstIndex = (index) => {
-    setCurrentIndex([index, 0]);
+    if(index === 0) {
+      setCurrentIndex([index, 0]);
+    }else {
+      Toast.info('敬请期待...', 1);
+    }
   };
 
   // 选择二级菜单

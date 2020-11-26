@@ -74,7 +74,7 @@ function Header() {
         alt=""
       ></img>
       <div className="right-content">
-        <span className="login-btn" onClick={() => handleTestMessage(10090)}>
+        {/* <span className="login-btn" onClick={() => handleTestMessage(10090)}>
           10090
         </span>
         <span className="login-btn" onClick={() => handleTestMessage(10091)}>
@@ -82,7 +82,7 @@ function Header() {
         </span>
         <span className="login-btn" onClick={() => handleTestMessage(10092)}>
           10092
-        </span>
+        </span> */}
         {login}
         <div className="message" onClick={handleMessage}>
           {messageList.length && (

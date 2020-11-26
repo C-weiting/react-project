@@ -19,7 +19,7 @@ function bindingUserClientid(params){
  */
 function unBindingUserClientid(params){
     return new Promise((resolve, reject) => {
-      http("post",' /message/message/unBindingUserClientid.json',params).then(res => {
+      http("post",'/message/message/unBindingUserClientid.json',params).then(res => {
         resolve (res);
       },error => {
         console.log("网络异常~",error);

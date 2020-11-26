@@ -56,6 +56,7 @@ function Login(props) {
           if (window.android != null && typeof window.android != 'undefined') {
             const data = {
               method: eventActionTypes.GET_MSG_LIST,
+              custId: res.model.custId
             };
             window.android.callAndroid(JSON.stringify(data));
           }

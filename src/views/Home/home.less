@@ -266,6 +266,7 @@
                             flex: 1;
                             font-size: 13px;
                             line-height: 18px;
+                            overflow: hidden;
 
                             .title {
                                 display: flex;
@@ -281,6 +282,13 @@
                                 .message-time {
                                     color: rgba(255, 255, 255, 0.5);
                                 }
+                            }
+
+                            .info {
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                overflow: hidden;
+                                word-break: break-all;
                             }
                         }
 

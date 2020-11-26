@@ -29,8 +29,7 @@ axios.interceptors.request.use(
       delete config.params.data;
       config.headers = {
         sign: sign,
-        timestamp: timestamp,
-        requestSource: '',
+        timestamp: timestamp
       };
       return config;
     }

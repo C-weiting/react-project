@@ -31,7 +31,7 @@ function Pay () {
     initData();
 
     const fn = (data) => {
-      if (parseInt(data.type) === 10092) {//已缴费通知
+      if (parseInt(JSON.parse(data.content).type) === 10092) {//已缴费通知
         CustomSuccess('缴费成功');
         payModelCallback();//关闭二维码弹框
         initData();

@@ -7,9 +7,11 @@ import { DESEncrypt, DESDecrypt, md5Sign, md5Timestamp, md5 } from './secret';
 import Qs from 'qs';
 
 axios.defaults.timeout = 100000;
-axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = '/api';
 const argraceBaseUrl ='/'
 // axios.defaults.baseURL = 'http://61.132.109.16:8088/';
+// console.log(process.env.NODE_ENV);
+axios.defaults.baseURL= process.env.NODE_ENV==='development'?'/api':'http://61.132.109.16:8099/'
 // axios.defaults.baseURL = 'http://61.132.109.16:8099/';
 // axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
 

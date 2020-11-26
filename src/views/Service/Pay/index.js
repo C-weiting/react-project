@@ -15,21 +15,20 @@ function Pay () {
   const store = useStore();
   const userInfo = store.getState().userInfo;
   let payModelCallback;
-  let initData = () => {
-    getOrderList({
-      thirdHouseId: userInfo.thirdHouseid,
-      reqSource: 1,
-      data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
-    }).then((res) => {
-      setDataSource(res.model);
-      setSelectedData(res.model);
-    });
-  };
+  
   useEffect(() => {
+    let initData = () => {
+      getOrderList({
+        thirdHouseId: userInfo.thirdHouseid,
+        reqSource: 1,
+        data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
+      }).then((res) => {
+        setDataSource(res.model);
+        setSelectedData(res.model);
+      });
+    };
     initData();
-  }, []);
 
-  useEffect(() => {
     const fn = (data) => {
       if (parseInt(data.type) === 10092) {//已缴费通知
         CustomSuccess('缴费成功');
@@ -42,7 +41,7 @@ function Pay () {
     return () => {
       eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
     }
-  }, [])
+  }, [payModelCallback, userInfo.thirdHouseid]);
 
   const totolMoney = useMemo(
     () =>

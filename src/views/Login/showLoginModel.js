@@ -6,20 +6,15 @@ import MD5 from 'md5';
 import { Modal } from 'antd-mobile';
 import './login.less';
 import { getUserMsg } from '../../api/user';
-import { createStore } from 'redux';
 import action from '../../store/action/userInfo';
-import rootReducer from '../../store/reducer/index';
-import { useStore } from 'react-redux';
 import store from '@/store';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess, CustomFail } from '../../components/CustomToast';
-import { string } from 'prop-types';
 
 let divList = [];
 
 function Login(props) {
   const [modal, setModal] = useState(true);
-  let timer;
 
   function onClose() {
     setModal(false);
@@ -80,7 +75,7 @@ function Login(props) {
       clearInterval(timer);
       timer = null;
     };
-  }, []);
+  }, [text]);
 
   return (
     <Modal

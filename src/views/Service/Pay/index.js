@@ -11,7 +11,6 @@ import { CustomSuccess } from '@/components/CustomToast';
 function Pay () {
   const [dataSource, setDataSource] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
-  const [payInfo, setPayInfo] = useState({});
   const store = useStore();
   const userInfo = store.getState().userInfo;
   let payModelCallback;
@@ -53,16 +52,6 @@ function Pay () {
     [selectedData]
   );
 
-  function onChange (data, status) {
-    const index = selectedData.findIndex((item) => item.id === data.id);
-
-    if (index > -1) {
-      let newSelectedData = selectedData.filter((item) => item.id !== data.id);
-      setSelectedData(newSelectedData);
-    } else {
-      setSelectedData([...selectedData, data]);
-    }
-  }
   let orderNameList = () => {
     let arr = [];
     for (const item of selectedData) {

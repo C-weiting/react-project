@@ -11,25 +11,25 @@ import { CustomSuccess } from '@/components/CustomToast';
 function Pay () {
   const [dataSource, setDataSource] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
-  const [payInfo, setPayInfo] = useState({});
   const store = useStore();
   const userInfo = store.getState().userInfo;
   let payModelCallback;
-  let initData = () => {
-    getOrderList({
-      thirdHouseId: userInfo.thirdHouseid,
-      reqSource: 1,
-      data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
-    }).then((res) => {
-      setDataSource(res.model);
-      setSelectedData(res.model);
-    });
-  };
-  useEffect(() => {
-    initData();
-  }, []);
 
   useEffect(() => {
+    let initData = () => {
+      getOrderList({
+        thirdHouseId: userInfo.thirdHouseid,
+        reqSource: 1,
+        data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
+      }).then((res) => {
+        if (res && res.success && res.model) {
+          setDataSource(res.model);
+          setSelectedData(res.model);
+        }
+      });
+    };
+    initData();
+
     const fn = (data) => {
       if (parseInt(data.type) === 10092) {//已缴费通知
         CustomSuccess('缴费成功');
@@ -42,7 +42,7 @@ function Pay () {
     return () => {
       eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
     }
-  }, [])
+  }, [payModelCallback, userInfo.thirdHouseid]);
 
   const totolMoney = useMemo(
     () =>
@@ -54,16 +54,6 @@ function Pay () {
     [selectedData]
   );
 
-  function onChange (data, status) {
-    const index = selectedData.findIndex((item) => item.id === data.id);
-
-    if (index > -1) {
-      let newSelectedData = selectedData.filter((item) => item.id !== data.id);
-      setSelectedData(newSelectedData);
-    } else {
-      setSelectedData([...selectedData, data]);
-    }
-  }
   let orderNameList = () => {
     let arr = [];
     for (const item of selectedData) {

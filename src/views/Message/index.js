@@ -44,7 +44,6 @@ function Message () {
                 sourceType: 1
             }
             getPropertyBlockInformationPicDetail(params).then(res => {
-                alert(JSON.stringify(res))
                 if (res.success && res.model && res.model.informationNote) {
                     const { note } = res.model.informationNote
                     let messageDetail = {

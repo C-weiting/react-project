@@ -28,8 +28,8 @@ function Message () {
                         const { subBillMonth, subFeeName } = propertyBillList[0];
 
                         let messageDetail = {
-                            title: '物业通知',
-                            createTime: paymentTime,
+                            title: '已缴费通知',
+                            createTime: showTime(item.createTime),
                             content: `您已缴纳${subFeeName}，缴纳账期${subBillMonth}，订单编号{${orderId}}，支付时间{${paymentTime}}，支付方式{${paymentTypeName}}，缴纳渠道{${paymentChannelName}}`
                         }
                         showMessageModel(messageDetail);
@@ -44,16 +44,17 @@ function Message () {
                 sourceType: 1
             }
             getPropertyBlockInformationPicDetail(params).then(res => {
-                if (res.success && res.model) {
-                    const { title, createTime, detailList } = res.model;
-                    if (detailList && detailList.length) {
-                        let messageDetail = {
-                            title: title,
-                            createTime: createTime,
-                            content: detailList[0].note
-                        }
-                        showMessageModel(messageDetail);
+                alert(JSON.stringify(res))
+                if (res.success && res.model && res.model.informationNote) {
+                    const { note } = res.model.informationNote
+                    let messageDetail = {
+                        title: parseInt(item.type) === 10090 ? '社区公告通知' : '欠费通知',
+                        createTime: showTime(item.createTime),
+                        content: note
                     }
+                    showMessageModel(messageDetail);
+                } else {
+                    CustomFail('请求详情失败');
                 }
             });
         }

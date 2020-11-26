@@ -14,7 +14,7 @@ let divList = [];
 function LoginInfo (props) {
   const [modal, setModal] = useState(true);
   const userInfo = store.getState().userInfo;
-  const { clientId } = store.getState().clientId;
+  const { clientId } = store.getState().client;
 
   function onClose () {
     setModal(false);

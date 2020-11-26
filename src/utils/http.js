@@ -5,10 +5,11 @@ import axios from 'axios';
 import { Base64 } from 'js-base64';
 import { DESEncrypt, DESDecrypt, md5Sign, md5Timestamp, md5 } from './secret';
 import Qs from 'qs';
+import { CustomFail } from '@/components/CustomToast';
 
 axios.defaults.timeout = 100000;
 // axios.defaults.baseURL = '/api';
-const argraceBaseUrl ='/'
+const argraceBaseUrl = '/'
 // axios.defaults.baseURL = 'http://61.132.109.16:8088/';
 // axios.defaults.baseURL= process.env.NODE_ENV==='development'?'/api':'http://47.115.191.251:8089/proxy'
 // axios.defaults.baseURL= process.env.NODE_ENV==='development'?'/api':'http://61.132.109.16:8099/'
@@ -34,8 +35,8 @@ axios.interceptors.request.use(
       return config;
     }
     if (config.url.indexOf('/argraceApi') !== -1) {
-      config.url=config.url.slice(11,config.url.length)
-      config.baseURL=argraceBaseUrl
+      config.url = config.url.slice(11, config.url.length)
+      config.baseURL = argraceBaseUrl
       console.log(config);
       return config
     }
@@ -58,7 +59,7 @@ axios.interceptors.request.use(
  */
 axios.interceptors.response.use(
   (response) => {
-    if (response.data) {
+    if (response && response.data) {
       if (response.data.showapi_res_body) {
         return response;
       }
@@ -69,6 +70,8 @@ axios.interceptors.response.use(
         console.log('过期');
       }
       response.data = JSON.parse(DESDecrypt(response.data));
+    } else {
+
     }
     return response;
   },
@@ -83,7 +86,7 @@ axios.interceptors.response.use(
  * @param params  请求参数
  * @returns {Promise}
  */
-export function get(url, params = {}) {
+export function get (url, params = {}) {
   return new Promise((resolve, reject) => {
     axios
       .get(url, {
@@ -106,12 +109,16 @@ export function get(url, params = {}) {
  * @returns {Promise}
  */
 
-export function post(url, data) {
+export function post (url, data) {
   return new Promise((resolve, reject) => {
     axios.post(url, data).then(
       (response) => {
-        //关闭进度条
-        resolve(response.data);
+        if (response && response.data) {
+          //关闭进度条
+          resolve(response.data);
+        } else {
+          CustomFail('请求出错');
+        }
       },
       (err) => {
         reject(err);
@@ -126,7 +133,7 @@ export function post(url, data) {
  * @param data
  * @returns {Promise}
  */
-export function patch(url, data = {}) {
+export function patch (url, data = {}) {
   return new Promise((resolve, reject) => {
     axios.patch(url, data).then(
       (response) => {
@@ -147,7 +154,7 @@ export function patch(url, data = {}) {
  * @returns {Promise}
  */
 
-export function put(url, data = {}) {
+export function put (url, data = {}) {
   return new Promise((resolve, reject) => {
     axios.put(url, data).then(
       (response) => {
@@ -162,7 +169,7 @@ export function put(url, data = {}) {
 }
 
 //统一接口处理，返回数据
-export default function http(fecth, url, param) {
+export default function http (fecth, url, param) {
   return new Promise((resolve, reject) => {
     switch (fecth) {
       case 'get':
@@ -193,7 +200,7 @@ export default function http(fecth, url, param) {
 }
 
 //失败提示
-function msag(err) {
+function msag (err) {
   if (err && err.response) {
     switch (err.response.status) {
       case 400:
@@ -249,7 +256,7 @@ function msag(err) {
  * @param params
  * @param data
  */
-function landing(url, params, data) {
+function landing (url, params, data) {
   if (data.code === -1) {
   }
 }

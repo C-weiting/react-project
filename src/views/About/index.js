@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import eventBus from '@/event/EventBus';
 import * as eventActionTypes from '@/event/action-types';
+import { useSelector } from 'react-redux';
 import './about.less';
 
 export default function About () {
     const [appVersion, setAppVersion] = useState('');
+    const { isUpgrade } = useSelector((state) => state.client);
 
     useEffect(() => {
         function fn (data) {
@@ -24,7 +26,16 @@ export default function About () {
         return () => {
             eventBus.off(eventActionTypes.APP_VERSION, fn);
         }
-    }, [])
+    }, []);
+
+    function handleUpgrade() {
+        if (window.android != null && typeof (window.android) != "undefined") {
+            const data = {
+                method: eventActionTypes.START_UPGRADE,
+            }
+            window.android.callAndroid(JSON.stringify(data));
+        }
+    }
 
     return (
         <div className="about">
@@ -32,10 +43,14 @@ export default function About () {
             <div className="about-content">
                 <img className="icon-logo" src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png" alt=""></img>
                 <div className="version">Version {appVersion}</div>
-                <div className="last-version">
-                    <span className="reflash-icon"></span>
-                    您的系统已经是最新版本！
-                </div>
+                {
+                    parseInt(isUpgrade) ?
+                        <div className="upgrade" onClick={handleUpgrade}>更新版本</div> :
+                        <div className="last-version">
+                            <span className="reflash-icon"></span>
+                            您的系统已经是最新版本！
+                        </div>
+                }
             </div>
             <div className="about-footer">
                 <div>雅观科技 版权所有</div>

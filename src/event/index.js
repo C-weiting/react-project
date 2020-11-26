@@ -29,6 +29,9 @@ function callByAndroidParam (msg) { // 接收来自Android的一个参数的方�
         case actionTypes.SET_PUSH_CLIENTID: // 获取个推clientId
             eventBus.emit(actionTypes.SET_PUSH_CLIENTID, msg.object);
             break;
+        case actionTypes.SET_IS_UPDATE: // 获取app是否需要更新
+            eventBus.emit(actionTypes.SET_IS_UPDATE, msg.object);
+            break;
         default:
             break;
     }

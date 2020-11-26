@@ -5,16 +5,17 @@ import { showLoginModel } from '@/views/Login';
 import useMessageList from '@/hooks/useMessageList';
 import useMessageSub from '@/hooks/useMessageSub';
 import useClientBind from '@/hooks/useClientBind';
+import useAppUpgrade from '@/hooks/useAppUpgrade';
 import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 import { useSelector } from 'react-redux';
 
-function Header() {
+function Header () {
   const history = useHistory();
-  const userInfo = useSelector((state) => {
-    return state.userInfo;
-  });
-  function loginBtn() {
+  const userInfo = useSelector((state) => state.userInfo);
+  const { isUpgrade } = useSelector((state) => state.client);
+
+  function loginBtn () {
     if (Object.keys(userInfo).length !== 0) {
       return (
         <span className="xc-btn" onClick={handleUserInfo}>
@@ -31,22 +32,22 @@ function Header() {
   }
   let login = loginBtn();
 
-  function handleLogin() {
+  function handleLogin () {
     showLoginModel();
   }
 
-  function handleUserInfo() {
+  function handleUserInfo () {
     showLoginInfoModel();
   }
-  function handleMessage() {
+  function handleMessage () {
     history.push('/message');
   }
 
-  function handleSetting() {
+  function handleSetting () {
     history.push('/settings');
   }
 
-  function handleTestMessage(type) {
+  function handleTestMessage (type) {
     const data = {
       method: 'PUSH_TEST',
       object: {
@@ -65,6 +66,7 @@ function Header() {
   const messageList = useMessageList();
   useClientBind();
   useMessageSub();
+  useAppUpgrade();
 
   return (
     <div className="header-content">
@@ -74,7 +76,7 @@ function Header() {
         alt=""
       ></img>
       <div className="right-content">
-        {/* <span className="login-btn" onClick={() => handleTestMessage(10090)}>
+        <span className="login-btn" onClick={() => handleTestMessage(10090)}>
           10090
         </span>
         <span className="login-btn" onClick={() => handleTestMessage(10091)}>
@@ -82,7 +84,7 @@ function Header() {
         </span>
         <span className="login-btn" onClick={() => handleTestMessage(10092)}>
           10092
-        </span> */}
+        </span>
         {login}
         <div className="message" onClick={handleMessage}>
           {messageList.length && (
@@ -95,7 +97,7 @@ function Header() {
           )}
           <i className="iconfont iconxiaoxi"></i>
         </div>
-        <div className="settings new" onClick={handleSetting}>
+        <div className={`settings ${parseInt(isUpgrade) && 'new'}`} onClick={handleSetting}>
           <i className="iconfont iconshezhi"></i>
         </div>
       </div>

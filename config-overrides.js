@@ -28,6 +28,6 @@ module.exports = override(
     addPostcssPlugins([
         require('postcss-pxtorem')({ rootValue: 128, propList: ['*'], minPixelValue: 2, selectorBlackList: ['am-'] })
     ]),
-    // setWebpackPublicPath('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/web/')
+    setWebpackPublicPath('https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/web/')
 
 );

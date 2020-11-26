@@ -10,7 +10,6 @@ let divList = [];
 
 function Pay(props) {
   const [modal, setModal] = useState(true);
-  const [text, setText] = useState(props.qrCodePayUrl);
 
   console.log(props);
 

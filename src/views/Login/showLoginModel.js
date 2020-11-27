@@ -10,6 +10,7 @@ import action from '../../store/action/userInfo';
 import store from '@/store';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess, CustomFail } from '../../components/CustomToast';
+import showConfirmLoginModel from './confirmLoginModel';
 
 let divList = [];
 
@@ -47,8 +48,8 @@ function Login(props) {
               method: eventActionTypes.SET_PUSH_PHONE,
               object: {
                 phone: res.model.custPhone,
-                custId: res.model.custId
-              }
+                custId: res.model.custId,
+              },
             };
             window.android.callAndroid(JSON.stringify(data));
           }
@@ -56,12 +57,13 @@ function Login(props) {
           if (window.android != null && typeof window.android != 'undefined') {
             const data = {
               method: eventActionTypes.GET_MSG_LIST,
-              custId: res.model.custId
+              custId: res.model.custId,
             };
             window.android.callAndroid(JSON.stringify(data));
           }
-          CustomSuccess('操作成功');
+          // CustomSuccess('操作成功');
           onClose();
+          showConfirmLoginModel();
         }
       });
       if (

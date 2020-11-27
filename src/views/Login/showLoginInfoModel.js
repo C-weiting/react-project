@@ -11,12 +11,12 @@ import * as actionTypes from '@/store/action-types';
 
 let divList = [];
 
-function LoginInfo (props) {
+function LoginInfo(props) {
   const [modal, setModal] = useState(true);
   const userInfo = store.getState().userInfo;
   const { clientId } = store.getState().client;
 
-  function onClose () {
+  function onClose() {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -25,23 +25,28 @@ function LoginInfo (props) {
     let params = {
       custId: userInfo.custId,
       clientId: clientId,
-      bindType: 'Y-PAD'
-    }
- 
-    unBindingUserClientid(params).then(res => {
+      bindType: 'Y-PAD',
+    };
+
+    unBindingUserClientid(params).then((res) => {
       // CustomInfo(JSON.stringify(res), 10);
     });
 
     store.dispatch({ type: actionTypes.CLEAR_MESSAGELIST }); //退出登录后清除前端页面消息缓存
+  }
+  function onCancel() {
+    setModal(false);
 
+    divList.forEach((div) => document.body.removeChild(div));
+    divList = [];
   }
 
   return (
     <Modal
       visible={modal}
       transparent
-      maskClosable={false}
-      onClose={onClose}
+      maskClosable={true}
+      onClose={onCancel}
       className="model-login-info"
       footer={[
         {
@@ -73,7 +78,7 @@ function LoginInfo (props) {
   );
 }
 
-function showLoginInfoModel (...args) {
+function showLoginInfoModel(...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

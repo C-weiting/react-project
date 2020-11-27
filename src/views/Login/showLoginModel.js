@@ -99,7 +99,6 @@ function Login(props) {
     <Modal
       visible={modal}
       transparent
-      maskClosable={false}
       onClose={onClose}
       className="model-login"
       footer={[

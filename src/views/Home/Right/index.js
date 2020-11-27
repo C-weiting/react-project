@@ -3,6 +3,7 @@ import { SwipeAction } from 'antd-mobile';
 import { useDispatch } from 'react-redux';
 import Empty from '@/components/Empty';
 import useMessageList from '@/hooks/useMessageList';
+import messageClick from '@/utils/messageClick';
 import { showTime } from '@/utils';
 import * as actionTypes from '@/store/action-types';
 import * as eventActionTypes from '@/event/action-types';
@@ -22,6 +23,10 @@ export default function HomeRight () {
             }
             window.android.callAndroid(JSON.stringify(data));
         }
+    }
+
+    function handleClick (item) {
+        messageClick(item);
     }
 
     return (
@@ -59,7 +64,7 @@ export default function HomeRight () {
                                             style={{ marginBottom: '0.09375rem' }}
                                             key={message.messageId}
                                         >
-                                            <li className="message-item">
+                                            <li className="message-item" onClick={() => handleClick(message)}>
                                                 <div className="message-item-info">
                                                     <i className="iconfont iconshineihuti"></i>
                                                     <div className="message-item-info-content">

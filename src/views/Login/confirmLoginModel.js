@@ -50,7 +50,6 @@ function LoginInfo(props) {
     <Modal
       visible={modal}
       transparent
-      maskClosable={false}
       onClose={onClose}
       className="model-login-info"
       footer={[

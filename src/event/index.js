@@ -5,8 +5,6 @@ import * as actionTypes from './action-types';
 function sendHelloToAndroid () {
     if (window.android != null && typeof (window.android) != "undefined") {
         window.android.callAndroid("你好，Android! ");
-    } else {
-        alert(typeof (window.android));
     }
 }
 

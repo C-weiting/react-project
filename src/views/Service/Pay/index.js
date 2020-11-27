@@ -9,7 +9,7 @@ import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess } from '@/components/CustomToast';
 let payModelCallback;
 
-function Pay () {
+function Pay() {
   const [dataSource, setDataSource] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const store = useStore();
@@ -17,6 +17,7 @@ function Pay () {
 
   useEffect(() => {
     let initData = () => {
+      console.log(userInfo);
       getOrderList({
         thirdHouseId: userInfo.thirdHouseid,
         reqSource: 1,
@@ -31,25 +32,26 @@ function Pay () {
     initData();
 
     const fn = (data) => {
-      if (parseInt(JSON.parse(data.content).type) === 10092) {//已缴费通知
+      if (parseInt(JSON.parse(data.content).type) === 10092) {
+        //已缴费通知
         CustomSuccess('缴费成功');
-        payModelCallback();//关闭二维码弹框
+        payModelCallback(); //关闭二维码弹框
         initData();
       }
-    }
+    };
     eventBus.on(eventActionTypes.GET_PUSH_MSG, fn);
 
     return () => {
       eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
-    }
+    };
   }, [userInfo.thirdHouseid]);
 
   const totolMoney = useMemo(
     () =>
       selectedData.length
         ? selectedData.reduce((a, b) => {
-          return parseInt(a) + parseInt(b.totalMoney);
-        }, 0)
+            return parseInt(a) + parseInt(b.totalMoney);
+          }, 0)
         : 0,
     [selectedData]
   );
@@ -62,9 +64,9 @@ function Pay () {
     return arr;
   };
 
-  function handlePay () {
+  function handlePay() {
     if (selectedData.length === 0) {
-      return
+      return;
     }
     const paramsObj = {
       cityId: userInfo.cityId,
@@ -93,7 +95,7 @@ function Pay () {
       payModelCallback = showPayModel(res.model.qrCodePayUrl);
     });
   }
-  function json2String (params) {
+  function json2String(params) {
     let result = '';
     for (let key in params) {
       if (params.hasOwnProperty(key)) {
@@ -128,11 +130,11 @@ function Pay () {
             ))}
           </ul>
         ) : (
-            <Empty
-              pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/pay-empty%402x.png"
-              text="当前没有缴费账单"
-            />
-          )}
+          <Empty
+            pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/pay-empty%402x.png"
+            text="当前没有缴费账单"
+          />
+        )}
       </div>
       <div className="content-bottom">
         <div className="btn-title">

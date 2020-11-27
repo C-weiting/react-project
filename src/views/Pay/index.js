@@ -39,7 +39,10 @@ function Pay(props) {
       <div className="pay-model-content">
         <div className="address">
           <span className="addressIcon"></span>
-          缴费房屋：{store.getState().userInfo.houseAddress}
+          缴费房屋：
+          {store.getState().userInfo.cityName +
+            store.getState().userInfo.blockName +
+            store.getState().userInfo.houseAddress}
         </div>
         <div className="qrcode">
           {/* <QRCode
@@ -68,7 +71,7 @@ function showPayModel(...args) {
   divList.push(div);
 
   return () => {
-    divList = divList.filter(cdiv => cdiv !== div)
+    divList = divList.filter((cdiv) => cdiv !== div);
     ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);
   };

@@ -64,10 +64,12 @@ function Pay(props) {
 function showPayModel(...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  divList.push(div);
   ReactDOM.render(<Pay {...args} />, div);
+  divList.push(div);
 
   return () => {
+    divList = divList.filter(cdiv => cdiv !== div)
+    ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);
   };
 }

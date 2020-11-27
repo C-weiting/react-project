@@ -7,13 +7,13 @@ import { useStore } from 'react-redux';
 import eventBus from '@/event/EventBus';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess } from '@/components/CustomToast';
+let payModelCallback;
 
 function Pay () {
   const [dataSource, setDataSource] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const store = useStore();
   const userInfo = store.getState().userInfo;
-  let payModelCallback;
 
   useEffect(() => {
     let initData = () => {
@@ -42,7 +42,7 @@ function Pay () {
     return () => {
       eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
     }
-  }, [payModelCallback, userInfo.thirdHouseid]);
+  }, [userInfo.thirdHouseid]);
 
   const totolMoney = useMemo(
     () =>

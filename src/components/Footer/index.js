@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import './footer.less';
 
 function Footer () {
     const history = useHistory();
-    const [state, setstate] = useState(1)
+    const [state, setstate] = useState(1);
 
     function handleClick (type) {
         setstate(type)
@@ -17,6 +17,15 @@ function Footer () {
             history.push('/community');
         }
     }
+
+    useEffect(() => {
+        const pathnameMap = {
+            '/': 1,
+            '/community': 3
+        }
+        setstate(pathnameMap[history.location.pathname])
+
+    }, [history.location.pathname]);
 
     return (
         <div className="footer">

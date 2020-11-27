@@ -6,7 +6,7 @@ import store from '@/store';
 import action from '../../store/action/userInfo';
 import showLoginModel from './showLoginModel';
 import { unBindingUserClientid } from '@/api/bindingUserClientid';
-import { CustomInfo } from '@/components/CustomToast';
+import { CustomSuccess } from '@/components/CustomToast';
 import * as actionTypes from '@/store/action-types';
 
 let divList = [];
@@ -61,9 +61,11 @@ function LoginInfo(props) {
           },
         },
         {
-          text: '确认',
+          text: '确认登陆',
           onPress: () => {
             setIsConfirm(true);
+            CustomSuccess('登陆成功');
+
             // store.dispatch(action.clearUserInfo());
             onCancel();
           },
@@ -74,7 +76,10 @@ function LoginInfo(props) {
         <div className="title">账户信息</div>
         <ul className="info-list">
           <li>账号名：{userInfo.custNickName}</li>
-          <li>定位地址：{userInfo.houseAddress}</li>
+          <li>
+            定位地址：
+            {userInfo.cityName + userInfo.blockName + userInfo.houseAddress}
+          </li>
           <li>手机号： {userInfo.custPhone}</li>
         </ul>
       </div>

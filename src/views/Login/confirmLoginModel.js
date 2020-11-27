@@ -6,7 +6,7 @@ import store from '@/store';
 import action from '../../store/action/userInfo';
 import showLoginModel from './showLoginModel';
 import { unBindingUserClientid } from '@/api/bindingUserClientid';
-import { CustomInfo } from '@/components/CustomToast';
+import { CustomSuccess } from '@/components/CustomToast';
 import * as actionTypes from '@/store/action-types';
 
 let divList = [];
@@ -64,6 +64,8 @@ function LoginInfo(props) {
           text: '确认登陆',
           onPress: () => {
             setIsConfirm(true);
+            CustomSuccess('登陆成功');
+
             // store.dispatch(action.clearUserInfo());
             onCancel();
           },

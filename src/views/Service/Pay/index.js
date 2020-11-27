@@ -111,6 +111,16 @@ function Pay() {
     }
     return result.slice(0, result.length - 1);
   }
+  let payBtn = () => {
+    if (selectedData.length === 0) {
+      return <div></div>;
+    }
+    return (
+      <div className="bttom-btn" onClick={handlePay}>
+        确认缴费
+      </div>
+    );
+  };
 
   return (
     <div className="pay-content">
@@ -143,9 +153,10 @@ function Pay() {
             应缴总计：<span className="money">￥{totolMoney / 100}</span>
           </span>
         </div>
-        <div className="bttom-btn" onClick={handlePay}>
+        {/* <div className="bttom-btn" onClick={handlePay}>
           确认缴费
-        </div>
+        </div> */}
+        {payBtn}
       </div>
     </div>
   );

@@ -19,7 +19,6 @@ function MessageModel (props) {
         <Modal
             visible={modal}
             transparent
-            maskClosable={false}
             onClose={onClose}
             className="model-message"
             footer={[

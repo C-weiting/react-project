@@ -24,7 +24,6 @@ function Pay(props) {
     <Modal
       visible={modal}
       transparent
-      maskClosable={false}
       onClose={onClose}
       className="model-pay"
       footer={[

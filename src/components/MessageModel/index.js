@@ -47,6 +47,7 @@ function showMessageModel (params) {
     ReactDOM.render(<MessageModel {...params} />, div);
 
     return () => {
+        ReactDOM.unmountComponentAtNode(div);
         document.body.removeChild(div);
     };
 }

@@ -117,6 +117,7 @@ function showLoginModel(...args) {
   ReactDOM.render(<Login {...args} />, div);
 
   return () => {
+    ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);
   };
 }

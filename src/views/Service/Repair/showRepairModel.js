@@ -39,7 +39,8 @@ function LoginInfo(props) {
         CustomSuccess('操作成功');
         onClose();
       } else {
-        CustomFail('操作失败');
+        // CustomFail('操作失败');
+        CustomFail('您的操作太频繁，请稍后再试一下');
         onClose();
       }
     });

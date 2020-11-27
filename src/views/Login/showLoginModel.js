@@ -28,16 +28,20 @@ function Login(props) {
 
   const text = MD5(Math.random());
   useEffect(() => {
+    let addDeviceId = (payload) => {
+      setDeviceId(payload);
+    };
+    eventBus.on(eventActionTypes.GET_DEVICE_ID, addDeviceId);
     if (window.android != null && typeof window.android != 'undefined') {
       const data = {
         method: eventActionTypes.GET_DEVICE_ID,
       };
       window.android.callAndroid(JSON.stringify(data));
     }
+    return () => {
+      eventBus.off(eventActionTypes.GET_DEVICE_ID, addDeviceId);
+    };
   }, []);
-  eventBus.on(eventActionTypes.GET_DEVICE_ID, (payload) => {
-    setDeviceId(payload);
-  });
 
   const qrText = JSON.stringify({
     type: 2, //Y-PAD登录二维码

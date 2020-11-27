@@ -29,6 +29,9 @@ function callByAndroidParam (msg) { // 接收来自Android的一个参数的方�
         case actionTypes.SET_IS_UPDATE: // 获取app是否需要更新
             eventBus.emit(actionTypes.SET_IS_UPDATE, msg.object);
             break;
+        case actionTypes.GET_DEVICE_ID: // 获取deviceId
+            eventBus.emit(actionTypes.GET_DEVICE_ID, msg.object);
+            break;
         default:
             break;
     }

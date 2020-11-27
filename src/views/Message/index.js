@@ -66,7 +66,7 @@ function Message () {
                 {
                     messageList.length ? (<ul className="message-list">
                         {
-                            messageList.map((item, index) => {
+                            messageList.sort((a, b) => b.createTime - a.createTime).map((item, index) => {
                                 let message = {
                                     ...item,
                                     ...JSON.parse(item.content)

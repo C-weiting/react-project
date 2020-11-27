@@ -44,7 +44,7 @@ export default function HomeRight () {
                         <ul className="message-list">
                             {
 
-                                messageList.filter(item => !item.isRead).map((item, index) => {
+                                messageList.filter(item => !item.isRead).sort((a, b) => b.createTime - a.createTime).map((item, index) => {
                                     let message = {
                                         ...item,
                                         ...JSON.parse(item.content)

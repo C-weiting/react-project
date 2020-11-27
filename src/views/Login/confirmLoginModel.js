@@ -61,7 +61,7 @@ function LoginInfo(props) {
           },
         },
         {
-          text: '确认',
+          text: '确认登陆',
           onPress: () => {
             setIsConfirm(true);
             // store.dispatch(action.clearUserInfo());
@@ -74,7 +74,10 @@ function LoginInfo(props) {
         <div className="title">账户信息</div>
         <ul className="info-list">
           <li>账号名：{userInfo.custNickName}</li>
-          <li>定位地址：{userInfo.houseAddress}</li>
+          <li>
+            定位地址：
+            {userInfo.cityName + userInfo.blockName + userInfo.houseAddress}
+          </li>
           <li>手机号： {userInfo.custPhone}</li>
         </ul>
       </div>

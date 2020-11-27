@@ -6,3 +6,4 @@ export const SET_PUSH_PHONE = 'SET_PUSH_PHONE';
 export const SET_PUSH_CLIENTID = 'SET_PUSH_CLIENTID';
 export const SET_IS_UPDATE = 'SET_IS_UPDATE';
 export const START_UPGRADE = 'START_UPGRADE';
+export const GET_DEVICE_ID = 'GET_DEVICE_ID';

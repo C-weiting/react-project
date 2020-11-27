@@ -66,13 +66,13 @@ function Message () {
                 {
                     messageList.length ? (<ul className="message-list">
                         {
-                            messageList.filter(item => !item.isRead).map((item, index) => {
+                            messageList.map((item, index) => {
                                 let message = {
                                     ...item,
                                     ...JSON.parse(item.content)
                                 }
                                 return (
-                                    <li className="message-item" key={index} onClick={() => handleClick(message)}>
+                                    <li className={`message-item ${!item.isRead && 'noRead'}`} key={index} onClick={() => handleClick(message)}>
                                         <div className="message-time">{showTime(message.createTime)}</div>
                                         <div className="message-text">{message.content}</div>
                                     </li>

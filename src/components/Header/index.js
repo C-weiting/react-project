@@ -58,7 +58,7 @@ function Header () {
     if (window.android != null && typeof window.android != 'undefined') {
       window.android.callAndroid(JSON.stringify(data));
     } else {
-      alert(typeof window.android);
+      
     }
   }
 

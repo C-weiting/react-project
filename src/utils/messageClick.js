@@ -1,6 +1,6 @@
 import { CustomFail } from '@/components/CustomToast';
 import { getPropertyBlockInformationPicDetail, queryPropertyOrderDetail } from '@/api/message';
-import showMessageModel from '@/components/MessageModel';
+import { showMessageModel, showMessageConfirmModel } from '@/components/MessageModel';
 import { showTime } from '@/utils';
 import * as actionTypes from '@/store/action-types';
 import * as eventActionTypes from '@/event/action-types';
@@ -19,7 +19,11 @@ function beforeShowMessageModel (messageDetail, messageId, dispatch) {
     }
 }
 
-function messageClick (item, dispatch) {
+function beforeShowMessageConfirmModel (messageDetail, cb) {
+    showMessageConfirmModel(messageDetail, cb);
+}
+
+function messageClick (item, dispatch, history) {
     if (parseInt(item.type) === 10092) { // 已缴费通知
         const orderId = item.id1; // 12011181533601682
         let params = {
@@ -43,7 +47,7 @@ function messageClick (item, dispatch) {
                 CustomFail('请求详情失败');
             }
         });
-    } else {
+    } else if (parseInt(item.type) === 10090) {
         let params = {
             informationId: item.id1,
             sourceType: 1
@@ -52,7 +56,7 @@ function messageClick (item, dispatch) {
             if (res.success && res.model && res.model.informationNote) {
                 const { note } = res.model.informationNote
                 let messageDetail = {
-                    title: parseInt(item.type) === 10090 ? '社区公告通知' : '欠费通知',
+                    title: '社区公告通知',
                     createTime: showTime(item.createTime),
                     content: note
                 }
@@ -61,6 +65,28 @@ function messageClick (item, dispatch) {
                 CustomFail('请求详情失败');
             }
         });
+    } else if (parseInt(item.type) === 10091) {
+        let messageDetail = {
+            title: '欠费通知',
+            createTime: showTime(item.createTime),
+            content: '最新的物业账单已出，请按时缴纳'
+        }
+
+        const cb = () => {
+            history.push('/service/pay');
+            dispatch({ type: actionTypes.READ_MESSAGE, payload: item.messageId });
+            if (window.android != null && typeof (window.android) != "undefined") {
+                const data = {
+                    method: eventActionTypes.SET_MEG_READ,
+                    object: {
+                        messageId: item.messageId
+                    }
+                }
+                window.android.callAndroid(JSON.stringify(data));
+            }
+        }
+
+        beforeShowMessageConfirmModel(messageDetail, cb);
     }
 }
 

@@ -111,7 +111,7 @@ function Pay() {
     }
     return result.slice(0, result.length - 1);
   }
-  let payBtn = () => {
+  function payBtn() {
     if (selectedData.length === 0) {
       return <div></div>;
     }
@@ -120,7 +120,8 @@ function Pay() {
         确认缴费
       </div>
     );
-  };
+  }
+  let payItem  = payBtn()
 
   return (
     <div className="pay-content">
@@ -156,7 +157,7 @@ function Pay() {
         {/* <div className="bttom-btn" onClick={handlePay}>
           确认缴费
         </div> */}
-        {payBtn}
+        {payItem}
       </div>
     </div>
   );

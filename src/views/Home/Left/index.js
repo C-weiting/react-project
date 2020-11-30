@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Toast } from 'antd-mobile';
 import { getWeather } from '@/api/thirdParty';
+import * as eventActionTypes from '@/event/action-types';
+import eventBus from '@/event/EventBus';
 import '../home.less';
 
 const weekDayMap = {
@@ -23,10 +25,21 @@ export default function HomeLeft () {
     });
 
     useEffect(() => {
-        getWeather().then(res => {
-            console.log(res)
-            setWeatherInfo(res.showapi_res_body.f1)
-        })
+        const fn = () => {
+            getWeather().then(res => {
+                if(res && res.showapi_res_body && res.showapi_res_body.f1){
+                    setWeatherInfo(res.showapi_res_body.f1)
+                }
+            })
+        }
+
+        fn();
+
+        eventBus.on(eventActionTypes.GET_NETWORK_STATUS, fn);
+
+        return () => {
+            eventBus.off(eventActionTypes.GET_NETWORK_STATUS, fn);
+        }
     }, []);
 
     useEffect(() => {

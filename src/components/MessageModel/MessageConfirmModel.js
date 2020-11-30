@@ -20,6 +20,7 @@ function MessageConfirmModel (props) {
             visible={modal}
             transparent
             onClose={onClose}
+            className="model-confirm-message"
             footer={[
                 {
                     text: '稍后再说',

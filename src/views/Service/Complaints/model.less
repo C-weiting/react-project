@@ -1,11 +1,11 @@
 @import url('~@/styles/mixin.less');
 
 .model-complaints.am-modal-transparent {
-  width: 614px;
+  width: 907px;
 }
 
 .model-complaints-info.am-modal-transparent {
-  width: 600px;
+  width: 900px;
 }
 
 .complaints-content {
@@ -40,14 +40,17 @@
 }
 
 .complaints-info-content {
+  padding-left: 78px;
+
   .title {
     font-size: 28px;
     line-height: 40px;
     margin-top: 25px;
+    margin-left: -78px;
   }
 
   .info-list {
-    margin: 49px 39px 0;
+    margin: 49px 0;
 
     li {
       color: rgba(255, 255, 255, 0.8);
@@ -57,11 +60,15 @@
     }
   }
   .tagName {
+    width: 100%;
     height: 33px;
     font-size: 24px;
     // font-family: PingFangSC-Medium, PingFang SC;
     font-weight: 500;
     color: #999999;
     line-height: 33px;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }

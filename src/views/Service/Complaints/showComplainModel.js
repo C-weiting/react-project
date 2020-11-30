@@ -58,7 +58,7 @@ function LoginInfo(props) {
       visible={modal}
       transparent
       onClose={onClose}
-      className="model-login-info"
+      className="model-complaints-info"
       footer={[
         {
           text: '取消',

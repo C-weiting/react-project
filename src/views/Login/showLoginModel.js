@@ -87,7 +87,8 @@ function Login(props) {
       });
       if (
         Object.keys(store.getState().userInfo).length > 0 ||
-        divList.length === 0
+        divList.length === 0 ||
+        store.getState().client.networkStatus !== 1
       ) {
         clearInterval(timer);
         timer = null;

@@ -74,13 +74,13 @@ function LoginInfo(props) {
         },
       ]}
     >
-      <div className="login-info-content">
+      <div className="complaints-info-content">
         <div className="title">投诉举报确认</div>
         <ul className="info-list">
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>
         </ul>
-        <div>分类选择：</div>
+        <div className='tagName'>分类选择：</div>
         <SelectTag tagList={tagList} default="房修"></SelectTag>
       </div>
     </Modal>

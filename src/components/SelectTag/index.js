@@ -9,9 +9,11 @@ export default function SelectTag(props) {
   const [currentTag, setCurrentTag] = useState(props.default);
   useEffect(() => {
     setTagElement(
-      tagList.map((item) =>
+      tagList.map((item,index) =>
         item.value === currentTag ? (
-          <div className="currentItem">{item.value}</div>
+          <div className="currentItem" key={index}>
+            {item.value}
+          </div>
         ) : (
           <div
             className="tagItem"

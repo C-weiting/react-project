@@ -48,7 +48,7 @@ export default function HomeLeft () {
     }
 
     function handleToast () {
-        Toast.info('敬请期待...', 1);
+        Toast.info('正在建设中，敬请期待', 1);
     }
 
     return (

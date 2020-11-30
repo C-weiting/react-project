@@ -26,7 +26,7 @@ function Service() {
     if(index === 0) {
       setCurrentIndex([index, 0]);
     }else {
-      Toast.info('敬请期待...', 1);
+      Toast.info('正在建设中，敬请期待', 1);
     }
   };
 

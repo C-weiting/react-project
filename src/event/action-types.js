@@ -7,3 +7,4 @@ export const SET_PUSH_CLIENTID = 'SET_PUSH_CLIENTID';
 export const SET_IS_UPDATE = 'SET_IS_UPDATE';
 export const START_UPGRADE = 'START_UPGRADE';
 export const GET_DEVICE_ID = 'GET_DEVICE_ID';
+export const GET_NETWORK_STATUS = 'GET_NETWORK_STATUS';

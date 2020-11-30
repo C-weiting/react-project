@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Navigation from '@/components/Navigation';
 import Empty from '@/components/Empty';
 import useMessageList from '@/hooks/useMessageList';
@@ -9,11 +10,12 @@ import './message.less';
 
 function Message () {
     const messageList = useMessageList();
+    const dispatch = useDispatch();
     useMessageSub();
+    
     // handleClick({type: 10092, id1: 6491})
-
     function handleClick (item) {
-        messageClick(item);
+        messageClick(item, dispatch);
     }
 
     return (

@@ -26,7 +26,7 @@ export default function HomeRight () {
     }
 
     function handleClick (item) {
-        messageClick(item);
+        messageClick(item, dispatch);
     }
 
     return (

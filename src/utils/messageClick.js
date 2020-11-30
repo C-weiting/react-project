@@ -2,8 +2,24 @@ import { CustomFail } from '@/components/CustomToast';
 import { getPropertyBlockInformationPicDetail, queryPropertyOrderDetail } from '@/api/message';
 import showMessageModel from '@/components/MessageModel';
 import { showTime } from '@/utils';
+import * as actionTypes from '@/store/action-types';
+import * as eventActionTypes from '@/event/action-types';
 
-function messageClick (item) {
+function beforeShowMessageModel (messageDetail, messageId, dispatch) {
+    showMessageModel(messageDetail);
+    dispatch({ type: actionTypes.READ_MESSAGE, payload: messageId });
+    if (window.android != null && typeof (window.android) != "undefined") {
+        const data = {
+            method: eventActionTypes.SET_MEG_READ,
+            object: {
+                messageId: messageId
+            }
+        }
+        window.android.callAndroid(JSON.stringify(data));
+    }
+}
+
+function messageClick (item, dispatch) {
     if (parseInt(item.type) === 10092) { // 已缴费通知
         const orderId = item.id1; // 12011181533601682
         let params = {
@@ -21,7 +37,7 @@ function messageClick (item) {
                         createTime: showTime(item.createTime),
                         content: `您已缴纳${subFeeName}，缴纳账期${subBillMonth}，订单编号{${orderId}}，支付时间{${paymentTime}}，支付方式{${paymentTypeName}}，缴纳渠道{${paymentChannelName}}`
                     }
-                    showMessageModel(messageDetail);
+                    beforeShowMessageModel(messageDetail, item.messageId, dispatch);
                 }
             } else {
                 CustomFail('请求详情失败');
@@ -40,7 +56,7 @@ function messageClick (item) {
                     createTime: showTime(item.createTime),
                     content: note
                 }
-                showMessageModel(messageDetail);
+                beforeShowMessageModel(messageDetail, item.messageId, dispatch);
             } else {
                 CustomFail('请求详情失败');
             }

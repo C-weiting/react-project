@@ -6,6 +6,7 @@ import useMessageList from '@/hooks/useMessageList';
 import useMessageSub from '@/hooks/useMessageSub';
 import useClientBind from '@/hooks/useClientBind';
 import useAppUpgrade from '@/hooks/useAppUpgrade';
+import useNetworkSub from '@/hooks/useNetworkSub';
 import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 import { useSelector } from 'react-redux';
@@ -13,7 +14,7 @@ import { useSelector } from 'react-redux';
 function Header () {
   const history = useHistory();
   const userInfo = useSelector((state) => state.userInfo);
-  const { isUpgrade } = useSelector((state) => state.client);
+  const { isUpgrade, networkStatus } = useSelector((state) => state.client);
 
   function loginBtn () {
     if (Object.keys(userInfo).length !== 0) {
@@ -47,44 +48,30 @@ function Header () {
     history.push('/settings');
   }
 
-  function handleTestMessage (type) {
-    const data = {
-      method: 'PUSH_TEST',
-      object: {
-        type: type,
-      },
-    };
-
-    if (window.android != null && typeof window.android != 'undefined') {
-      window.android.callAndroid(JSON.stringify(data));
-    } else {
-      
-    }
-  }
-
-
   const messageList = useMessageList();
   useClientBind();
   useMessageSub();
   useAppUpgrade();
+  useNetworkSub();
 
   return (
     <div className="header-content">
-      <img
-        className="icon-logo"
-        src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png"
-        alt=""
-      ></img>
+      <div className="left-content">
+        <img
+          className="icon-logo"
+          src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/logo%402x.png"
+          alt=""
+        ></img>
+        {
+          !networkStatus && (
+            <div className="disconnection">
+              <span className="loading"></span>
+              网络异常，请检查网络
+            </div>
+          )
+        }
+      </div>
       <div className="right-content">
-        {/* <span className="login-btn" onClick={() => handleTestMessage(10090)}>
-          10090
-        </span>
-        <span className="login-btn" onClick={() => handleTestMessage(10091)}>
-          10091
-        </span>
-        <span className="login-btn" onClick={() => handleTestMessage(10092)}>
-          10092
-        </span> */}
         {login}
         <div className="message" onClick={handleMessage}>
           {messageList.length && (

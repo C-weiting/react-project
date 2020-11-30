@@ -1,3 +1,5 @@
+@import url('~@/styles/mixin.less');
+
 .header-content {
   width: 100%;
   height: 98px;
@@ -11,9 +13,33 @@
   box-sizing: border-box;
   z-index: 1;
 
-  .icon-logo {
-    width: 367px;
-    height: 48px;
+  .left-content {
+
+    display: flex;
+    align-items: center;
+
+    .icon-logo {
+      width: 367px;
+      height: 48px;
+    }
+
+    .disconnection {
+      color: #ffffff;
+      font-size: 22px;
+      margin-left: 23px;
+      display: flex;
+      align-items: center;
+
+      .loading {
+        width: 19px;
+        height: 19px;
+        display: inline-block;
+        .bg-image('~@/assets/images/loading');
+        background-size: 100% 100%;
+        margin-right: 7px;
+        animation: rotatefresh 2s infinite linear;
+      }
+    }
   }
 
   .right-content {
@@ -80,5 +106,14 @@
       font-size: 42px;
       color: #ffffff;
     }
+  }
+}
+
+
+@keyframes rotatefresh {
+  from { transform: rotate(0deg) }
+  to {
+      transform: rotate(360deg);
+      transition: all 0.6s;
   }
 }

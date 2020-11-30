@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Toast } from 'antd-mobile';
 import { time_range } from '@/utils';
+import useLogin from '@/hooks/useLogin';
+import { showLoginModel } from '@/views/Login';
 
 export default function HomeCenter () {
     const [title, setTitle] = useState('');
     const [pic, setPic] = useState('');
     const history = useHistory();
+    const isLogin = useLogin();
 
     useEffect(() => {
         function initData () {
@@ -35,7 +38,11 @@ export default function HomeCenter () {
     }, [])
 
     function go (path) {
-        history.push(path);
+        if(isLogin) {
+            history.push(path);
+        }else {
+            showLoginModel()
+        }
     }
 
     function handleToast () {

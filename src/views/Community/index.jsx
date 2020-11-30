@@ -4,10 +4,13 @@ import './index.less';
 
 import SlideItem from './Components/SlideTag/SlideTag';
 import { useHistory } from 'react-router-dom';
+import useLogin from '@/hooks/useLogin';
+import { showLoginModel } from '@/views/Login';
 export const SlideItemContext = createContext({});
 
 function Community () {
   let history = useHistory();
+  const isLogin = useLogin();
 
   const [slideList, setSlideList] = useState([
     {
@@ -44,9 +47,13 @@ function Community () {
   let clickItem = (id) => {
     let actions = {
       property: () => {
-        history.push({
-          pathname: '/service'
-        });
+        if (isLogin) {
+          history.push({
+            pathname: '/service'
+          });
+        } else {
+          showLoginModel()
+        }
       },
     };
     if (actions.hasOwnProperty(id)) {

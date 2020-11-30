@@ -34,7 +34,7 @@ function Pay() {
     const fn = (data) => {
       if (parseInt(JSON.parse(data.content).type) === 10092) {
         //已缴费通知
-        CustomSuccess('缴费成功');
+        CustomSuccess('支付成功');
         payModelCallback(); //关闭二维码弹框
         initData();
       }
@@ -111,17 +111,6 @@ function Pay() {
     }
     return result.slice(0, result.length - 1);
   }
-  function payBtn() {
-    if (selectedData.length === 0) {
-      return <div></div>;
-    }
-    return (
-      <div className="bttom-btn" onClick={handlePay}>
-        确认缴费
-      </div>
-    );
-  }
-  let payItem  = payBtn()
 
   return (
     <div className="pay-content">
@@ -154,10 +143,13 @@ function Pay() {
             应缴总计：<span className="money">￥{totolMoney / 100}</span>
           </span>
         </div>
-        {/* <div className="bttom-btn" onClick={handlePay}>
-          确认缴费
-        </div> */}
-        {payItem}
+        {selectedData.length > 0 ? (
+          <div className="bttom-btn" onClick={handlePay}>
+            确认缴费
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

@@ -51,7 +51,7 @@ function Pay(props) {
             logoWidth={25}
             logoHeight={25}
           /> */}
-          <QRCode size={96} value={props[0]} level="L" />
+          <QRCode className="codeImg" size={96} value={props[0]} level="L" />
         </div>
         <div className="pay-type">
           <span className="wechat"></span>

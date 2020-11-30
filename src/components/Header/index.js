@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Badge } from 'antd-mobile';
 import { showLoginModel } from '@/views/Login';
@@ -49,6 +49,9 @@ function Header () {
   }
 
   const messageList = useMessageList();
+  const unreadMessage = useMemo(() => (
+    messageList.filter(item => !item.isRead)
+  ), [messageList])
   useClientBind();
   useMessageSub();
   useAppUpgrade();
@@ -74,10 +77,10 @@ function Header () {
       <div className="right-content">
         {login}
         <div className="message" onClick={handleMessage}>
-          {messageList.length && (
+          {unreadMessage.length && (
             <Badge
               className="message-badge"
-              text={messageList.length}
+              text={unreadMessage.length}
               overflowCount={99}
               style={{ backgroundColor: '#FF3B3B' }}
             />

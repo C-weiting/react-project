@@ -13,7 +13,6 @@ function callByAndroid () {// 接收来自Android的无参的方法
 }
 
 function callByAndroidParam (msg) { // 接收来自Android的一个参数的方法
-    // CustomInfo(JSON.toString(msg));
     switch (msg.method) {
         case actionTypes.GET_PUSH_MSG: // 来自新城的消息推送
             eventBus.emit(actionTypes.GET_PUSH_MSG, msg.object[0]);

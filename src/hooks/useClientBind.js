@@ -15,6 +15,7 @@ function useClientBind () {
 
             let params = {
                 custId: userInfo.custId,
+                blockId: userInfo.blockId,
                 clientId: clientId,
                 bindType: 'Y-PAD'
             }
@@ -28,7 +29,7 @@ function useClientBind () {
         return () => {
             eventBus.off(eventActionTypes.SET_PUSH_CLIENTID, fn);
         }
-    }, [dispatch, userInfo.custId]);
+    }, [dispatch, userInfo.blockId, userInfo.custId]);
 }
 
 export default useClientBind;

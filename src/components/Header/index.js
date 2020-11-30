@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 function Header () {
   const history = useHistory();
   const userInfo = useSelector((state) => state.userInfo);
-  const { isUpgrade, networkStatus } = useSelector((state) => state.client);
+  const { isUpgrade, networkStatus, homeUpgrade } = useSelector((state) => state.client);
 
   function loginBtn () {
     if (Object.keys(userInfo).length !== 0) {
@@ -87,7 +87,7 @@ function Header () {
           )}
           <i className="iconfont iconxiaoxi"></i>
         </div>
-        <div className={`settings ${parseInt(isUpgrade) && 'new'}`} onClick={handleSetting}>
+        <div className={`settings ${parseInt(isUpgrade) && homeUpgrade && 'new'}`} onClick={handleSetting}>
           <i className="iconfont iconshezhi"></i>
         </div>
       </div>

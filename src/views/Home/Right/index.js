@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import { SwipeAction } from 'antd-mobile';
 import { useDispatch } from 'react-redux';
 import Empty from '@/components/Empty';
@@ -11,6 +12,7 @@ import * as eventActionTypes from '@/event/action-types';
 export default function HomeRight () {
     const messageList = useMessageList();
     const dispatch = useDispatch();
+    const history = useHistory();
     const unreadMessage = useMemo(() => (
         messageList.filter(item => !item.isRead)
     ), [messageList])
@@ -29,7 +31,7 @@ export default function HomeRight () {
     }
 
     function handleClick (item) {
-        messageClick(item, dispatch);
+        messageClick(item, dispatch, history);
     }
 
     return (

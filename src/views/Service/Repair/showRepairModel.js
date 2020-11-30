@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { createRef, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'antd-mobile';
 import './model.less';
 import store from '@/store';
 import { addWorkOrder } from '../../../api/service';
+import SelectTag from '@/components/SelectTag';
 import { CustomSuccess, CustomFail } from '../../../components/CustomToast';
 
 let divList = [];
 
 function LoginInfo(props) {
   const [modal, setModal] = useState(true);
-
+  const [tagList, setTagLit] = useState([
+    { value: '房修问题' },
+    { value: '电梯故障' },
+    { value: '管道堵塞' },
+    { value: '渗水漏水' },
+    { value: '电力故障' },
+    { value: '其它' },
+  ]);
   function onClose() {
     setModal(false);
 
@@ -23,7 +31,7 @@ function LoginInfo(props) {
   // console.log(userInfo);
 
   function onCommit() {
-    addWorkOrder({
+    let params = {
       appUser: userInfo.custNickName,
       houseId: userInfo.houseId,
       phone: userInfo.custPhone,
@@ -34,7 +42,10 @@ function LoginInfo(props) {
       community: userInfo.blockId,
       orderType: 1,
       subOrderType: 1,
-    }).then((res) => {
+      orderDesc: userInfo.currentTag,
+    };
+    console.log(params);
+    addWorkOrder(params).then((res) => {
       if (res.success === true) {
         CustomSuccess('操作成功');
         onClose();
@@ -72,6 +83,8 @@ function LoginInfo(props) {
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>
         </ul>
+        <div>分类选择：</div>
+        <SelectTag tagList={tagList} default="房修问题"></SelectTag>
       </div>
     </Modal>
   );

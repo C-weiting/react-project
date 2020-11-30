@@ -5,12 +5,20 @@ import './model.less';
 import store from '@/store';
 import { addWorkOrder } from '../../../api/service';
 import { CustomSuccess, CustomFail } from '../../../components/CustomToast';
+import SelectTag from '@/components/SelectTag';
 
 let divList = [];
 
 function LoginInfo(props) {
   const [modal, setModal] = useState(true);
-
+  const [tagList, setTagLit] = useState([
+    { value: '房修' },
+    { value: '环境' },
+    { value: '秩序' },
+    { value: '服务' },
+    { value: '突发事件' },
+    { value: '其它' },
+  ]);
   function onClose() {
     setModal(false);
 
@@ -21,7 +29,7 @@ function LoginInfo(props) {
   const userInfo = store.getState().userInfo;
 
   function onCommit() {
-    addWorkOrder({
+    let params = {
       appUser: userInfo.custNickName,
       houseId: userInfo.houseId,
       phone: userInfo.custPhone,
@@ -31,7 +39,10 @@ function LoginInfo(props) {
       thirdHouseId: userInfo.thirdHouseid,
       community: userInfo.blockId,
       orderType: 3,
-    }).then((res) => {
+      orderDesc: userInfo.currentTag,
+    };
+    console.log(params);
+    addWorkOrder(params).then((res) => {
       console.log(res);
       if (res.success === true) {
         CustomSuccess('操作成功');
@@ -69,6 +80,8 @@ function LoginInfo(props) {
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>
         </ul>
+        <div>分类选择：</div>
+        <SelectTag tagList={tagList} default="房修"></SelectTag>
       </div>
     </Modal>
   );

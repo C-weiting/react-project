@@ -9,7 +9,7 @@ export default function SelectTag(props) {
   const [currentTag, setCurrentTag] = useState(props.default);
   useEffect(() => {
     setTagElement(
-      tagList.map((item,index) =>
+      tagList.map((item, index) =>
         item.value === currentTag ? (
           <div className="currentItem" key={index}>
             {item.value}
@@ -20,12 +20,9 @@ export default function SelectTag(props) {
             key={index}
             onClick={() => {
               setCurrentTag(item.value);
-              store.dispatch(
-                action.addUserInfo({
-                  ...store.getState().userInfo,
-                  currentTag: currentTag,
-                })
-              );
+              let userInfo = store.getState().userInfo;
+              userInfo.currentTag = item.value;
+              store.dispatch(action.addUserInfo(userInfo));
             }}
           >
             {item.value}

@@ -1,13 +1,15 @@
-import React, { createRef, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal } from 'antd-mobile';
 import './model.less';
 import store from '@/store';
+import action from '@/store/action/userInfo';
 import { addWorkOrder } from '../../../api/service';
 import SelectTag from '@/components/SelectTag';
 import { CustomSuccess, CustomFail } from '../../../components/CustomToast';
 
 let divList = [];
+const defaultTag = '房修问题';
 
 function LoginInfo(props) {
   const [modal, setModal] = useState(true);
@@ -42,10 +44,11 @@ function LoginInfo(props) {
       community: userInfo.blockId,
       orderType: 1,
       subOrderType: 1,
-      orderDesc: userInfo.currentTag,
+      orderDesc: userInfo.currentTag || defaultTag,
     };
     console.log(params);
     addWorkOrder(params).then((res) => {
+      setDefaultTag();
       if (res.success === true) {
         CustomSuccess('操作成功');
         onClose();
@@ -55,6 +58,11 @@ function LoginInfo(props) {
         onClose();
       }
     });
+  }
+  function setDefaultTag() {
+    let userInfo = store.getState().userInfo;
+    userInfo.currentTag = null;
+    store.dispatch(action.addUserInfo(userInfo));
   }
   return (
     <Modal
@@ -84,7 +92,7 @@ function LoginInfo(props) {
           <li>联系电话： {userInfo.custPhone}</li>
         </ul>
         <div className="tagName">分类选择：</div>
-        <SelectTag tagList={tagList} default="房修问题"></SelectTag>
+        <SelectTag tagList={tagList} default={defaultTag}></SelectTag>
       </div>
     </Modal>
   );

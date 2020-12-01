@@ -17,11 +17,11 @@ export default function HomeRight () {
         messageList.filter(item => !item.isRead)
     ), [messageList])
 
-    function handleReadMessage (message) {
-        dispatch({ type: actionTypes.READ_MESSAGE, payload: message.messageId });
+    function handleRemoveMessage (message) {
+        dispatch({ type: actionTypes.SET_MEG_REMOVE, payload: message.messageId });
         if (window.android != null && typeof (window.android) != "undefined") {
             const data = {
-                method: eventActionTypes.SET_MEG_READ,
+                method: eventActionTypes.SET_MEG_REMOVE,
                 object: {
                     messageId: message.messageId
                 }
@@ -49,7 +49,7 @@ export default function HomeRight () {
                         <ul className="message-list">
                             {
 
-                                messageList.filter(item => !item.isRead).sort((a, b) => b.createTime - a.createTime).map((item, index) => {
+                                messageList.filter(item => !item.isRead).filter(item => !item.isRemove).sort((a, b) => b.createTime - a.createTime).map((item, index) => {
                                     let message = {
                                         ...item,
                                         ...JSON.parse(item.content)
@@ -60,7 +60,7 @@ export default function HomeRight () {
                                             right={[
                                                 {
                                                     text: '移出',
-                                                    onPress: () => handleReadMessage(message),
+                                                    onPress: () => handleRemoveMessage(message),
                                                     style: { backgroundColor: '#F2543F', color: '#ffffff', fontSize: '0.09375rem', width: '0.78125rem', borderRadius: '0.0625rem', marginLeft: '0.078125rem' },
                                                 },
                                             ]}

@@ -1,4 +1,4 @@
-import { CustomFail } from '@/components/CustomToast';
+import { CustomFail, CustomLoading, CustomHide } from '@/components/CustomToast';
 import { getPropertyBlockInformationPicDetail, queryPropertyOrderDetail } from '@/api/message';
 import { showMessageModel, showMessageConfirmModel } from '@/components/MessageModel';
 import { showTime } from '@/utils';
@@ -25,12 +25,14 @@ function beforeShowMessageConfirmModel (messageDetail, cb) {
 
 function messageClick (item, dispatch, history) {
     if (parseInt(item.type) === 10092) { // 已缴费通知
+        CustomLoading('', 0);
         const orderId = item.id1; // 12011181533601682
         let params = {
             orderId: orderId,
             data: `orderId=${orderId}`
         }
         queryPropertyOrderDetail(params).then(res => {
+            CustomHide();
             if (res.success && res.model) {
                 let { propertyBillList, orderId, paymentTime, paymentTypeName, paymentChannelName } = res.model
                 if (propertyBillList && propertyBillList.length) {
@@ -48,11 +50,13 @@ function messageClick (item, dispatch, history) {
             }
         });
     } else if (parseInt(item.type) === 10090) {
+        CustomLoading('', 0);
         let params = {
             informationId: item.id1,
             sourceType: 1
         }
         getPropertyBlockInformationPicDetail(params).then(res => {
+            CustomHide();
             if (res.success && res.model && res.model.informationNote) {
                 const { note } = res.model.informationNote
                 let messageDetail = {

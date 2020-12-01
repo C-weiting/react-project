@@ -27,6 +27,25 @@ function reducer (state = { cacheMessageList: [], pushMessageList: [] }, action)
                 return { ...state, pushMessageList: [...state.pushMessageList] };
             }
             break;
+        case actionTypes.SET_MEG_REMOVE:
+            let cacheMessageRemoveIndex = state.cacheMessageList.findIndex((item)=>{
+                return item.messageId === action.payload
+            })
+            
+            let pushMessageRemoveIndex = state.pushMessageList.findIndex((item)=>{
+                return item.messageId === action.payload
+            })
+            
+            if(cacheMessageRemoveIndex > -1) {
+                state.cacheMessageList[cacheMessageRemoveIndex].isRemove = true;
+                return { ...state, cacheMessageList: [...state.cacheMessageList] };
+            }
+
+            if(pushMessageRemoveIndex > -1) {
+                state.pushMessageList[pushMessageRemoveIndex].isRemove = true;
+                return { ...state, pushMessageList: [...state.pushMessageList] };
+            }
+            break;
         default:
             return state;
     }

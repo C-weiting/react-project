@@ -3,12 +3,14 @@ import counter from './counter';
 import userInfo from './userInfo';
 import message from './message';
 import client from './client';
+import third from './third';
 
 const rootReducer = combineReducers({
   counter,
   userInfo,
   message,
-  client
+  client,
+  third
 });
 
 export default rootReducer;

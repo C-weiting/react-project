@@ -40,3 +40,11 @@ export function CustomFail (text, delay) {
 export function CustomInfo (text, delay) {
     return Toast.info(<Info text={text} />, delay || 2)
 }
+
+export function CustomLoading (text, delay) {
+    return Toast.loading(text || 'Loading...', delay)
+}
+
+export function CustomHide () {
+    return Toast.hide();
+}

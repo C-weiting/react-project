@@ -8,3 +8,4 @@ export const SET_IS_UPDATE = 'SET_IS_UPDATE';
 export const START_UPGRADE = 'START_UPGRADE';
 export const GET_DEVICE_ID = 'GET_DEVICE_ID';
 export const GET_NETWORK_STATUS = 'GET_NETWORK_STATUS';
+export const SET_MEG_REMOVE = 'SET_MEG_REMOVE';

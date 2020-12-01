@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd-mobile": "^2.3.4",
     "axios": "^0.21.0",
+    "core-js": "^3.8.0",
     "crypto-js": "^4.0.0",
     "http-proxy-middleware": "^1.0.6",
     "js-base64": "^3.6.0",
@@ -41,12 +42,14 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "ie > 9"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie > 9"
     ]
   },
   "devDependencies": {
@@ -55,6 +58,7 @@
     "less": "^3.12.2",
     "less-loader": "^7.1.0",
     "postcss-pxtorem": "^5.1.1",
+    "react-app-polyfill": "^2.0.0",
     "react-app-rewired": "^2.1.6"
   }
 }

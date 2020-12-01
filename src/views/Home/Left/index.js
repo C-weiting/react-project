@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { Toast } from 'antd-mobile';
 import { getWeather } from '@/api/thirdParty';
 import * as eventActionTypes from '@/event/action-types';
+import * as actionTypes from '@/store/action-types';
 import eventBus from '@/event/EventBus';
 import '../home.less';
 
@@ -17,7 +19,8 @@ const weekDayMap = {
 }
 
 export default function HomeLeft () {
-    const [weatherInfo, setWeatherInfo] = useState({});
+    const dispatch = useDispatch();
+    const { weatherInfo } = useSelector(state => state.third);
     const [timeData, setTimeData] = useState({
         time: moment().format('HH:mm'),
         day: moment().format('MM月DD日'),
@@ -27,8 +30,8 @@ export default function HomeLeft () {
     useEffect(() => {
         const fn = () => {
             getWeather().then(res => {
-                if(res && res.showapi_res_body && res.showapi_res_body.f1){
-                    setWeatherInfo(res.showapi_res_body.f1)
+                if (res && res.showapi_res_body && res.showapi_res_body.f1) {
+                    dispatch({ type: actionTypes.SET_WEATHER_INFO, payload: res.showapi_res_body.f1 })
                 }
             })
         }
@@ -40,7 +43,7 @@ export default function HomeLeft () {
         return () => {
             eventBus.off(eventActionTypes.GET_NETWORK_STATUS, fn);
         }
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         let timer = setInterval(getTime, 60 * 1000)

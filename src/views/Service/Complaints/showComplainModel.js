@@ -75,7 +75,7 @@ function LoginInfo(props) {
       ]}
     >
       <div className="complaints-info-content">
-        <div className="title">投诉举报确认</div>
+        <div className="title">投诉咨询确认</div>
         <ul className="info-list">
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>

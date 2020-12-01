@@ -78,7 +78,7 @@ function LoginInfo(props) {
       ]}
     >
       <div className="repair-info-content">
-        <div className="title">报事保修确认</div>
+        <div className="title">报事报修确认</div>
         <ul className="info-list">
           <li>房屋地址：{userInfo.houseAddress}</li>
           <li>联系电话： {userInfo.custPhone}</li>

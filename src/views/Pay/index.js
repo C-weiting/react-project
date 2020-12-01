@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 // import QRCode from 'qrcode-react';
 import { Modal } from 'antd-mobile';
@@ -14,11 +14,21 @@ function Pay(props) {
   console.log(props);
 
   function onClose() {
+    props[1]();
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
     divList = [];
   }
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      onClose();
+    }, 28 * 60 * 1000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <Modal

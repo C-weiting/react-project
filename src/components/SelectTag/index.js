@@ -17,6 +17,7 @@ export default function SelectTag(props) {
         ) : (
           <div
             className="tagItem"
+            key={index}
             onClick={() => {
               setCurrentTag(item.value);
               store.dispatch(

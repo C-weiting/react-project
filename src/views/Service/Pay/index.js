@@ -16,19 +16,6 @@ function Pay() {
   const userInfo = store.getState().userInfo;
 
   useEffect(() => {
-    let initData = () => {
-      console.log(userInfo);
-      getOrderList({
-        thirdHouseId: userInfo.thirdHouseid,
-        reqSource: 1,
-        data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
-      }).then((res) => {
-        if (res && res.success && res.model) {
-          setDataSource(res.model);
-          setSelectedData(res.model);
-        }
-      });
-    };
     initData();
 
     const fn = (data) => {
@@ -45,6 +32,19 @@ function Pay() {
       eventBus.off(eventActionTypes.GET_PUSH_MSG, fn);
     };
   }, [userInfo.thirdHouseid]);
+  let initData = () => {
+    console.log(userInfo);
+    getOrderList({
+      thirdHouseId: userInfo.thirdHouseid,
+      reqSource: 1,
+      data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
+    }).then((res) => {
+      if (res && res.success && res.model) {
+        setDataSource(res.model);
+        setSelectedData(res.model);
+      }
+    });
+  };
 
   const totolMoney = useMemo(
     () =>
@@ -92,7 +92,7 @@ function Pay() {
       data: json2String(paramsObj),
     };
     createPayOrder(params).then((res) => {
-      payModelCallback = showPayModel(res.model.qrCodePayUrl);
+      payModelCallback = showPayModel(res.model.qrCodePayUrl,initData);
     });
   }
   function json2String(params) {

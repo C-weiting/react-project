@@ -6,6 +6,7 @@ import { getWeather } from '@/api/thirdParty';
 import * as eventActionTypes from '@/event/action-types';
 import * as actionTypes from '@/store/action-types';
 import eventBus from '@/event/EventBus';
+import showLightToast from '@/components/LightToast';
 import '../home.less';
 
 const weekDayMap = {
@@ -64,7 +65,7 @@ export default function HomeLeft () {
     }
 
     function handleToast () {
-        Toast.info('正在建设中，敬请期待', 1);
+        showLightToast();
     }
 
     return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { Toast } from 'antd-mobile';
 import { getWeather } from '@/api/thirdParty';
 import * as eventActionTypes from '@/event/action-types';
 import * as actionTypes from '@/store/action-types';

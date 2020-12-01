@@ -7,6 +7,7 @@ import useMessageSub from '@/hooks/useMessageSub';
 import useClientBind from '@/hooks/useClientBind';
 import useAppUpgrade from '@/hooks/useAppUpgrade';
 import useNetworkSub from '@/hooks/useNetworkSub';
+import useGetUserInfo from '@/hooks/useGetUserInfo';
 import { showLoginInfoModel } from '@/views/Login';
 import './header.less';
 import { useSelector } from 'react-redux';
@@ -56,6 +57,7 @@ function Header () {
   useMessageSub();
   useAppUpgrade();
   useNetworkSub();
+  useGetUserInfo();
 
   return (
     <div className="header-content">

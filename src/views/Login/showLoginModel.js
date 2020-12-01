@@ -68,6 +68,7 @@ function Login(props) {
               object: {
                 phone: res.model.custPhone,
                 custId: res.model.custId,
+                blockId: res.model.blockId
               },
             };
             window.android.callAndroid(JSON.stringify(data));

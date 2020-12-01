@@ -7,41 +7,41 @@ function reducer (state = { cacheMessageList: [], pushMessageList: [] }, action)
         case actionTypes.PUSH_MESSAGE:
             return { ...state, pushMessageList: [...state.pushMessageList, action.payload] };
         case actionTypes.CLEAR_MESSAGELIST:
-            return { cacheMessageList: [], pushMessageList: [] };
+            return { ...state, cacheMessageList: [], pushMessageList: [] };
         case actionTypes.READ_MESSAGE:
-            let cacheMessageIndex = state.cacheMessageList.findIndex((item)=>{
-                return item.messageId === action.payload
-            })
-            
-            let pushMessageIndex = state.pushMessageList.findIndex((item)=>{
+            let cacheMessageIndex = state.cacheMessageList.findIndex((item) => {
                 return item.messageId === action.payload
             })
 
-            if(cacheMessageIndex > -1) {
+            let pushMessageIndex = state.pushMessageList.findIndex((item) => {
+                return item.messageId === action.payload
+            })
+
+            if (cacheMessageIndex > -1) {
                 state.cacheMessageList[cacheMessageIndex].isRead = true;
                 return { ...state, cacheMessageList: [...state.cacheMessageList] };
             }
 
-            if(pushMessageIndex > -1) {
+            if (pushMessageIndex > -1) {
                 state.pushMessageList[pushMessageIndex].isRead = true;
                 return { ...state, pushMessageList: [...state.pushMessageList] };
             }
             break;
         case actionTypes.SET_MEG_REMOVE:
-            let cacheMessageRemoveIndex = state.cacheMessageList.findIndex((item)=>{
+            let cacheMessageRemoveIndex = state.cacheMessageList.findIndex((item) => {
                 return item.messageId === action.payload
             })
-            
-            let pushMessageRemoveIndex = state.pushMessageList.findIndex((item)=>{
+
+            let pushMessageRemoveIndex = state.pushMessageList.findIndex((item) => {
                 return item.messageId === action.payload
             })
-            
-            if(cacheMessageRemoveIndex > -1) {
+
+            if (cacheMessageRemoveIndex > -1) {
                 state.cacheMessageList[cacheMessageRemoveIndex].isRemove = true;
                 return { ...state, cacheMessageList: [...state.cacheMessageList] };
             }
 
-            if(pushMessageRemoveIndex > -1) {
+            if (pushMessageRemoveIndex > -1) {
                 state.pushMessageList[pushMessageRemoveIndex].isRemove = true;
                 return { ...state, pushMessageList: [...state.pushMessageList] };
             }

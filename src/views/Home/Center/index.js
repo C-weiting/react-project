@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { Toast } from 'antd-mobile';
 import { time_range } from '@/utils';
 import useLogin from '@/hooks/useLogin';
 import { showLoginModel } from '@/views/Login';
+import showLightToast from '@/components/LightToast';
 
 export default function HomeCenter () {
     const [title, setTitle] = useState('');
@@ -46,7 +46,7 @@ export default function HomeCenter () {
     }
 
     function handleToast () {
-        Toast.info('正在建设中，敬请期待', 1);
+        showLightToast();
     }
 
     return (

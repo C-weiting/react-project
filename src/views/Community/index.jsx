@@ -1,11 +1,11 @@
 import React, { createContext, useState } from 'react';
-import { Toast } from 'antd-mobile';
-import './index.less';
-
 import SlideItem from './Components/SlideTag/SlideTag';
 import { useHistory } from 'react-router-dom';
 import useLogin from '@/hooks/useLogin';
 import { showLoginModel } from '@/views/Login';
+import showLightToast from '@/components/LightToast';
+import './index.less';
+
 export const SlideItemContext = createContext({});
 
 function Community () {
@@ -41,7 +41,7 @@ function Community () {
   ]);
 
   function handleToast () {
-    Toast.info('正在建设中，敬请期待', 1);
+    showLightToast();
   }
   // 点击跳转事件
   let clickItem = (id) => {

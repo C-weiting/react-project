@@ -7,12 +7,12 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { useStore } from 'react-redux';
-import { Toast } from 'antd-mobile';
 import Complaints from '@/views/Service/Complaints';
 import Pay from '@/views/Service/Pay';
 import Repair from '@/views/Service/Repair';
 import Navigation from '@/components/Navigation';
 import indexTree from './menu.json';
+import showLightToast from '@/components/LightToast';
 import './service.less';
 
 function Service() {
@@ -26,7 +26,7 @@ function Service() {
     if(index === 0) {
       setCurrentIndex([index, 0]);
     }else {
-      Toast.info('正在建设中，敬请期待', 1);
+      showLightToast();
     }
   };
 

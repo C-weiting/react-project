@@ -12,12 +12,12 @@ function useMessageSub () {
     useEffect(() => {
         const fn = (payload) => {
             if (!isLogin) {
-                dispatch(action.addUserInfo(payload));
+                dispatch(action.addUserInfo(JSON.stringify(payload)));
             }
         }
 
         eventBus.on(eventActionTypes.GET_USER_INFO, fn);
-        
+
         if (!isLogin) {
             if (window.android != null && typeof window.android != 'undefined') {// 每次跳转到首页都重新取一把数据
                 const data = {

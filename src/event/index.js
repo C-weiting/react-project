@@ -35,6 +35,9 @@ function callByAndroidParam (msg) { // 接收来自Android的一个参数的方�
         case actionTypes.GET_NETWORK_STATUS: // 获取网络状态
             eventBus.emit(actionTypes.GET_NETWORK_STATUS, msg.object);
             break;
+        case actionTypes.GET_USER_INFO: // 获取用户信息
+            eventBus.emit(actionTypes.GET_USER_INFO, msg.object);
+            break;
         default:
             break;
     }

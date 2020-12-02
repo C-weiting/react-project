@@ -116,7 +116,7 @@ export function post (url, data) {
           //关闭进度条
           resolve(response.data);
         } else {
-          CustomFail('请求出错');
+          // CustomFail('请求出错');
         }
       },
       (err) => {

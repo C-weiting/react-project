@@ -12,7 +12,7 @@ function useMessageSub () {
     useEffect(() => {
         const fn = (payload) => {
             if (!isLogin) {
-                dispatch(action.addUserInfo(JSON.stringify(payload)));
+                dispatch(action.addUserInfo(JSON.parse(payload)));
             }
         }
 

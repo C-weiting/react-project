@@ -6,17 +6,17 @@ import store from '@/store';
 import action from '../../store/action/userInfo';
 import showLoginModel from './showLoginModel';
 import { unBindingUserClientid } from '@/api/bindingUserClientid';
-import { CustomInfo } from '@/components/CustomToast';
 import * as actionTypes from '@/store/action-types';
+import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
-function LoginInfo(props) {
+function LoginInfo (props) {
   const [modal, setModal] = useState(true);
   const userInfo = store.getState().userInfo;
   const { clientId } = store.getState().client;
 
-  function onClose() {
+  function onClose () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -33,8 +33,15 @@ function LoginInfo(props) {
     });
 
     store.dispatch({ type: actionTypes.CLEAR_MESSAGELIST }); //退出登录后清除前端页面消息缓存
+
+    if (window.android != null && typeof window.android != 'undefined') {// 退出登录时清楚缓存的登录信息
+      const data = {
+        method: eventActionTypes.USER_LOGIN_OUT
+      };
+      window.android.callAndroid(JSON.stringify(data));
+    }
   }
-  function onCancel() {
+  function onCancel () {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -78,7 +85,7 @@ function LoginInfo(props) {
   );
 }
 
-function showLoginInfoModel(...args) {
+function showLoginInfoModel (...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

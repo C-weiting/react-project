@@ -11,7 +11,7 @@ function useMessageSub () {
 
     useEffect(() => {
         const fn = (payload) => {
-            if (!isLogin) {
+            if (!isLogin && payload) {
                 dispatch(action.addUserInfo(JSON.parse(payload)));
             }
         }

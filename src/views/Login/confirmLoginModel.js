@@ -61,10 +61,10 @@ function LoginInfo(props) {
           },
         },
         {
-          text: '确认登陆',
+          text: '确认登录',
           onPress: () => {
             setIsConfirm(true);
-            CustomSuccess('登陆成功');
+            CustomSuccess('登录成功');
 
             // store.dispatch(action.clearUserInfo());
             onCancel();

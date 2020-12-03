@@ -48,7 +48,7 @@ function LoginInfo(props) {
       console.log(res);
       setDefaultTag();
       if (res.success === true) {
-        CustomSuccess('操作成功');
+        CustomSuccess('提交成功');
         onClose();
       } else {
         CustomFail('您的操作太频繁，请稍后再试一下');

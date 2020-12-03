@@ -50,7 +50,7 @@ function LoginInfo(props) {
     addWorkOrder(params).then((res) => {
       setDefaultTag();
       if (res.success === true) {
-        CustomSuccess('操作成功');
+        CustomSuccess('提交成功');
         onClose();
       } else {
         // CustomFail('操作失败');

@@ -69,7 +69,7 @@ function Login(props) {
                 phone: res.model.custPhone,
                 custId: res.model.custId,
                 blockId: res.model.blockId,
-                userInfo: res.model
+                userInfo: res.model,
               },
             };
             window.android.callAndroid(JSON.stringify(data));
@@ -112,7 +112,7 @@ function Login(props) {
         {
           text: '取消',
           onPress: () => {
-            CustomFail('取消登陆');
+            CustomFail('取消登录');
             onClose();
           },
         },
@@ -122,7 +122,7 @@ function Login(props) {
         <div className="qrcode-bg">
           <div className="qrcode-header"></div>
           <div className="qrcode">
-            <QRCode size={96} value={qrText} level="L" />
+            <QRCode className="qrImg" size={96} value={qrText} level="L" />
           </div>
         </div>
         <div className="infoTag">

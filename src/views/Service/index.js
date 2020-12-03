@@ -23,9 +23,9 @@ function Service() {
 
   // 选择一级菜单
   let chooseFirstIndex = (index) => {
-    if(index === 0) {
+    if (index === 0) {
       setCurrentIndex([index, 0]);
-    }else {
+    } else {
       showLightToast();
     }
   };
@@ -80,7 +80,12 @@ function Service() {
       <div className="service-content">
         <section className="addressLine flex-row-center">
           <div className="addressIcon"></div>
-          <div className="address">当前房屋：{houseName}</div>
+          <div className="address">
+            当前房屋：
+            {store.getState().userInfo.cityName +
+              store.getState().userInfo.blockName +
+              store.getState().userInfo.houseAddress}
+          </div>
         </section>
         <section className="contentBox flex-row">
           <div className="firstList">{firstListElement}</div>

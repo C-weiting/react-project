@@ -1,7 +1,7 @@
 import http from '../utils/http';
 
 /**
- * 获取登陆用户信息
+ * 获取登录用户信息
  */
 function addWorkOrder(params) {
   return new Promise((resolve, reject) => {
@@ -34,7 +34,11 @@ function addWorkOrder(params) {
 // }
 function getOrderList(params) {
   return new Promise((resolve, reject) => {
-    http('post', '/obms-pos/user/getNotPaymentOrderListByThirdHouseId', params).then(
+    http(
+      'post',
+      '/obms-pos/user/getNotPaymentOrderListByThirdHouseId',
+      params
+    ).then(
       (res) => {
         resolve(res);
       },
@@ -62,4 +66,4 @@ function createPayOrder(params) {
   });
 }
 
-export { addWorkOrder, getOrderList ,createPayOrder};
+export { addWorkOrder, getOrderList, createPayOrder };

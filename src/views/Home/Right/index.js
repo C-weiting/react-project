@@ -15,7 +15,12 @@ export default function HomeRight () {
     const history = useHistory();
     const unreadMessage = useMemo(() => (
         messageList.filter(item => !item.isRead)
-    ), [messageList])
+    ), [messageList]);
+    const iconMap = {
+        10090: 'iconwuyetongzhi',
+        10091: 'iconqianfeitongzhi',
+        10092: 'iconjiaofeichenggong',
+    }
 
     function handleRemoveMessage (message) {
         dispatch({ type: actionTypes.SET_MEG_REMOVE, payload: message.messageId });
@@ -71,7 +76,7 @@ export default function HomeRight () {
                                         >
                                             <li className="message-item" onClick={() => handleClick(message)}>
                                                 <div className="message-item-info">
-                                                    <i className="iconfont iconshineihuti"></i>
+                                                    <i className={`iconfont ${iconMap[message.type]}`}></i>
                                                     <div className="message-item-info-content">
                                                         <div className="title">
                                                             <span className="message-type">{message.title}</span>

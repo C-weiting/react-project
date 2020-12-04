@@ -193,8 +193,10 @@
         background-color: #2C2C2D;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        // justify-content: space-between;
         padding-bottom: 30px;
+
+        overflow-y: auto;
 
         .message-header {
             width: 100%;
@@ -228,8 +230,11 @@
         }
 
         .message-list-wrapper {
-            flex: 1;
-            overflow: hidden;
+            // flex: 1;
+            // overflow: hidden;
+            // height: 1500px;
+            margin-top: 50px;
+
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -241,7 +246,6 @@
             .message-list {
                 padding-right: 26px;
                 height: 267px;
-                overflow-y: auto;
 
                 .message-item {
                     height: 79px;

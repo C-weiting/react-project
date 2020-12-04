@@ -21,6 +21,11 @@ export default function HomeRight () {
         10091: 'iconqianfeitongzhi',
         10092: 'iconjiaofeichenggong',
     }
+    const titleMap = {
+        10090: '社区公告',
+        10091: '欠费通知',
+        10092: '缴费通知',
+    }
 
     function handleRemoveMessage (message) {
         dispatch({ type: actionTypes.SET_MEG_REMOVE, payload: message.messageId });
@@ -79,7 +84,7 @@ export default function HomeRight () {
                                                     <i className={`iconfont ${iconMap[message.type]}`}></i>
                                                     <div className="message-item-info-content">
                                                         <div className="title">
-                                                            <span className="message-type">{message.title}</span>
+                                                            <span className="message-type">{titleMap[message.type]}</span>
                                                             <span className="message-time">{showTime(message.createTime)}</span>
                                                         </div>
                                                         <div className="info">

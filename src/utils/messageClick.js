@@ -60,7 +60,7 @@ function messageClick (item, dispatch, history) {
             if (res.success && res.model && res.model.informationNote) {
                 const { note } = res.model.informationNote
                 let messageDetail = {
-                    title: '社区公告通知',
+                    title: '社区公告',
                     createTime: showTime(item.createTime),
                     content: note
                 }

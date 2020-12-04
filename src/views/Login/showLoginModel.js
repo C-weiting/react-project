@@ -50,57 +50,57 @@ function Login(props) {
     source: 'Y-PAD', //二维码来源 Y-PAD
     deviceId: deviceId,
   });
-  useEffect(() => {
-    let timer = setInterval(() => {
-      // userLogin();
-      getUserMsg({
-        qrCodeId: text,
-        // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
-        source: 'Y-PAD',
-      }).then((res) => {
-        if (res.model) {
-          console.log(res);
-          store.dispatch(action.addUserInfo({ ...res.model }));
+  // useEffect(() => {
+  //   let timer = setInterval(() => {
+  //     // userLogin();
+  //     getUserMsg({
+  //       qrCodeId: text,
+  //       // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
+  //       source: 'Y-PAD',
+  //     }).then((res) => {
+  //       if (res.model) {
+  //         console.log(res);
+  //         store.dispatch(action.addUserInfo({ ...res.model }));
 
-          if (window.android != null && typeof window.android != 'undefined') {
-            const data = {
-              method: eventActionTypes.SET_PUSH_PHONE,
-              object: {
-                phone: res.model.custPhone,
-                custId: res.model.custId,
-                blockId: res.model.blockId,
-                userInfo: res.model,
-              },
-            };
-            window.android.callAndroid(JSON.stringify(data));
-          }
+  //         if (window.android != null && typeof window.android != 'undefined') {
+  //           const data = {
+  //             method: eventActionTypes.SET_PUSH_PHONE,
+  //             object: {
+  //               phone: res.model.custPhone,
+  //               custId: res.model.custId,
+  //               blockId: res.model.blockId,
+  //               userInfo: res.model,
+  //             },
+  //           };
+  //           window.android.callAndroid(JSON.stringify(data));
+  //         }
 
-          if (window.android != null && typeof window.android != 'undefined') {
-            const data = {
-              method: eventActionTypes.GET_MSG_LIST,
-              custId: res.model.custId,
-            };
-            window.android.callAndroid(JSON.stringify(data));
-          }
-          // CustomSuccess('操作成功');
-          onClose();
-          showConfirmLoginModel();
-        }
-      });
-      if (
-        Object.keys(store.getState().userInfo).length > 0 ||
-        divList.length === 0 ||
-        store.getState().client.networkStatus !== 1
-      ) {
-        clearInterval(timer);
-        timer = null;
-      }
-    }, 1000);
-    return () => {
-      clearInterval(timer);
-      timer = null;
-    };
-  }, [text]);
+  //         if (window.android != null && typeof window.android != 'undefined') {
+  //           const data = {
+  //             method: eventActionTypes.GET_MSG_LIST,
+  //             custId: res.model.custId,
+  //           };
+  //           window.android.callAndroid(JSON.stringify(data));
+  //         }
+  //         // CustomSuccess('操作成功');
+  //         onClose();
+  //         showConfirmLoginModel();
+  //       }
+  //     });
+  //     if (
+  //       Object.keys(store.getState().userInfo).length > 0 ||
+  //       divList.length === 0 ||
+  //       store.getState().client.networkStatus !== 1
+  //     ) {
+  //       clearInterval(timer);
+  //       timer = null;
+  //     }
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer);
+  //     timer = null;
+  //   };
+  // }, [text]);
 
   return (
     <Modal
@@ -129,6 +129,7 @@ function Login(props) {
           下载新橙社APP，进入APP首页点击右上角扫码登录
         </div>
       </div>
+      <div className="bottomLine"></div>
     </Modal>
   );
 }
@@ -139,6 +140,15 @@ function showLoginModel(...args) {
   divList.push(div);
   ReactDOM.render(<Login {...args} />, div);
 
+  // const modalBody = document.getElementsByClassName('am-modal-body')[0];
+  // const line = document.createElement('div');
+  // line.setAttribute('width', '500px');
+  // line.setAttribute('height', '1px');
+  // line.setAttribute('background-color', '#666666');
+  // line.setAttribute('position','absolute')
+  // modalBody.appendChild(line)
+  // // line.setAttribute('width', '100%');
+  // console.log(modalBody);
   return () => {
     ReactDOM.unmountComponentAtNode(div);
     document.body.removeChild(div);

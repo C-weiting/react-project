@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useHistory,
   useRouteMatch,
@@ -20,6 +20,23 @@ function Service() {
   const { path } = useRouteMatch();
 
   const [currentIndex, setCurrentIndex] = useState([0, 0]);
+  // 跳转获取默认tag
+  useEffect(() => {
+    let pathArr = history.location.pathname.split('/');
+    let currentFirst = {};
+    let currentFirstIndex = 0;
+    indexTree.map((item, index) => {
+      if (item.value === pathArr[1]) {
+        currentFirst = item;
+        currentFirstIndex = index;
+      }
+    });
+    currentFirst.children.map((item, index) => {
+      if (item.path === pathArr[2]) {
+        setCurrentIndex([currentFirstIndex, index]);
+      }
+    });
+  }, []);
 
   // 选择一级菜单
   let chooseFirstIndex = (index) => {

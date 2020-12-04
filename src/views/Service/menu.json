@@ -1,7 +1,10 @@
-[{
+[
+    {
         "label": "物业服务",
         "id": "01",
-        "children": [{
+        "value": "service",
+        "children": [
+            {
                 "label": "报事报修",
                 "id": "0101",
                 "path": "repair"
@@ -20,21 +23,25 @@
     },
     {
         "label": "生活服务",
+        "value": "service2",
         "id": "02",
         "children": []
     },
     {
         "label": "家政服务",
+        "value": "service3",
         "id": "03",
         "children": []
     },
     {
         "label": "邻里社区",
+        "value": "service4",
         "id": "04",
         "children": []
     },
     {
         "label": "家庭医生",
+        "value": "service5",
         "id": "05",
         "children": []
     }

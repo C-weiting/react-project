@@ -129,7 +129,7 @@ function Login(props) {
           下载新橙社APP，进入APP首页点击右上角扫码登录
         </div>
       </div>
-      <div className="bottomLine"></div>
+      {/* <div className="bottomLine"></div> */}
     </Modal>
   );
 }

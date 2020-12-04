@@ -80,7 +80,7 @@ function LoginInfo(props) {
             定位地址：
             {userInfo.cityName + userInfo.blockName + userInfo.houseAddress}
           </li>
-          <li>手机号： {userInfo.custPhone}</li>
+          <li>手机号： {userInfo.custPhone.slice(0,3)+'*****'+userInfo.custPhone.slice(8,11)}</li>
         </ul>
       </div>
     </Modal>

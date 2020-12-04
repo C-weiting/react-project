@@ -78,7 +78,7 @@ function LoginInfo (props) {
         <ul className="info-list">
           <li>账号名：{userInfo.custNickName}</li>
           <li>定位地址：{userInfo.houseAddress}</li>
-          <li>手机号： {userInfo.custPhone}</li>
+          <li>手机号： {userInfo.custPhone.slice(0,3)+'*****'+userInfo.custPhone.slice(8,11)}</li>
         </ul>
       </div>
     </Modal>

@@ -74,7 +74,7 @@ export default function HomeRight () {
                                                     <i className={`iconfont ${iconMap[message.type]}`}></i>
                                                     <div className="message-item-info-content">
                                                         <div className="title">
-                                                            <span className="message-type">{titleMap[message.type]}</span>
+                                                            <span className="message-type">{message.title}</span>
                                                             <span className="message-time">{showTime(message.createTime)}</span>
                                                         </div>
                                                         <div className="info">

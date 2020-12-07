@@ -11,12 +11,12 @@ import * as eventActionTypes from '@/event/action-types';
 
 let divList = [];
 
-function LoginInfo (props) {
+function LoginInfo(props) {
   const [modal, setModal] = useState(true);
   const userInfo = store.getState().userInfo;
   const { clientId } = store.getState().client;
 
-  function onClose () {
+  function onClose() {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -34,14 +34,15 @@ function LoginInfo (props) {
 
     store.dispatch({ type: actionTypes.CLEAR_MESSAGELIST }); //退出登录后清除前端页面消息缓存
 
-    if (window.android != null && typeof window.android != 'undefined') {// 退出登录时清楚缓存的登录信息
+    if (window.android != null && typeof window.android != 'undefined') {
+      // 退出登录时清楚缓存的登录信息
       const data = {
-        method: eventActionTypes.USER_LOGIN_OUT
+        method: eventActionTypes.USER_LOGIN_OUT,
       };
       window.android.callAndroid(JSON.stringify(data));
     }
   }
-  function onCancel () {
+  function onCancel() {
     setModal(false);
 
     divList.forEach((div) => document.body.removeChild(div));
@@ -77,15 +78,27 @@ function LoginInfo (props) {
         <div className="title">账户信息</div>
         <ul className="info-list">
           <li>账号名：{userInfo.custNickName}</li>
-          <li>定位地址：{userInfo.houseAddress}</li>
-          <li>手机号： {userInfo.custPhone.slice(0,3)+'*****'+userInfo.custPhone.slice(8,11)}</li>
+          <li>
+            定位地址：{' '}
+            {userInfo !== {}
+              ? userInfo.cityName + userInfo.blockName + userInfo.houseAddress
+              : ''}
+          </li>
+          <li>
+            手机号：{' '}
+            {userInfo.custPhone
+              ? userInfo.custPhone.slice(0, 3) +
+                '*****' +
+                userInfo.custPhone.slice(8, 11)
+              : ''}
+          </li>
         </ul>
       </div>
     </Modal>
   );
 }
 
-function showLoginInfoModel (...args) {
+function showLoginInfoModel(...args) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   divList.push(div);

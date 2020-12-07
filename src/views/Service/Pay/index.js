@@ -7,6 +7,12 @@ import { useStore } from 'react-redux';
 import eventBus from '@/event/EventBus';
 import * as eventActionTypes from '@/event/action-types';
 import { CustomSuccess } from '@/components/CustomToast';
+import {
+  CustomFail,
+  CustomLoading,
+  CustomHide,
+} from '@/components/CustomToast';
+
 let payModelCallback;
 
 function Pay() {
@@ -34,11 +40,13 @@ function Pay() {
   }, [userInfo.thirdHouseid]);
   let initData = () => {
     console.log(userInfo);
+
     getOrderList({
       thirdHouseId: userInfo.thirdHouseid,
       reqSource: 1,
       data: `thirdHouseId=${userInfo.thirdHouseid}&reqSource=${1}`,
     }).then((res) => {
+
       if (res && res.success && res.model) {
         setDataSource(res.model);
         setSelectedData(res.model);
@@ -65,6 +73,8 @@ function Pay() {
   };
 
   function handlePay() {
+    CustomLoading('', 0);
+
     if (selectedData.length === 0) {
       return;
     }
@@ -92,6 +102,8 @@ function Pay() {
       data: json2String(paramsObj),
     };
     createPayOrder(params).then((res) => {
+      CustomHide();
+
       payModelCallback = showPayModel(res.model.qrCodePayUrl,initData);
     });
   }

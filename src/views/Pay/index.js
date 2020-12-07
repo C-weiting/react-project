@@ -6,6 +6,7 @@ import './pay.less';
 import store from '@/store';
 import QRCode from 'qrcode.react';
 
+
 let divList = [];
 
 function Pay(props) {

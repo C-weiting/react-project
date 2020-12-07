@@ -5,8 +5,7 @@ import { showTime } from '@/utils';
 import * as actionTypes from '@/store/action-types';
 import * as eventActionTypes from '@/event/action-types';
 
-function beforeShowMessageModel (messageDetail, messageId, dispatch) {
-    showMessageModel(messageDetail);
+export function messageRead (messageId, dispatch) {
     dispatch({ type: actionTypes.READ_MESSAGE, payload: messageId });
     if (window.android != null && typeof (window.android) != "undefined") {
         const data = {
@@ -17,6 +16,24 @@ function beforeShowMessageModel (messageDetail, messageId, dispatch) {
         }
         window.android.callAndroid(JSON.stringify(data));
     }
+}
+
+export function messageRemove (messageId, dispatch) {
+    dispatch({ type: actionTypes.READ_MESSAGE, payload: messageId });
+    if (window.android != null && typeof (window.android) != "undefined") {
+        const data = {
+            method: eventActionTypes.SET_MEG_READ,
+            object: {
+                messageId: messageId
+            }
+        }
+        window.android.callAndroid(JSON.stringify(data));
+    }
+}
+
+function beforeShowMessageModel (messageDetail, messageId, dispatch) {
+    showMessageModel(messageDetail);
+    messageRead(messageId, dispatch)
 }
 
 function beforeShowMessageConfirmModel (messageDetail, cb) {
@@ -78,16 +95,7 @@ function messageClick (item, dispatch, history) {
 
         const cb = () => {
             history.push('/service/pay');
-            dispatch({ type: actionTypes.READ_MESSAGE, payload: item.messageId });
-            if (window.android != null && typeof (window.android) != "undefined") {
-                const data = {
-                    method: eventActionTypes.SET_MEG_READ,
-                    object: {
-                        messageId: item.messageId
-                    }
-                }
-                window.android.callAndroid(JSON.stringify(data));
-            }
+            messageRead(item.messageId, dispatch);
         }
 
         beforeShowMessageConfirmModel(messageDetail, cb);

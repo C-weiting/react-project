@@ -79,7 +79,7 @@ function Header () {
       <div className="right-content">
         {login}
         <div className="message" onClick={handleMessage}>
-          {unreadMessage.length && (
+          {unreadMessage.length > 0 && (
             <Badge
               className="message-badge"
               text={unreadMessage.length}

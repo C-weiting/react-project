@@ -4,10 +4,8 @@ import { SwipeAction } from 'antd-mobile';
 import { useDispatch } from 'react-redux';
 import Empty from '@/components/Empty';
 import useMessageList from '@/hooks/useMessageList';
-import messageClick from '@/utils/messageClick';
+import messageClick, { messageRead, messageRemove } from '@/utils/messageClick';
 import { showTime } from '@/utils';
-import * as actionTypes from '@/store/action-types';
-import * as eventActionTypes from '@/event/action-types';
 
 export default function HomeRight () {
     const messageList = useMessageList();
@@ -27,17 +25,9 @@ export default function HomeRight () {
         10092: '缴费通知',
     }
 
-    function handleRemoveMessage (message) {
-        dispatch({ type: actionTypes.SET_MEG_REMOVE, payload: message.messageId });
-        if (window.android != null && typeof (window.android) != "undefined") {
-            const data = {
-                method: eventActionTypes.SET_MEG_REMOVE,
-                object: {
-                    messageId: message.messageId
-                }
-            }
-            window.android.callAndroid(JSON.stringify(data));
-        }
+    function handleRemoveMessage (message) { //移除按钮需要将消息设为已读和移除状态
+        messageRead(message.messageId, dispatch);
+        messageRemove(message.messageId, dispatch);
     }
 
     function handleClick (item) {
@@ -50,7 +40,7 @@ export default function HomeRight () {
                 <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/message%402x.png" className="pic" alt="" />
                 <div className="text">
                     <h1 className="title">你有重要消息</h1>
-                    <h4 className="subtitle">{unreadMessage.length}个未读</h4>
+                    {unreadMessage.length > 0 ? <h4 className="subtitle">{unreadMessage.length}个未读</h4> : ''}
                 </div>
             </div>
             <div className={`message-list-wrapper ${messageList.length === 0 && 'short'}`} >
@@ -84,7 +74,7 @@ export default function HomeRight () {
                                                     <i className={`iconfont ${iconMap[message.type]}`}></i>
                                                     <div className="message-item-info-content">
                                                         <div className="title">
-                                                            <span className="message-type">{titleMap[message.type]}</span>
+                                                            <span className="message-type">{message.title}</span>
                                                             <span className="message-time">{showTime(message.createTime)}</span>
                                                         </div>
                                                         <div className="info">

@@ -103,6 +103,34 @@ H5->native
 }
 }
 
+### 获取通话记录列表
+H5->native
+{
+    "method":"GET_CALL_RECORDS"
+}
+
+native->H5
+{
+    "method":"GET_CALL_RECORDS",
+    "callList":[
+        {
+            "id":1,
+            "callName":"xxx",
+            "callTime":"xxx",
+            "isAnswer":true,
+            "custId":"123456"
+        },
+        {
+             "id":2,
+            "callName":"xxx",
+            "callTime":"xxx",
+            "isAnswer":false,
+            "custId":"789"
+        }
+    ]
+}
+注：isAnswer表示消息是否接听(false:未接, true:已接), callName是呼入方名称, callTime是呼入时间,custId是用户id
+
 type:目前支持 10090 10091 10092
 
 native->H5

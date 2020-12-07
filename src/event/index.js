@@ -38,6 +38,12 @@ function callByAndroidParam (msg) { // 接收来自Android的一个参数的方�
         case actionTypes.GET_USER_INFO: // 获取用户信息
             eventBus.emit(actionTypes.GET_USER_INFO, msg.object);
             break;
+        case actionTypes.GET_CALL_RECORDS: // 获取呼叫记录
+            eventBus.emit(actionTypes.GET_CALL_RECORDS, msg.callList);
+            break;
+        case actionTypes.GET_NOT_ANSWER_NUM: // 获取呼叫记录数量
+            eventBus.emit(actionTypes.GET_NOT_ANSWER_NUM, msg.object);
+            break;
         default:
             break;
     }

@@ -40,7 +40,7 @@ export default function HomeRight () {
                 <img src="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/message%402x.png" className="pic" alt="" />
                 <div className="text">
                     <h1 className="title">你有重要消息</h1>
-                    <h4 className="subtitle">{unreadMessage.length}个未读</h4>
+                    {unreadMessage.length > 0 ? <h4 className="subtitle">{unreadMessage.length}个未读</h4> : ''}
                 </div>
             </div>
             <div className={`message-list-wrapper ${messageList.length === 0 && 'short'}`} >

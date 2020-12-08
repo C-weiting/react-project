@@ -56,7 +56,7 @@ function messageClick (item, dispatch, history) {
                     const { subBillMonth, subFeeName } = propertyBillList[0];
 
                     let messageDetail = {
-                        title: '已缴费通知',
+                        title: item.title,
                         createTime: showTime(item.createTime),
                         content: `您已缴纳${subFeeName}，缴纳账期${subBillMonth}，订单编号{${orderId}}，支付时间{${paymentTime}}，支付方式{${paymentTypeName}}，缴纳渠道{${paymentChannelName}}`
                     }
@@ -77,7 +77,7 @@ function messageClick (item, dispatch, history) {
             if (res.success && res.model && res.model.informationNote) {
                 const { note } = res.model.informationNote
                 let messageDetail = {
-                    title: '社区公告',
+                    title: item.title,
                     createTime: showTime(item.createTime),
                     content: note
                 }
@@ -88,7 +88,7 @@ function messageClick (item, dispatch, history) {
         });
     } else if (parseInt(item.type) === 10091) {
         let messageDetail = {
-            title: '欠费通知',
+            title: item.title,
             createTime: showTime(item.createTime),
             content: '最新的物业账单已出，请按时缴纳'
         }

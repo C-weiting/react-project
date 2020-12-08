@@ -18,6 +18,8 @@ let divList = [];
 function Login(props) {
   const [modal, setModal] = useState(true);
   const [deviceId, setDeviceId] = useState(0);
+  const [text, setText] = useState(MD5(Math.random()));
+  const [qrText, setQrText] = useState('');
 
   function onClose() {
     setModal(false);
@@ -26,7 +28,7 @@ function Login(props) {
     divList = [];
   }
 
-  const text = MD5(Math.random());
+  // const text = MD5(Math.random());
   useEffect(() => {
     let addDeviceId = (payload) => {
       setDeviceId(payload);
@@ -43,13 +45,26 @@ function Login(props) {
     };
   }, []);
 
-  const qrText = JSON.stringify({
-    type: 2, //Y-PAD登录二维码
-    qrCodeId: text, // 二维码标识
-    expireTimeMills: parseInt(new Date().getTime()) + 90000 + '', // 二维码过期时间的毫秒值
-    source: 'Y-PAD', //二维码来源 Y-PAD
-    deviceId: deviceId,
-  });
+  useEffect(() => {
+    console.log(text);
+    setQrText(
+      JSON.stringify({
+        type: 2, //Y-PAD登录二维码
+        qrCodeId: text, // 二维码标识
+        expireTimeMills: parseInt(new Date().getTime()) + 90000 + '', // 二维码过期时间的毫秒值
+        source: 'Y-PAD', //二维码来源 Y-PAD
+        deviceId: deviceId,
+      })
+    );
+  }, []);
+
+  // const qrText = JSON.stringify({
+  //   type: 2, //Y-PAD登录二维码
+  //   qrCodeId: text, // 二维码标识
+  //   expireTimeMills: parseInt(new Date().getTime()) + 90000 + '', // 二维码过期时间的毫秒值
+  //   source: 'Y-PAD', //二维码来源 Y-PAD
+  //   deviceId: deviceId,
+  // });
   useEffect(() => {
     let timer = setInterval(() => {
       // userLogin();
@@ -83,6 +98,9 @@ function Login(props) {
             window.android.callAndroid(JSON.stringify(data));
           }
           // CustomSuccess('操作成功');
+          clearInterval(timer);
+          timer = null;
+
           onClose();
           showConfirmLoginModel();
         }
@@ -100,7 +118,7 @@ function Login(props) {
       clearInterval(timer);
       timer = null;
     };
-  }, [text]);
+  }, [qrText]);
 
   return (
     <Modal

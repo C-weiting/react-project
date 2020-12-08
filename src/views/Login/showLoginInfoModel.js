@@ -16,6 +16,8 @@ function LoginInfo(props) {
   const userInfo = store.getState().userInfo;
   const { clientId } = store.getState().client;
 
+  const [userInfoState, setUserInfoState] = useState({});
+
   function onClose() {
     setModal(false);
 
@@ -77,19 +79,19 @@ function LoginInfo(props) {
       <div className="login-info-content">
         <div className="title">账户信息</div>
         <ul className="info-list">
-          <li>账号名：{userInfo.custNickName}</li>
+          <li>账号名：{userInfo.custNickName ? userInfo.custNickName : ''}</li>
           <li>
             定位地址：{' '}
-            {userInfo !== {}
+            {userInfo.cityName
               ? userInfo.cityName + userInfo.blockName + userInfo.houseAddress
               : ''}
           </li>
           <li>
             手机号：{' '}
             {userInfo.custPhone
-              ? userInfo.custPhone.slice(0, 3) +
+              ? userInfo.custPhone.slice(0, 3).toString() +
                 '*****' +
-                userInfo.custPhone.slice(8, 11)
+                userInfo.custPhone.slice(8, 11).toString()
               : ''}
           </li>
         </ul>

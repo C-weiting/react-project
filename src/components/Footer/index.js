@@ -4,11 +4,14 @@ import { useSelector } from 'react-redux';
 import { Badge } from 'antd-mobile';
 import eventBus from '@/event/EventBus';
 import * as eventActionTypes from '@/event/action-types';
+import useLogin from '@/hooks/useLogin';
+import { showLoginModel } from '@/views/Login';
 import './footer.less';
 
 function Footer () {
     const history = useHistory();
     const userInfo = useSelector(state => state.userInfo);
+    const isLogin = useLogin();
     const [state, setstate] = useState(1);
     const [recordNum, setRecordNum] = useState(0);
 
@@ -18,7 +21,11 @@ function Footer () {
         if (type === 1) {
             history.push('/');
         } else if (type === 2) {
-            history.push('/callRecord');
+            if (isLogin) {
+                history.push('/callRecord');
+            } else {
+                showLoginModel()
+            }
         } else if (type === 3) {
             history.push('/community');
         }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import eventBus from '@/event/EventBus';
 import { useSelector } from 'react-redux';
 import { showTime } from '@/utils';
+import Empty from '@/components/Empty';
 import * as eventActionTypes from '@/event/action-types';
 import './call-record.less';
 
@@ -32,18 +33,24 @@ function CallRecord () {
     return (
         <div className="call-record">
             <h1 className="title">最近通话</h1>
-            <ul className="record-list">
+            <div className="record-list-container">
                 {
-                    recordList.map(record => {
-                        return (
-                            <li key={record.id} className={`record-item ${record.isAnswer ? '' : 'no-answer'} `}>
-                                <span className="record-name">{record.callName}</span>
-                                <span className="record-time">{showTime(parseInt(record.callTime))}</span>
-                            </li>
-                        )
-                    })
+                    recordList.length > 0 ? (
+                        <ul className="record-list">
+                            {
+                                recordList.map(record => {
+                                    return (
+                                        <li key={record.id} className={`record-item ${record.isAnswer ? '' : 'no-answer'} `}>
+                                            <span className="record-name">{record.callName}</span>
+                                            <span className="record-time">{showTime(parseInt(record.callTime))}</span>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    ) : <Empty pic="https://argrace-web.oss-cn-hangzhou.aliyuncs.com/xincheng-web/images/record-empty%402x.png" text="暂无通话记录" />
                 }
-            </ul>
+            </div>
         </div>
     )
 }

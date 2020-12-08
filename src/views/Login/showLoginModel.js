@@ -95,7 +95,7 @@ function Login(props) {
         clearInterval(timer);
         timer = null;
       }
-    }, 1000);
+    }, 3000);
     return () => {
       clearInterval(timer);
       timer = null;

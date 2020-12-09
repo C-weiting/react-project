@@ -113,7 +113,7 @@ function Login(props) {
         clearInterval(timer);
         timer = null;
       }
-    }, 3000);
+    }, 2000);
     return () => {
       clearInterval(timer);
       timer = null;

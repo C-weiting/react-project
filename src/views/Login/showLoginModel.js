@@ -73,8 +73,8 @@ function Login(props) {
         // qrCodeId: 'a67f4dc277eb26813198e7c3bed39840',
         source: 'Y-PAD',
       }).then((res) => {
+        console.log(res);
         if (res.model) {
-          console.log(res);
           store.dispatch(action.addUserInfo({ ...res.model }));
 
           if (window.android != null && typeof window.android != 'undefined') {

@@ -65,7 +65,10 @@ function Footer () {
         <div className="footer">
             <ul className="menu-list">
                 <li className={`menu-item ${state === 1 && 'selected'}`}>
-                    <i className="iconfont iconshouye" onClick={() => { handleClick(1) }}></i>
+                    <span className="icon-span" onClick={() => { handleClick(1) }}>
+                        <i className="iconfont iconshouye"></i>
+                    </span>
+
                 </li>
                 <li className={`menu-item ${state === 2 && 'selected'}`}>
                     {
@@ -78,10 +81,14 @@ function Footer () {
                             />
                         )
                     }
-                    <i className="iconfont iconkeshiduijiang" onClick={() => { handleClick(2) }}></i>
+                    <span className="icon-span" onClick={() => { handleClick(2) }}>
+                        <i className="iconfont iconkeshiduijiang"></i>
+                    </span>
                 </li>
                 <li className={`menu-item ${state === 3 && 'selected'}`}>
-                    <i className="iconfont iconshequ" onClick={() => { handleClick(3) }}></i>
+                    <span className="icon-span" onClick={() => { handleClick(3) }}>
+                        <i className="iconfont iconshequ"></i>
+                    </span>
                 </li>
             </ul>
         </div>

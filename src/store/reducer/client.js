@@ -3,7 +3,8 @@ const initState = {
   clientId: '',
   isUpgrade: '0',
   homeUpgrade: true,//首页小红点是否可以显示, 第一次可以显示，进入设置页面之后不展示
-  networkStatus: 1 // 1,有网络 0,网络断开
+  networkStatus: 1 ,// 1,有网络 0,网络断开，
+  deviceId:0
 }
 
 function reducer (state = initState, action) {
@@ -16,6 +17,8 @@ function reducer (state = initState, action) {
       return { ...state, homeUpgrade: action.payload };
     case actionTypes.GET_NETWORK_STATUS:
       return { ...state, networkStatus: parseInt(action.payload) };
+    case actionTypes.SET_DEVICE_ID:
+      return { ...state, deviceId:action.payload };
     default:
       return state;
   }

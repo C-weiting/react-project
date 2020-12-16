@@ -17,7 +17,7 @@ let divList = [];
 
 function Login(props) {
   const [modal, setModal] = useState(true);
-  const [deviceId, setDeviceId] = useState(0);
+  // const [deviceId, setDeviceId] = useState(10);
   const [text, setText] = useState(MD5(Math.random()));
   const [qrText, setQrText] = useState('');
 
@@ -29,33 +29,35 @@ function Login(props) {
   }
 
   // const text = MD5(Math.random());
-  useEffect(() => {
-    let addDeviceId = (payload) => {
-      setDeviceId(payload);
-    };
-    eventBus.on(eventActionTypes.GET_DEVICE_ID, addDeviceId);
-    if (window.android != null && typeof window.android != 'undefined') {
-      const data = {
-        method: eventActionTypes.GET_DEVICE_ID,
-      };
-      window.android.callAndroid(JSON.stringify(data));
-    }
-    return () => {
-      eventBus.off(eventActionTypes.GET_DEVICE_ID, addDeviceId);
-    };
-  }, []);
+  // useEffect(() => {
+  //   let addDeviceId = (payload) => {
+  //     setDeviceId(payload);
+  //   };
+  //   eventBus.on(eventActionTypes.GET_DEVICE_ID, addDeviceId);
+  //   if (window.android != null && typeof window.android != 'undefined') {
+  //     const data = {
+  //       method: eventActionTypes.GET_DEVICE_ID,
+  //     };
+  //     window.android.callAndroid(JSON.stringify(data));
+  //   }
+  //   return () => {
+  //     eventBus.off(eventActionTypes.GET_DEVICE_ID, addDeviceId);
+  //   };
+  // }, []);
 
   useEffect(() => {
-    console.log(text);
+    // setDeviceId(store.getState().client.deviceId)
+    // console.log(store.getState().client);
     setQrText(
       JSON.stringify({
         type: 2, //Y-PAD登录二维码
         qrCodeId: text, // 二维码标识
         expireTimeMills: parseInt(new Date().getTime()) + 90000 + '', // 二维码过期时间的毫秒值
         source: 'Y-PAD', //二维码来源 Y-PAD
-        deviceId: deviceId,
+        deviceId: store.getState().client.deviceId,
       })
-    );
+      );
+      console.log(store.getState().client.deviceId);
   }, []);
 
   // const qrText = JSON.stringify({

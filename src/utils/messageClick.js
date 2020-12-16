@@ -42,7 +42,7 @@ function beforeShowMessageConfirmModel (messageDetail, cb) {
 
 function messageClick (item, dispatch, history) {
     if (parseInt(item.type) === 10092) { // 已缴费通知
-        CustomLoading('', 0);
+        CustomLoading('', 10);
         const orderId = item.id1; // 12011181533601682
         let params = {
             orderId: orderId,
@@ -67,7 +67,7 @@ function messageClick (item, dispatch, history) {
             }
         });
     } else if (parseInt(item.type) === 10090) {
-        CustomLoading('', 0);
+        CustomLoading('', 10);
         let params = {
             informationId: item.id1,
             sourceType: 1

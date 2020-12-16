@@ -73,7 +73,7 @@ function Pay() {
   };
 
   function handlePay() {
-    CustomLoading('', 0);
+    CustomLoading('', 10);
 
     if (selectedData.length === 0) {
       return;

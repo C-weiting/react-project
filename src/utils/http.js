@@ -13,8 +13,8 @@ const argraceBaseUrl = '/'
 // axios.defaults.baseURL = 'http://61.132.109.16:8088/';
 // axios.defaults.baseURL= process.env.NODE_ENV==='development'?'/api':'http://47.115.191.251:8089/proxy'
 // axios.defaults.baseURL= process.env.NODE_ENV==='development'?'/api':'http://61.132.109.16:8099/'
-axios.defaults.baseURL = 'http://61.132.109.16:8099/';
-// axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
+// axios.defaults.baseURL = 'http://61.132.109.16:8099/';
+axios.defaults.baseURL = 'https://xcs-mobile.xincheng.com/';
 
 /**
  * http request 拦截器

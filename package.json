@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd-mobile": "^2.3.4",
     "axios": "^0.21.0",
+    "better-scroll": "^2.0.6",
     "core-js": "^3.8.0",
     "crypto-js": "^4.0.0",
     "http-proxy-middleware": "^1.0.6",
